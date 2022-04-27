@@ -15,9 +15,15 @@
  */
 #define pp_cat(x, y) x ## y
 
-#define pp_lparen() (
-#define pp_rparen() )
-#define pp_parens() ()
+/**
+ * @author Jin
+ * @brief indirective expression
+ */
+#define pp_indirect(x) x
+
+#define pp_lparen (
+#define pp_rparen )
+#define pp_parens ()
 
 #define pp_first(x, ...) x
 #define pp_second(x, y, ...) y
@@ -78,30 +84,80 @@
 
 /**
  * @author Jin
- * @brief postpones an evaluation
+ * @brief postpones an evaluation once
+ * 
+ * > #define ah() 1
+ * >
+ * > pp_defer(ah) () // postpones the macro
+ * > ah empty() ()
+ * > ah ()
+ * > 1
  */
 #define pp_defer(x) x pp_empty()
+#define pp_defer_2(x) \
+		x pp_empty pp_empty()()
+#define pp_defer_3(x) \
+        x pp_empty pp_empty pp_empty()()()
+#define pp_defer_4(x) \
+        x pp_empty pp_empty pp_empty pp_empty()()()()
+#define pp_defer_5(x) \
+        x pp_empty pp_empty pp_empty pp_empty pp_empty()()()()
+#define pp_defer_5(x) \
+        x pp_empty pp_empty pp_empty pp_empty pp_empty pp_empty()()()()
 
 /**
  * @author Jin
  * @brief evaluates an expression immediately
  */
 #define pp_eval(...) pp_eval_128(__VA_ARGS__)
-#define pp_eval128(...) pp_eval_64(__VA_ARGS__)
-#define pp_eval64(...) pp_eval_32(__VA_ARGS__)
-#define pp_eval32(...) pp_eval_16(__VA_ARGS__)
-#define pp_eval16(...) pp_eval_8(__VA_ARGS__)
-#define pp_eval8(...) pp_eval_4(__VA_ARGS__)
-#define pp_eval4(...) pp_eval_2(__VA_ARGS__)
-#define pp_eval2(...) pp_eval_1(__VA_ARGS__)
-#define pp_eval1(...) __VA_ARGS__
+#define pp_eval_128(...) pp_eval_64(__VA_ARGS__)
+#define pp_eval_64(...) pp_eval_32(__VA_ARGS__)
+#define pp_eval_32(...) pp_eval_16(__VA_ARGS__)
+#define pp_eval_16(...) pp_eval_8(__VA_ARGS__)
+#define pp_eval_8(...) pp_eval_4(__VA_ARGS__)
+#define pp_eval_4(...) pp_eval_2(__VA_ARGS__)
+#define pp_eval_2(...) pp_eval_1(__VA_ARGS__)
+#define pp_eval_1(...) __VA_ARGS__
 
+#define pp_terminate_args() 0
 
+#define pp_has_args(...) \
+		pp_bool(pp_first(pp_terminate_args __VA_ARGS__)())
 
-#define test() test
+/**
+ * @author Jin
+ * @brief repeats each macro arg
+ * 
+ * >
+ * >
+ * >
+ * >
+ * >
+ * >
+ */
+#define pp_map(macro, _arg1, ...)                         \
+		macro(_arg1)                                      \
+		pp_if_else(pp_has_args(__VA_ARGS__))              \
+		(                                                 \
+			pp_defer_2(pp_map_next)()(macro, __VA_ARGS__) \
+		)                                                 \
+		(                                                 \
+                                                          \
+		)
+		
+#define pp_map_next() pp_map
+
+void ah(int i)
+{
+	printf("%d\n", i);
+}
+
+#define hey(x) ah pp_lparen x pp_rparen ;
 
 int main(int argc, char** argv)
 {
+
+	pp_eval(pp_map(hey, 5, 4));
 	
 
 	return 0;
