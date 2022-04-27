@@ -152,7 +152,14 @@ void ah(int i)
 	printf("%d\n", i);
 }
 
+#define pp_define_field(type, name, ...) type name __VA_ARGS__;
+
 #define hey(x) ah pp_lparen x pp_rparen ;
+
+struct fuck
+{
+	pp_map(pp_define_field, int, ah)
+};
 
 int main(int argc, char** argv)
 {
