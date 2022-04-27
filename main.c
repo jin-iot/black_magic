@@ -102,7 +102,7 @@
         x pp_empty pp_empty pp_empty pp_empty()()()()
 #define pp_defer_5(x) \
         x pp_empty pp_empty pp_empty pp_empty pp_empty()()()()
-#define pp_defer_5(x) \
+#define pp_defer_6(x) \
         x pp_empty pp_empty pp_empty pp_empty pp_empty pp_empty()()()()
 
 /**
