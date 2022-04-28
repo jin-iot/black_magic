@@ -156,15 +156,15 @@ void ah(int i)
 
 #define hey(x) ah pp_lparen x pp_rparen ;
 
-struct fuck
-{
-	pp_map(pp_define_field, int, ah)
-};
+// struct fuck
+// {
+// 	pp_map(pp_define_field, int, ah)
+// };
 
 int main(int argc, char** argv)
 {
 
-	pp_eval(pp_map(hey, 5, 4));
+	pp_eval(pp_map(hey, 5, 4, 3, 2, 1));
 	
 
 	return 0;
