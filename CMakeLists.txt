@@ -22,4 +22,4 @@ endforeach()
 include_directories(${CMAKE_INCLUDE_PATH}
                     ${CMAKE_BINARY_DIR}/generated/include)
 
-add_executable(black_magic main.c)
+add_executable(black_magic main.c  metaresc.c  mr_btree.c  mr_extra.c  mr_hsort.c  mr_ic.c mr_message.c  mr_save.c  mr_stringify.c)
