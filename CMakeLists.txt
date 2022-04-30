@@ -15,11 +15,11 @@ foreach (SENTIENT_LOOP_VAR RANGE 0 127 1)
     endforeach()
 
     write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_GET_N_H_PATH}
-               "#define pp_get_${SENTIENT_LOOP_VAR}(${TMP_SRC} ...) _${SENTIENT_LOOP_VAR}"
+               "#define ___sentient_pp_get_${SENTIENT_LOOP_VAR}(${TMP_SRC} ...) _${SENTIENT_LOOP_VAR}"
                APPEND)
 endforeach()
 
 include_directories(${CMAKE_INCLUDE_PATH}
                     ${CMAKE_BINARY_DIR}/generated/include)
 
-add_executable(black_magic main.c  metaresc.c  mr_btree.c  mr_extra.c  mr_hsort.c  mr_ic.c mr_message.c  mr_save.c  mr_stringify.c)
+add_executable(black_magic main.c)
