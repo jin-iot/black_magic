@@ -80,19 +80,23 @@
  * > (0xdead) ___sentient_pp_if_1_else (0xbeef)
  * > (0xdead)
  */
-#define ___sentient_pp_if_else(cond)      ___sentient_pp_if_else_impl(___sentient_pp_bool(cond))
-#define ___sentient_pp_if_else_impl(cond) ___sentient_pp_cat(___sentient_pp_if_else_, cond)
-#define ___sentient_pp_if_else_1(...)     __VA_ARGS__ ___sentient_pp_if_1_else
-#define ___sentient_pp_if_else_0(...)                 ___sentient_pp_if_0_else
+#define ___sentient_pp_if_else(cond) \
+        ___sentient_pp_if_else_impl(___sentient_pp_bool(cond))
+#define ___sentient_pp_if_else_impl(cond) \
+        ___sentient_pp_cat(___sentient_pp_if_else_, cond)
+#define ___sentient_pp_if_else_1(...) \
+        __VA_ARGS__ ___sentient_pp_if_1_else
+#define ___sentient_pp_if_else_0(...) \
+        ___sentient_pp_if_0_else
 #define ___sentient_pp_if_1_else(...)
-#define ___sentient_pp_if_0_else(...)     __VA_ARGS__
+#define ___sentient_pp_if_0_else(...) \
+        __VA_ARGS__
 
 /**
  * @brief 
  * 
  * count_args(4, 5, 6)
  * count_args_impl(0, 4, 5, 6)
- * 
  *                
  * args(__VA_ARGS__, 6, 5, 4, 3, 2, 1, 0, )
  * 
@@ -108,12 +112,11 @@
 
 #include <sentient/core/internal/pp_iterations.h>
 #define ___sentient_pp_foreach(expr, ...) \
-		___sentient_pp_cat(___sentient_pp_foreach_, \
-					       ___sentient_pp_count_args(__VA_ARGS__)) (expr, __VA_ARGS__)
+		___sentient_pp_cat(___sentient_pp_foreach_, ___sentient_pp_count_args(__VA_ARGS__)) (expr, __VA_ARGS__)
 
 int main(int argc, char** argv)
 {
-	const int num_args = ___sentient_pp_count_args(6, 7, 8);
+	const int num_args = ___sentient_pp_count_args();
 
 	return 0;
 }

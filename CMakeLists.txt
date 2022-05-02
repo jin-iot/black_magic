@@ -55,7 +55,7 @@ write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_ITERATIONS_H_PATH} ${SENTIENT_P
 
 #___sentient_pp_count_args
 set(SENTIENT_PP_COUNT_ARGS_SRC "#define ___sentient_pp_count_args(...) \\\n"
-                               "        ___sentient_pp_count_args_impl(0, __VA_ARGS__)\n"
+                               "        ___sentient_pp_count_args_impl(0, ## __VA_ARGS__)\n"
                                "#define ___sentient_pp_count_args_impl(...) \\\n"
                                "        ___sentient_pp_args(__VA_ARGS__, ")
 math(EXPR SENTIENT_COUNT_ARGS_START "${SENTIENT_C_AUTOGEN_MAX_NUM_ITERATIONS}-2")
