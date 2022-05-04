@@ -25,7 +25,7 @@ bool sentient_pt64_local_now(sentient_pt64* pt)
     return result;
 }
 
-bool sentient_tv128_local_now(sentient_tv128* tv)
+bool sentient_ts128_local_now(sentient_ts128* tv)
 {
     bool result = true;
 
@@ -53,7 +53,7 @@ bool sentient_pt64_utc_now(sentient_pt64* pt)
     return result;
 }
 
-bool sentient_tv128_utc_now(sentient_tv128* tv)
+bool sentient_ts128_utc_now(sentient_ts128* tv)
 {
     bool result = true;
 

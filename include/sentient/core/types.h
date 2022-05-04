@@ -102,7 +102,7 @@ struct sentient_subcentury_datetime64
 	sentient_u32 microseconds;
 };
 
-struct timeval128
+struct timespec128
 {
 	sentient_u64 seconds;
 	sentient_u64 microseconds;
@@ -113,16 +113,16 @@ typedef sentient_u64                          sentient_posix_time64;
 typedef struct sentient_subcentury_datetime32 sentient_scdt32;
 typedef struct sentient_subcentury_datetime64 sentient_scdt64;
 typedef sentient_posix_time64                 sentient_pt64;
-typedef struct sentient_timeval128            sentient_tv128;
+typedef struct sentient_timespec128           sentient_ts128;
 
 bool sentient_scdt32_local_now(sentient_scdt32*);
 bool sentient_scdt64_local_now(sentient_scdt64*);
 bool sentient_pt64_local_now(sentient_pt64*);
-bool sentient_tv128_local_now(sentient_tv128*);
+bool sentient_ts128_local_now(sentient_ts128*);
 bool sentient_scdt32_utc_now(sentient_scdt32*);
 bool sentient_scdt64_utc_now(sentient_scdt64*);
 bool sentient_pt64_utc_now(sentient_pt64*);
-bool sentient_tv128_utc_now(sentient_tv128*);
+bool sentient_ts128_utc_now(sentient_ts128*);
 bool sentient_get_tm_from_scdt32(struct tm*, sentient_scdt32*);
 bool sentient_get_scdt32_from_tm(sentient_scdt32*, struct tm*);
 bool sentient_get_tm_from_scdt64(struct tm*, sentient_scdt32*);
