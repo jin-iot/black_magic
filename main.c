@@ -32,6 +32,10 @@
 
 #define ___sentient_pp_first(x, ...) x
 #define ___sentient_pp_second(x, y, ...) y
+
+/**
+ * @brief the collection of ___sentient_pp_get_{N}(...)
+ */
 #include <sentient/core/internal/pp_get_n.h>
 
 /**
@@ -92,31 +96,16 @@
 #define ___sentient_pp_if_0_else(...) \
         __VA_ARGS__
 
-/**
- * @brief 
- * 
- * count_args(4, 5, 6)
- * count_args_impl(0, 4, 5, 6)
- *                
- * args(__VA_ARGS__, 6, 5, 4, 3, 2, 1, 0, )
- * 
- *       1  2  3  4  5  6  7  8
- * args( 0, 4, 5, 6, 6, 5, 4, 3, 2, 1, 0, )
- * 
- * 3
- * 
- */
-#define args(_1, _2, _3, _4, _5, _6, _7, _8, ...) _8
-#define count_args(...) count_args_impl(0, __VA_ARGS__)
-#define count_args_impl(...) args(__VA_ARGS__, 6, 5, 4, 3, 2, 1, 0, )
-
-#include <sentient/core/internal/pp_iterations.h>
 #define ___sentient_pp_foreach(expr, ...) \
-		___sentient_pp_cat(___sentient_pp_foreach_, ___sentient_pp_count_args(__VA_ARGS__)) (expr, __VA_ARGS__)
+	    ___sentient_pp_cat(___sentient_pp_foreach_, ___sentient_pp_count_args(__VA_ARGS__)) (expr, __VA_ARGS__)
+
+#include <sentient/core/pp_utils.h>
 
 int main(int argc, char** argv)
 {
 	const int num_args = ___sentient_pp_count_args();
+
+        
 
 	return 0;
 }
