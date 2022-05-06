@@ -26,14 +26,7 @@ void custom_print(int x, int y)
 
 int main(int argc, char** argv)
 {
-    const int fdsafdsa =
-        ___sentient_pp_if_else(___sentient_pp_is_eq(1, 2))
-        (
-            666
-        )
-        (
-            777
-        );
+    const int fdsafdsa = ___sentient_pp_and(1)(1);
 
     struct fuck
     {

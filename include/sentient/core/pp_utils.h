@@ -73,6 +73,15 @@ extern "C"
 #define ___sentient_pp_is_paren_probe(...) \
         ___sentient_pp_probe()
 
+/**
+ * @author Jin (jaehwanspin@gmail.com)
+ * @brief and operator macro, usage: ___sentient_pp_and(1)(1)
+ * @date 2022-05-06
+ */
+#define ___sentient_pp_and(arg_1) \
+        ___sentient_pp_cat(___sentient_pp_and_, arg_1)
+#define ___sentient_pp_and_0(arg_2) 0
+#define ___sentient_pp_and_1(arg_2) arg_2
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
