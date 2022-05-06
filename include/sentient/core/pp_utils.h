@@ -108,7 +108,6 @@ extern "C"
         ) (expr, __VA_ARGS__)
 #include <sentient/core/internal/pp_foreach.h>
 
-
 /**
  * @author Jin (jaehwanspin@gmail.com)
  * @brief for count args
