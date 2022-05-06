@@ -80,13 +80,23 @@ foreach(SENTIENT_LOOP_VAR_TYPE
     endforeach()
 endforeach()
 
+######################
+### pp_compare_n.h ###
+######################
+set(SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_COMPARE_N_H_PATH
+    ${SENTIENT_C_AUTOGEN_DIR}/core/internal/pp_compare_n.h)
+write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_COMPARE_N_H_PATH} "")
+foreach(SENTIENT_LOOP_VAR RANGE 0 2048 1)
+    write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_COMPARE_N_H_PATH}
+                "#define ___sentient_pp_compare_${SENTIENT_LOOP_VAR}(x) x"
+                APPEND)
+endforeach()
+
 ####################
 ### pp_inc_dec.h ###
 ####################
 set(SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_INC_DEC_H_PATH
     ${SENTIENT_C_AUTOGEN_DIR}/core/internal/pp_inc_dec.h)
-set(SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_DEFERS_H_PATH
-    ${SENTIENT_C_AUTOGEN_DIR}/core/internal/pp_defers.h)
 write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_INC_DEC_H_PATH} "")
 foreach(SENTIENT_LOOP_VAR RANGE 0 2048 1)
     set(TMP_INC "")
@@ -182,3 +192,20 @@ foreach (SENTIENT_LOOP_VAR RANGE ${SENTIENT_COUNT_ARGS_START} 0 -1)
 endforeach()
 set(SENTIENT_PP_COUNT_ARGS_SRC "${SENTIENT_PP_COUNT_ARGS_SRC})\n")
 write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_COUNT_ARGS_H_PATH} ${SENTIENT_PP_COUNT_ARGS_SRC} APPEND)
+
+######################
+### pp_has_comma.h ###
+######################
+set(SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_HAS_COMMA_H_PATH
+    ${SENTIENT_C_AUTOGEN_DIR}/core/internal/pp_has_comma.h)
+write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_HAS_COMMA_H_PATH} "")
+set(SENTIENT_PP_HAS_COMMA_SRC "#define ___sentient_pp_has_comma_impl(...) \\\n"
+                               "        ___sentient_pp_args(__VA_ARGS__, ")
+math(EXPR SENTIENT_HAS_COMMA_ARGS_COUNT "${SENTIENT_C_AUTOGEN_MAX_NUM_ITERATIONS}-3")
+foreach (SENTIENT_LOOP_VAR RANGE ${SENTIENT_HAS_COMMA_ARGS_COUNT} 0 -1)
+    set(SENTIENT_PP_HAS_COMMA_SRC "${SENTIENT_PP_HAS_COMMA_SRC} \\\n                            "
+                                   "1, ")
+endforeach()
+set(SENTIENT_PP_HAS_COMMA_SRC "${SENTIENT_PP_HAS_COMMA_SRC} "
+                              "\\\n                            0)")
+write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_HAS_COMMA_H_PATH} ${SENTIENT_PP_HAS_COMMA_SRC} APPEND)

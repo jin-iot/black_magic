@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 
 #include <sentient/core/types.h>
 #include <sentient/core/field_info.h>
@@ -8,14 +9,6 @@
 #include <sentient/core/pp_utils.h>
 #include <sentient/core/generic.h>
 
-#include <string.h>
-
-#define hey(a)              \
-        ({                  \
-            int a = 1;      \
-            a = hey(a + 1); \
-            a;              \
-        })
 
 void custom_print(int x, int y)
 {
@@ -30,19 +23,27 @@ void custom_print(int x, int y)
         type name ;
 
 
+
 int main(int argc, char** argv)
 {
+    const int fdsafdsa =
+        ___sentient_pp_if_else(___sentient_pp_is_eq(1, 2))
+        (
+            666
+        )
+        (
+            777
+        );
+
     struct fuck
     {
-    ___sentient_pp_foreach(
-        ___custom_def,
-        (int, a),
-        (int, b),
-        (int, c)
-    )
+        ___sentient_pp_foreach(
+            ___custom_def,
+            (int, a),
+            (int, b),
+            (int, c)
+        )
     };
-
-    struct fuck shit = { 0, };
 
 	return 0;
 }

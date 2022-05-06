@@ -30,7 +30,9 @@ extern "C"
 #define ___sentient_pp_empty(...)
 
 #define ___sentient_pp_wrap(...) \
-        ___sentient_pp_lparen ## __VA_ARGS__ ## ___sentient_pp_rparen
+        ___sentient_pp_lparen __VA_ARGS__  ___sentient_pp_rparen
+#define ___sentient_pp_unwrap(...)
+
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
@@ -39,6 +41,56 @@ extern "C"
  */
 #define ___sentient_pp_first(x, ...) x
 #define ___sentient_pp_second(x, y, ...) y
+
+/**
+ * @author Jin (jaehwanspin@gmail.com)
+ * @brief check if the arg is in parenthesis
+ * @date 2022-05-06
+ */
+#define ___sentient_pp_detect_paren(...) ,
+#define ___sentient_pp_is_in_paren(...) \
+        ___sentient_pp_is_in_paren_impl(__VA_ARGS__)
+#define ___sentient_pp_is_in_paren_impl(...)                                      \
+        ___sentient_pp_has_comma(                                                 \
+            ___sentient_pp_cat_3(                                                 \
+                ___sentient_pp_is_in_paren_,                                      \
+                ___sentient_pp_has_comma(__VA_ARGS__),                            \
+                ___sentient_pp_has_comma(___sentient_pp_detect_paren __VA_ARGS__) \
+            )                                                                     \
+        )
+#define ___sentient_pp_is_in_paren_01 ,
+
+/**
+ * @author Jin (jaehwanspin@gmail.com)
+ * @brief check if the arg is parenthesis
+ * @date 2022-05-06
+ */
+#define ___sentient_pp_check(...) \
+        ___sentient_pp_get_1(__VA_ARGS__, 0, )
+
+#define ___sentient_pp_is_paren(x) \
+        ___sentient_pp_check(___sentient_pp_is_paren_probe x)
+#define ___sentient_pp_is_paren_probe(...) \
+        ___sentient_pp_probe()
+
+
+/**
+ * @author Jin (jaehwanspin@gmail.com)
+ * @brief compares each arg
+ * @date 2022-05-04
+ */
+#define ___sentient_pp_is_eq(x, y) \
+        ___sentient_pp_is_eq_impl(x, y)
+#define ___sentient_pp_is_eq_impl(x, y)                                           \
+        ___sentient_pp_not(                                                       \
+            ___sentient_pp_is_paren(                                              \
+                ___sentient_pp_compare_ ## x (___sentient_pp_compare_ ## y ) (()) \
+            )                                                                     \
+        )
+/**
+ * constants ( 0 ~ N ) to compare
+ */
+#include <sentient/core/internal/pp_compare_n.h>
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
@@ -72,7 +124,7 @@ extern "C"
         ___sentient_pp_cat(___sentient_pp_increase_impl_, number)
 
 /*!
- * @author Jin
+ * @author Jin (jaehwanspin@gmail.com)
  * @brief preprocessor if else statement
  *
  * > const int val = ___sentient_pp_if_else(5) (0xdead)(0xbeef);
@@ -123,6 +175,15 @@ extern "C"
 #define ___sentient_pp_count_args(...) \
         ___sentient_pp_count_args_impl(0, ## __VA_ARGS__)
 #include <sentient/core/internal/pp_count_args.h>
+
+/**
+ * @author Jin (jaehwanspin@gmail.com)
+ * @brief check if the args have comma
+ * @date 2022-05-06
+ */
+#define ___sentient_pp_has_comma(...) \
+        ___sentient_pp_has_comma_impl(__VA_ARGS__)
+#include <sentient/core/internal/pp_has_comma.h>
 
 /**
  * @author Jin
