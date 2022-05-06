@@ -10,6 +10,13 @@
 
 #include <string.h>
 
+#define hey(a)              \
+        ({                  \
+            int a = 1;      \
+            a = hey(a + 1); \
+            a;              \
+        })
+
 void custom_print(int x, int y)
 {
     printf("black magic! %d %d\n", x, y);
@@ -17,14 +24,25 @@ void custom_print(int x, int y)
 #define ___custom_print(args) \
         custom_print args ;
 
+#define ___custom_def(args) \
+        ___custom_def_impl args
+#define ___custom_def_impl(type, name) \
+        type name ;
+
+
 int main(int argc, char** argv)
 {
+    struct fuck
+    {
     ___sentient_pp_foreach(
-        ___custom_print,
-        (1, 2),
-        (3, 4),
-        (5, 6)
+        ___custom_def,
+        (int, a),
+        (int, b),
+        (int, c)
     )
+    };
+
+    struct fuck shit = { 0, };
 
 	return 0;
 }
