@@ -2,6 +2,8 @@
 
 #include <sys/time.h>
 
+
+
 bool sentient_scdt32_local_now(sentient_scdt32* dt)
 {
     bool result = true;

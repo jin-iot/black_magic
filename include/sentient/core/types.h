@@ -60,6 +60,15 @@ typedef char          sentient_str8;
 typedef sentient_i16  sentient_str16;
 typedef sentient_i32  sentient_str32;
 
+#define sentient_call_once __attribute__((constructor))
+#define sentient_call_once_prio(prio) __attribute__((constructor(prio)))
+
+typedef sentient_u32 ___sentient_type_id_internal;
+typedef ___sentient_type_id_internal* ___sentient_type_id;
+
+extern const ___sentient_type_id ___sentient_type_id_sentient_u8;
+extern const ___sentient_type_id ___sentient_type_id_sentient_u16;
+
 typedef sentient_u8   sentient_stx8;
 typedef sentient_u8   sentient_cmd8;
 typedef sentient_u16  sentient_cmd16;
@@ -127,7 +136,6 @@ bool sentient_get_tm_from_scdt32(struct tm*, sentient_scdt32*);
 bool sentient_get_scdt32_from_tm(sentient_scdt32*, struct tm*);
 bool sentient_get_tm_from_scdt64(struct tm*, sentient_scdt32*);
 bool sentient_get_scdt64_from_tm(sentient_scdt32*, struct tm*);
-
 
 #ifdef __cplusplus
 }

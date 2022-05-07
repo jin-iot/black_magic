@@ -10,8 +10,12 @@ extern "C"
 
 struct sentient_field_info
 {
-    char*         field_name;
-    sentient_size field_offset;
+    sentient_str8*            field_name;
+    const ___sentient_type_id type_id;
+    sentient_size             field_offset;
+    sentient_size             array_size;
+    sentient_bool             is_pointer;
+    sentient_bool             is_primary_key;
 };
 
 #ifdef __cplusplus

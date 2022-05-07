@@ -75,7 +75,7 @@ sentient_match_checksum_crc16_adler_b(sentient_void* data,
 }
 static
 sentient_bool
-sentient_match_checksum_CRC16_ccitt(sentient_void* data,
+sentient_match_checksum_crc16_ccitt(sentient_void* data,
                                     sentient_size data_size)
 {
     bool result = false;
@@ -84,7 +84,7 @@ sentient_match_checksum_CRC16_ccitt(sentient_void* data,
 }
 static
 sentient_bool
-sentient_match_checksum_CRC16_ibm(sentient_void* data,
+sentient_match_checksum_crc16_ibm(sentient_void* data,
                                   sentient_size data_size)
 {
     bool result = false;

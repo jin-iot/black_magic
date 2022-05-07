@@ -17,10 +17,11 @@ extern "C"
 {
 #endif
 
+#define ___sentient_pp_pass(args) args
 #define ___sentient_pp_is_va_arg(...) ,
 #define ___sentient_pp_comma() ,
 #define ___sentient_pp_lparen() (
-#define ___sentient_pp_rparen() (
+#define ___sentient_pp_rparen() )
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
@@ -30,8 +31,15 @@ extern "C"
 #define ___sentient_pp_empty(...)
 
 #define ___sentient_pp_wrap(...) \
-        ___sentient_pp_lparen __VA_ARGS__  ___sentient_pp_rparen
-#define ___sentient_pp_unwrap(...)
+        ___sentient_pp_lparen() __VA_ARGS__  ___sentient_pp_rparen()
+#define ___sentient_pp_unwrap(args) \
+        ___sentient_pp_if_else(___sentient_pp_is_in_paren(args)) \
+        (                                                        \
+            ___sentient_pp_pass args                             \
+        )                                                        \
+        (                                                        \
+            args                                                 \
+        )
 
 
 /**
@@ -86,7 +94,7 @@ extern "C"
 /**
  * @author Jin (jaehwanspin@gmail.com)
  * @brief compares each arg
- * @date 2022-05-04
+ * @date 2022-05-07
  */
 #define ___sentient_pp_is_eq(x, y) \
         ___sentient_pp_is_eq_impl(x, y)
@@ -97,9 +105,11 @@ extern "C"
             )                                                                     \
         )
 /**
- * constants ( 0 ~ N ) to compare
+ * macro numeric, keyword constants ( 0 ~ N, keywords... ) to compare
  */
 #include <sentient/core/internal/pp_compare_n.h>
+#define ___sentient_pp_compare_struct(x) x
+#define ___sentient_pp_compare_bit_field(x) x
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
@@ -220,6 +230,41 @@ extern "C"
 
 #define ___sentient_pp_bool(x) \
         ___sentient_pp_not(___sentient_pp_not(x))
+
+#define ___sentient_pp_decl_field(...)             \
+        ___sentient_pp_cat(                        \
+            ___sentient_pp_decl_field_,            \
+            ___sentient_pp_count_args(__VA_ARGS__) \
+        ) (__VA_ARGS__)
+
+#define ___sentient_pp_decl_field_2(type, name) \
+        ___sentient_pp_decl_field_2_impl(type, name)
+#define ___sentient_pp_decl_field_2_impl(type, name) \
+        type name ;
+
+
+#define ___sentient_pp_decl_field_3(type, name, arr_size) \
+        ___sentient_pp_decl_field_3_impl(type, name, arr_size)
+#define ___sentient_pp_decl_field_3_impl(type, name, arr_size) \
+        type name [ arr_size ] ;
+
+
+
+
+/**
+ * @author Jin (jaehwanspin@gmail.com)
+ * @brief defines a model structure with the model info
+ * @date 2022-05-07
+ */
+#define ___sentient_pp_define_model(...) \
+        ___sentient_pp_define_model_impl(__VA_ARGS__)
+
+#define ___sentient_pp_define_model_impl(model_name, ...) \
+        ___sentient_pp_decl_model_name(model_name)        \
+        }
+
+#define ___sentient_pp_decl_model_name(model_name) \
+        struct model_name {
 
 
 #ifdef __cplusplus
