@@ -56,7 +56,7 @@ ___sentient_model_info_store_model_info(
 const
 struct sentient_model_info*
 ___sentient_model_info_get_model_info(
-    ___sentient_type_id type_id)
+    const ___sentient_type_id type_id)
 {
     return model_info_list[*type_id];
 }

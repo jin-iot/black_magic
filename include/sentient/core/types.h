@@ -60,6 +60,8 @@ typedef char          sentient_str8;
 typedef sentient_i16  sentient_str16;
 typedef sentient_i32  sentient_str32;
 
+typedef atomic_size_t sentient_atomic_size;
+
 #define sentient_call_once __attribute__((constructor))
 #define sentient_call_once_prio(prio) __attribute__((constructor(prio)))
 
