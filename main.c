@@ -10,21 +10,17 @@
 #include <sentient/core/generic.h>
 #include <sentient/core/define_model.h>
 
-
-
-
-
-
-
-
-
 int main(int argc, char** argv)
 {
     const struct sentient_model_info* mi = 
         ___sentient_model_info_get_model_info(
             ___sentient_type_id_sentient_u16
         );
-    // printf("hey! %s\n", mi->model_name);
+    printf("%p %p %p %p \n",
+        ___sentient_type_id_sentient_u8,
+        ___sentient_type_id_sentient_u16,
+        ___sentient_type_id_sentient_u32,
+        ___sentient_type_id_sentient_u64);
 
     printf("ah\n");
 

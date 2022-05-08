@@ -3,48 +3,33 @@
 #include <stdlib.h>
 #include <stdatomic.h>
 
-static
-___sentient_type_id_internal
-___sentient_type_id_internal_sentient_u8;
-const ___sentient_type_id
-___sentient_type_id_sentient_u8 =
-    &___sentient_type_id_internal_sentient_u8;
-static
-struct sentient_model_info
-___sentient_model_info_sentient_u8 = {
-    .model_name = "u8",
-    .fields_count = 0,
-    .fields_info = sentient_nullptr,
-    .actual_size = sizeof(sentient_u8),
-};
-
-static
-___sentient_type_id_internal
-___sentient_type_id_internal_sentient_u16;
-const ___sentient_type_id
-___sentient_type_id_sentient_u16 =
-    &___sentient_type_id_internal_sentient_u16;
-static
-struct sentient_model_info
-___sentient_model_info_sentient_u16 = {
-    .model_name = "u16",
-    .fields_count = 0,
-    .fields_info = sentient_nullptr,
-    .actual_size = sizeof(sentient_u16),
-};
-
-
 #ifndef SENTIENT_MODEL_INFO_LIST_MAX_SIZE
 #define SENTIENT_MODEL_INFO_LIST_MAX_SIZE (sentient_size)128U
 #endif
 
+#include "./builtin_type_ids.h"
+
 static
 struct sentient_model_info*
-model_info_list[SENTIENT_MODEL_INFO_LIST_MAX_SIZE];
+model_info_list[SENTIENT_MODEL_INFO_LIST_MAX_SIZE] = {
+    &___sentient_model_info_sentient_u8,
+    &___sentient_model_info_sentient_u16,
+    &___sentient_model_info_sentient_u32,
+    &___sentient_model_info_sentient_u64,
+    &___sentient_model_info_sentient_i8,
+    &___sentient_model_info_sentient_i16,
+    &___sentient_model_info_sentient_i32,
+    &___sentient_model_info_sentient_i64,
+    &___sentient_model_info_sentient_f32,
+    &___sentient_model_info_sentient_f64,
+    &___sentient_model_info_sentient_str8,
+    &___sentient_model_info_sentient_str16,
+    &___sentient_model_info_sentient_str32,
+};
 
 static
 atomic_size_t
-model_info_list_size = 0;
+model_info_list_size = 13;
 
 /**
  * @author Jin (jaehwanspin@gmail.com)

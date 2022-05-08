@@ -68,22 +68,23 @@ typedef ___sentient_type_id_internal* ___sentient_type_id;
 
 extern const ___sentient_type_id ___sentient_type_id_sentient_u8;
 extern const ___sentient_type_id ___sentient_type_id_sentient_u16;
+extern const ___sentient_type_id ___sentient_type_id_sentient_u32;
+extern const ___sentient_type_id ___sentient_type_id_sentient_u64;
+extern const ___sentient_type_id ___sentient_type_id_sentient_i8;
+extern const ___sentient_type_id ___sentient_type_id_sentient_i16;
+extern const ___sentient_type_id ___sentient_type_id_sentient_i32;
+extern const ___sentient_type_id ___sentient_type_id_sentient_i64;
+extern const ___sentient_type_id ___sentient_type_id_sentient_f32;
+extern const ___sentient_type_id ___sentient_type_id_sentient_f64;
+extern const ___sentient_type_id ___sentient_type_id_sentient_str8;
+extern const ___sentient_type_id ___sentient_type_id_sentient_str16;
+extern const ___sentient_type_id ___sentient_type_id_sentient_str32;
 
 typedef sentient_u8   sentient_stx8;
 typedef sentient_u8   sentient_cmd8;
 typedef sentient_u16  sentient_cmd16;
 typedef sentient_u32  sentient_cmd32;
 typedef sentient_u64  sentient_cmd64;
-
-typedef sentient_u64 sentient_model_uid;
-
-#ifndef SENTIENT_MODEL_UID_SIZE
-#define SENTIENT_MODEL_UID_SIZE 16
-#elif SENTIENT_MODEL_UID_SIZE != 32 || \
-      SENTIENT_MODEL_UID_SIZE != 16 || \
-      SENTIENT_MODEL_UID_SIZE != 8
-#error "Sentient model uid size must be 64 or 32 or 16"
-#endif
 
 #include <sentient/core/internal/string_types.h>
 #include <sentient/core/internal/vec_types.h>

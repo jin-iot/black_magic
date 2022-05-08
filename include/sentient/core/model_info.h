@@ -14,17 +14,6 @@
 
 #include <sentient/core/types.h>
 
-/**
- * @file define_model.h
- * @author Jin (jaehwanspin@gmail.com)
- * @brief defines a struct that describes the type(model)
- * @version 0.1
- * @date 2022-05-07
- * 
- * @copyright Copyright (c) 2022
- * 
- */
-
 #ifdef __cplusplus
 extern "C"
 {
@@ -49,17 +38,6 @@ const
 struct sentient_model_info*
 ___sentient_model_info_get_model_info(
     ___sentient_type_id type_id);
-
-
-
-
-
-
-
-
-
-
-
 
 
 #ifdef __cplusplus
