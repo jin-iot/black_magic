@@ -13,6 +13,8 @@
  */
 
 #include <sentient/core/types.h>
+#include <sentient/core/sentient_config.h>
+#include <sentient/core/os_wrap.h>
 
 #ifdef __cplusplus
 extern "C"
@@ -30,6 +32,9 @@ struct sentient_model_info
     struct sentient_field_info*  fields_info;
     sentient_size                pool_size;
     struct sentient_object_pool* object_pool;
+#ifdef SENTIENT_C_USE_OS
+    sentient_mutex_t*            mutex;
+#endif
 };
 
 void

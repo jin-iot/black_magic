@@ -24,6 +24,9 @@ struct sentient_object_pool
     sentient_atomic_size current_index;
     sentient_atomic_size using_index;
     sentient_void*       pool_ptr;
+#ifdef SENTIENT_C_USE_OS
+    sentient_void*       mutex_ptr;
+#endif
 };
 
 void*

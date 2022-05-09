@@ -21,6 +21,51 @@
 set(SENTIENT_C_AUTOGEN_DIR
     ${CMAKE_BINARY_DIR}/generated/include/sentient)
 
+#########################
+### sentient_config.h ###
+#########################
+set(SENTIENT_C_AUTOGEN_CORE_SENTIENT_CONFIG_H_PATH
+    ${SENTIENT_C_AUTOGEN_DIR}/core/sentient_config.h)
+write_file(${SENTIENT_C_AUTOGEN_CORE_SENTIENT_CONFIG_H_PATH}
+           "#ifndef __SENTIENT_CORE_SENTIENT_CONFIG_H__\n"
+           "#define __SENTIENT_CORE_SENTIENT_CONFIG_H__\n\n"
+           "#ifdef __cplusplus\n"
+           "extern \"C\"\n"
+           "{\n"
+           "#endif\n\n")
+if(SENTIENT_C_USE_OS)
+write_file(${SENTIENT_C_AUTOGEN_CORE_SENTIENT_CONFIG_H_PATH}
+           "#define SENTIENT_C_USE_OS\n\n"
+           APPEND)
+endif()
+if(SENTIENT_C_OS_POSIX)
+write_file(${SENTIENT_C_AUTOGEN_CORE_SENTIENT_CONFIG_H_PATH}
+           "#define SENTIENT_C_OS_POSIX\n\n"
+           APPEND)
+endif()
+if(SENTIENT_C_OS_ZEPHYR)
+write_file(${SENTIENT_C_AUTOGEN_CORE_SENTIENT_CONFIG_H_PATH}
+           "#define SENTIENT_C_OS_ZEPHYR\n\n"
+           APPEND)
+endif()
+if(SENTIENT_C_OS_RIOT)
+write_file(${SENTIENT_C_AUTOGEN_CORE_SENTIENT_CONFIG_H_PATH}
+           "#define SENTIENT_C_OS_RIOT\n\n"
+           APPEND)
+endif()
+if(SENTIENT_C_OS_MIPOS)
+write_file(${SENTIENT_C_AUTOGEN_CORE_SENTIENT_CONFIG_H_PATH}
+           "#define SENTIENT_C_OS_MIPOS\n\n"
+           APPEND)
+endif()
+write_file(${SENTIENT_C_AUTOGEN_CORE_SENTIENT_CONFIG_H_PATH}
+           "#ifdef __cplusplus\n"
+           "extern \"C\"\n"
+           "{\n"
+           "#endif\n\n"
+           "#endif"
+           APPEND)
+
 ######################
 ### string_types.h ###
 ######################
