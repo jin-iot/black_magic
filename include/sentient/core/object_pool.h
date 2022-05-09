@@ -13,11 +13,14 @@
  */
 
 #include <sentient/core/types.h>
+#include <sentient/core/sentient_config.h>
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
+
+struct sentient_object_pool_elem;
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
@@ -25,12 +28,11 @@ extern "C"
  */
 struct sentient_object_pool
 {
-    sentient_atomic_size current_index;
-    sentient_atomic_size using_index;
-    sentient_void*       pool_arr_ptr;
-#ifdef SENTIENT_C_USE_OS
-    sentient_void*       mutex_ptr;
-#endif
+    sentient_atomic_size              pool_size;
+    struct sentient_object_pool_elem* pool_elem;
+    sentient_uptr                     rear;
+    sentient_uptr                     front;
+    
 };
 
 sentient_void*
@@ -70,7 +72,9 @@ ___sentient_pool_calloc_impl(
             count,                                 \
             ___sentient_type_id_ ## typename)
 
-sentient_void sentient_pool_free(sentient_void* mem);
+
+sentient_void
+sentient_pool_free(sentient_void* mem);
 
 #ifdef __cplusplus
 }
