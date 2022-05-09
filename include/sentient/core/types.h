@@ -28,39 +28,55 @@ extern "C"
 #endif
 
 /**
- * @author Jin
+ * @author Jin (jaehwanspin@gmail.com)
  * @brief basic types
  * 
  */
 
-#ifndef sentient_nullptr
 #define sentient_nullptr NULL
-#endif
 
-typedef uintptr_t     sentient_uptr;
-typedef intptr_t      sentient_iptr;
+#define sentient_atomic _Atomic
 
-typedef void          sentient_void;
-typedef bool          sentient_bool;
-typedef size_t        sentient_size;
-typedef ssize_t       sentient_ssize;
-typedef uint8_t       sentient_u8;
-typedef uint16_t      sentient_u16;
-typedef uint32_t      sentient_u32;
-typedef uint64_t      sentient_u64;
-typedef int8_t        sentient_i8;
-typedef int16_t       sentient_i16;
-typedef int32_t       sentient_i32;
-typedef int64_t       sentient_i64;
+typedef uintptr_t                          sentient_uptr;
+typedef intptr_t                           sentient_iptr;
 
-typedef float         sentient_f32;
-typedef double        sentient_f64;
+typedef void                               sentient_void;
+typedef bool                               sentient_bool;
+typedef size_t                             sentient_size;
+typedef ssize_t                            sentient_ssize;
+typedef uint8_t                            sentient_u8;
+typedef uint16_t                           sentient_u16;
+typedef uint32_t                           sentient_u32;
+typedef uint64_t                           sentient_u64;
+typedef int8_t                             sentient_i8;
+typedef int16_t                            sentient_i16;
+typedef int32_t                            sentient_i32;
+typedef int64_t                            sentient_i64;
 
-typedef char          sentient_str8;
-typedef sentient_i16  sentient_str16;
-typedef sentient_i32  sentient_str32;
 
-typedef atomic_size_t sentient_atomic_size;
+typedef float                              sentient_f32;
+typedef double                             sentient_f64;
+
+typedef char                               sentient_str8;
+typedef sentient_i16                       sentient_str16;
+typedef sentient_i32                       sentient_str32;
+
+typedef sentient_atomic sentient_uptr      sentient_atomic_uptr;
+typedef sentient_atomic sentient_iptr      sentient_atomic_iptr;
+
+typedef sentient_atomic sentient_size      sentient_atomic_size;
+typedef sentient_atomic sentient_bool      sentient_atomic_bool;
+typedef sentient_atomic sentient_u8        sentient_atomic_u8;
+typedef sentient_atomic sentient_u16       sentient_atomic_u16;
+typedef sentient_atomic sentient_u32       sentient_atomic_u32;
+typedef sentient_atomic sentient_u64       sentient_atomic_u64;
+typedef sentient_atomic sentient_i8        sentient_atomic_i8;
+typedef sentient_atomic sentient_i16       sentient_atomic_i16;
+typedef sentient_atomic sentient_i32       sentient_atomic_i32;
+typedef sentient_atomic sentient_i64       sentient_atomic_i64;
+
+typedef sentient_atomic sentient_f32       sentient_atomic_f32;
+typedef sentient_atomic sentient_f64       sentient_atomic_f64;
 
 #define sentient_call_once __attribute__((constructor))
 #define sentient_call_once_prio(prio) __attribute__((constructor(prio)))

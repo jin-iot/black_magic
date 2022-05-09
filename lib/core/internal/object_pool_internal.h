@@ -8,11 +8,14 @@ extern "C"
 {
 #endif
 
-struct sentient_lockfree_queue_elem
-{
-    sentient_uptr ptr;
-    sentient_uptr ref;
-};
+void
+sentient_object_pool_push(
+    struct sentient_object_pool* pool,
+    sentient_atomic_uptr ptr);
+
+sentient_atomic_uptr
+sentient_object_pool_pop(
+    struct sentient_object_pool* pool);
 
 #ifdef __cplusplus
 }

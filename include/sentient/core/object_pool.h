@@ -20,7 +20,24 @@ extern "C"
 {
 #endif
 
-struct sentient_object_pool_elem;
+#ifdef __x86_64__
+#define sentient_object_pool_cacheline_size (sentient_size)64
+#endif
+#ifdef __arm__
+#ifdef __TARGET_ARCH_THUMB
+
+#endif
+#endif
+
+/**
+ * @author Jin (jaehwanspin@gmail.com)
+ * @brief object pool element descriptor
+ */
+struct sentient_lockfree_queue_elem
+{
+    sentient_atomic_uptr ptr;
+    sentient_atomic_uptr ref;
+};
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
@@ -30,10 +47,15 @@ struct sentient_object_pool
 {
     sentient_atomic_size              pool_size;
     struct sentient_object_pool_elem* pool_elem;
-    sentient_uptr                     rear;
-    sentient_uptr                     front;
-
+    sentient_atomic_uptr              rear;
+    sentient_atomic_uptr              front;
 };
+
+// #define sentient_define_object_pool(type, name, size) \
+//         struct sentient_object_pool \
+//             ___sentient_object_pool_ ## name = { \
+                
+//             }
 
 sentient_void*
 ___sentient_pool_alloc_impl(
