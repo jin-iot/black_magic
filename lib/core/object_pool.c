@@ -20,22 +20,10 @@ ___sentient_pool_alloc_impl(
         ___sentient_model_info_get_model_info(type_id);
 
     if (minfo != sentient_nullptr &&
-        minfo->object_pool != sentient_nullptr
-#ifdef SENTIENT_C_USE_OS
-        &&
-        minfo->mutex != sentient_nullptr)
+        minfo->object_pool != sentient_nullptr)
     {
-        sentient_mutex_lock(minfo->mutex);
-#else
-        )
-    {
-#endif
         struct sentient_object_pool* pool =
             minfo->object_pool;
-        
-#ifdef SENTIENT_C_USE_OS
-        sentient_mutex_unlock(minfo->mutex);
-#endif
     }
 
     return mem;
@@ -60,22 +48,10 @@ ___sentient_pool_calloc_impl(
         ___sentient_model_info_get_model_info(type_id);
     
     if (minfo != sentient_nullptr &&
-        minfo->object_pool != sentient_nullptr
-#ifdef SENTIENT_C_USE_OS
-        &&
-        minfo->mutex != sentient_nullptr)
+        minfo->object_pool != sentient_nullptr)
     {
-        sentient_mutex_lock(minfo->mutex);
-#else
-        )
-    {
-#endif
         struct sentient_object_pool* pool =
             minfo->object_pool;
-
-#ifdef SENTIENT_C_USE_OS
-    sentient_mutex_unlock(minfo->mutex);
-#endif
     }
 
     return mem;
