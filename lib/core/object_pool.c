@@ -82,7 +82,9 @@ ___sentient_pool_calloc_impl(
 }
 
 sentient_void
-sentient_pool_free(sentient_void* mem)
+___sentient_pool_free_impl(
+    const ___sentient_type_id type_id,
+    sentient_void* mem)
 {
 
 }

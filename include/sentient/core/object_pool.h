@@ -32,7 +32,7 @@ struct sentient_object_pool
     struct sentient_object_pool_elem* pool_elem;
     sentient_uptr                     rear;
     sentient_uptr                     front;
-    
+
 };
 
 sentient_void*
@@ -43,6 +43,11 @@ sentient_void*
 ___sentient_pool_calloc_impl(
     const sentient_size count,
     const ___sentient_type_id type_id);
+
+sentient_void
+___sentient_pool_free_impl(
+    const ___sentient_type_id type_id,
+    sentient_void* mem);
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
@@ -72,9 +77,21 @@ ___sentient_pool_calloc_impl(
             count,                                 \
             ___sentient_type_id_ ## typename)
 
+/**
+ * @author Jin (jaehwanspin@gmail.com)
+ * @brief free pool memory
+ * 
+ * @param type_id 
+ * @param mem 
+ * @return sentient_void 
+ */
+#define sentient_pool_free(typename, mem_ptr) \
+        sentient_pool_free_impl(typename, mem_ptr)
+#define sentient_pool_free_impl(typename, mem_ptr) \
+        ___sentient_pool_calloc_impl(              \
+            ___sentient_type_id_ ## typename,      \
+            mem_ptr)
 
-sentient_void
-sentient_pool_free(sentient_void* mem);
 
 #ifdef __cplusplus
 }
