@@ -34,7 +34,7 @@ extern "C"
  */
 
 #ifndef sentient_nullptr
-#define sentient_nullptr 0
+#define sentient_nullptr NULL
 #endif
 
 typedef uintptr_t     sentient_uptr;

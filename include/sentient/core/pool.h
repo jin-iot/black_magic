@@ -19,21 +19,25 @@ extern "C"
 {
 #endif
 
+/**
+ * @author Jin (jaehwanspin@gmail.com)
+ * @brief object pool descriptor
+ */
 struct sentient_object_pool
 {
     sentient_atomic_size current_index;
     sentient_atomic_size using_index;
-    sentient_void*       pool_ptr;
+    sentient_void*       pool_arr_ptr;
 #ifdef SENTIENT_C_USE_OS
     sentient_void*       mutex_ptr;
 #endif
 };
 
-void*
+sentient_void*
 ___sentient_pool_alloc_impl(
     const ___sentient_type_id type_id);
 
-void*
+sentient_void*
 ___sentient_pool_calloc_impl(
     const sentient_size count,
     const ___sentient_type_id type_id);
@@ -65,6 +69,8 @@ ___sentient_pool_calloc_impl(
         ___sentient_pool_calloc_impl(              \
             count,                                 \
             ___sentient_type_id_ ## typename)
+
+sentient_void sentient_pool_free(sentient_void* mem);
 
 #ifdef __cplusplus
 }

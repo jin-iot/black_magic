@@ -53,6 +53,11 @@ write_file(${SENTIENT_C_AUTOGEN_CORE_SENTIENT_CONFIG_H_PATH}
            "#define SENTIENT_C_OS_RIOT\n\n"
            APPEND)
 endif()
+if(SENTIENT_C_OS_MYNEWT)
+write_file(${SENTIENT_C_AUTOGEN_CORE_SENTIENT_CONFIG_H_PATH}
+           "#define SENTIENT_C_OS_MYNEWT\n\n"
+           APPEND)
+endif()
 if(SENTIENT_C_OS_MIPOS)
 write_file(${SENTIENT_C_AUTOGEN_CORE_SENTIENT_CONFIG_H_PATH}
            "#define SENTIENT_C_OS_MIPOS\n\n"
