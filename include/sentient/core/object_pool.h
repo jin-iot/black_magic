@@ -20,20 +20,21 @@ extern "C"
 {
 #endif
 
-#ifdef __x86_64__
-#define sentient_object_pool_cacheline_size (sentient_size)64
-#endif
-#ifdef __arm__
-#ifdef __TARGET_ARCH_THUMB
+// #ifdef __x86_64__
+// #define sentient_object_pool_cacheline_size (sentient_size)64
+// #endif
+// #ifdef __arm__
+// #ifdef __TARGET_ARCH_THUMB
 
-#endif
-#endif
+// #endif
+// #endif
+#define sentient_cacheline_size (sentient_size)64
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
  * @brief object pool element descriptor
  */
-struct sentient_lockfree_queue_elem
+struct sentient_object_pool_element
 {
     sentient_atomic_uptr ptr;
     sentient_atomic_uptr ref;
@@ -45,6 +46,7 @@ struct sentient_lockfree_queue_elem
  */
 struct sentient_object_pool
 {
+    sentient_u8                       padding_[sentient_cacheline_size];
     sentient_atomic_size              pool_size;
     struct sentient_object_pool_elem* pool_elem;
     sentient_atomic_uptr              rear;
