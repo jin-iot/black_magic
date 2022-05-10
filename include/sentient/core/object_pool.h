@@ -13,6 +13,7 @@
  */
 
 #include <sentient/core/types.h>
+#include <sentient/core/hardware_traits.h>
 #include <sentient/core/sentient_config.h>
 
 #ifdef __cplusplus
@@ -20,41 +21,32 @@ extern "C"
 {
 #endif
 
-// #ifdef __x86_64__
-// #define sentient_object_pool_cacheline_size (sentient_size)64
-// #endif
-// #ifdef __arm__
-// #ifdef __TARGET_ARCH_THUMB
-
-// #endif
-// #endif
-#define sentient_cacheline_size (sentient_size)64
-typedef sentient_u8 sentient_object_pool_pad[sentient_cacheline_size];
-
 /**
  * @author Jin (jaehwanspin@gmail.com)
  * @brief object pool element descriptor
  */
 struct sentient_object_pool_element
 {
-    sentient_atomic_size seq;
-    sentient_void*       data;
+    sentient_atomic_uptr next_object_ptr;
+    sentient_u32         magic;
+    sentient_size        index;
+    sentient_atomic_uptr object_ptr;
 };
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
  * @brief object pool descriptor
  */
-struct sentient_object_pool
+struct
+#ifdef SENTIENT_MULTIPROCESSING
+__attribute__((aligned(SENTIENT_CACHELINE_SIZE)))
+#endif
+sentient_object_pool
 {
-    sentient_object_pool_pad             ___pad_0;
-    sentient_size                        ___buffer_mask;
-    struct sentient_object_pool_element* ___buffer;
-    sentient_object_pool_pad             ___pad_1;
-    sentient_atomic_size                 ___tail;
-    sentient_object_pool_pad             ___pad_2;
-    sentient_atomic_size                 ___head;
-    sentient_object_pool_pad             ___pad_3;
+    sentient_atomic_uptr head_object_ptr;
+    sentient_size        pool_size;
+    sentient_size        object_size;
+    
 };
 
 // #define sentient_define_object_pool(type, name, size) \

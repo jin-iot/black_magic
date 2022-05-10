@@ -4,6 +4,10 @@
 #include <sentient/core/model_info.h>
 #include <sentient/core/pp_utils.h>
 
+#ifdef SENTIENT_C_USE_POOL
+#include <sentient/core/object_pool.h>
+#endif
+
 #ifdef __cplusplus
 extern "C"
 {
@@ -26,6 +30,13 @@ extern "C"
             .actual_size = sizeof( typename ),               \
         };
 
+
+
+static
+struct sentient_object_pool
+___sentient_object_pool_sentient_u8 = {
+  
+};
 static
 ___sentient_type_id_internal
 ___sentient_type_id_internal_sentient_u8 = 0;

@@ -180,6 +180,23 @@ extern "C"
 #include <sentient/core/internal/pp_foreach.h>
 
 /**
+ * @author Jin
+ * @brief evaluates each expressions
+ * @date 2022-05-04
+ * 
+ * > ___sentient_pp_for(5, 0, increase, expression_macro, expr)
+ * > ___sentient_pp_for(5, 10, decrease, expression_macro, expr)
+ * 
+ */
+#define ___sentient_pp_for(num_loop, start_number, inc_dec, expr, ...) \
+        ___sentient_pp_cat_4(                                          \
+                ___sentient_pp_for_,                                   \
+                inc_dec,                                               \
+                _,                                                     \
+                num_loop                                               \
+        ) (start_number, expr, __VA_ARGS__)
+
+/**
  * @author Jin (jaehwanspin@gmail.com)
  * @brief for count args
  * @date 2022-05-04
@@ -247,8 +264,6 @@ extern "C"
         ___sentient_pp_decl_field_3_impl(type, name, arr_size)
 #define ___sentient_pp_decl_field_3_impl(type, name, arr_size) \
         type name [ arr_size ] ;
-
-
 
 
 /**

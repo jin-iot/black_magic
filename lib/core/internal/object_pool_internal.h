@@ -10,7 +10,7 @@ extern "C"
 #endif
 
 sentient_bool
-___sentient_object_pool_push(
+sentient_object_pool_push(
     struct sentient_object_pool* pool,
     sentient_void* ptr);
 
