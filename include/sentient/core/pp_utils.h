@@ -181,12 +181,8 @@ extern "C"
 
 /**
  * @author Jin
- * @brief evaluates each expressions
- * @date 2022-05-04
- * 
- * > ___sentient_pp_for(5, 0, increase, expression_macro, expr)
- * > ___sentient_pp_for(5, 10, decrease, expression_macro, expr)
- * 
+ * @brief evaluates expressions in the loop
+ * @date 2022-05-10
  */
 #define ___sentient_pp_for(num_loop, start_number, inc_dec, expr, ...) \
         ___sentient_pp_cat_4(                                          \
@@ -195,6 +191,7 @@ extern "C"
                 _,                                                     \
                 num_loop                                               \
         ) (start_number, expr, __VA_ARGS__)
+#include <sentient/core/internal/pp_for.h>
 
 /**
  * @author Jin (jaehwanspin@gmail.com)

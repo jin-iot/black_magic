@@ -18,38 +18,13 @@ int thread_handler(void* arg)
     printf("thread %ld\n", thrd_current());
 }
 
-#define ___sentient_pp_for_increase_0(number, expr, ...)
-#define ___sentient_pp_for_increase_1(number, expr, ...) \
-        expr(number, __VA_ARGS__)                     \
-        ___sentient_pp_for_increase_0(                   \
-            ___sentient_pp_increase(number),          \
-            expr,                                     \
-            __VA_ARGS__                               \
-        )
-#define ___sentient_pp_for_increase_2(number, expr, ...) \
-        expr(number, __VA_ARGS__)                     \
-        ___sentient_pp_for_increase_1(                   \
-            ___sentient_pp_increase(number),          \
-            expr,                                     \
-            __VA_ARGS__                               \
-        )
-#define ___sentient_pp_for_increase_3(number, expr, ...) \
-        expr(number, __VA_ARGS__)                     \
-        ___sentient_pp_for_increase_2(                   \
-            ___sentient_pp_increase(number),          \
-            expr,                                     \
-            __VA_ARGS__                               \
-        )
-
 #define def_num(num, type, name) \
-        const type name_ ## num = num ;
+        const type name ## _ ## num = num ;
 
 int main(int argc, char** argv)
 {
-    // ___sentient_pp_for(3, 1, increase, def_num, int, fuck)
-    ___sentient_pp_cat_4_impl(___sentient_pp_for_, increase, _, 3, )
-
-    // printf("%d %d %d \n");
+    ___sentient_pp_for(3, 0, increase, def_num, int, fuck)
+    printf("%d %d %d \n", fuck_0, fuck_1, fuck_2);
 
     int res = EXIT_SUCCESS;
 

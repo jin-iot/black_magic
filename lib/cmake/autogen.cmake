@@ -232,6 +232,47 @@ foreach (SENTIENT_LOOP_VAR RANGE 0 ${SENTIENT_C_AUTOGEN_MAX_NUM_ITERATIONS} 1)
     endif()
 endforeach()
 
+####################
+### pp_for.h ###
+####################
+set(SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_FOR_H_PATH
+    ${SENTIENT_C_AUTOGEN_DIR}/core/internal/pp_for.h)
+write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_FOR_H_PATH} "")
+foreach (SENTIENT_LOOP_VAR RANGE 0 ${SENTIENT_C_AUTOGEN_MAX_NUM_ITERATIONS} 1)
+    if (${SENTIENT_LOOP_VAR} EQUAL "0")
+        write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_FOR_H_PATH}
+                    "#define ___sentient_pp_for_increase_${SENTIENT_LOOP_VAR}(idx, expr, ...)\n")
+    else()
+        math(EXPR PREVIOUS_COUNT_VAR "${SENTIENT_LOOP_VAR}-1")
+        write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_FOR_H_PATH}
+                    "#define ___sentient_pp_for_increase_${SENTIENT_LOOP_VAR}(idx, expr, ...) \\\n"
+                    "        expr(idx, __VA_ARGS__)                        \\\n"
+                    "        ___sentient_pp_for_increase_${PREVIOUS_COUNT_VAR}(                \\\n"
+                    "            ___sentient_pp_increase(idx),             \\\n"
+                    "                expr,                                 \\\n"
+                    "                __VA_ARGS__                           \\\n"
+                    "        )"
+                    APPEND)
+    endif()
+endforeach()
+foreach (SENTIENT_LOOP_VAR RANGE 0 ${SENTIENT_C_AUTOGEN_MAX_NUM_ITERATIONS} 1)
+    if (${SENTIENT_LOOP_VAR} EQUAL "0")
+        write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_FOR_H_PATH}
+                    "#define ___sentient_pp_for_decrease_${SENTIENT_LOOP_VAR}(idx, expr, ...)\n" APPEND)
+    else()
+        math(EXPR PREVIOUS_COUNT_VAR "${SENTIENT_LOOP_VAR}-1")
+        write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_FOR_H_PATH}
+                    "#define ___sentient_pp_for_decrease_${SENTIENT_LOOP_VAR}(idx, expr, ...) \\\n"
+                    "        expr(idx, __VA_ARGS__)                        \\\n"
+                    "        ___sentient_pp_for_decrease_${PREVIOUS_COUNT_VAR}(                \\\n"
+                    "            ___sentient_pp_decrease(idx),             \\\n"
+                    "                expr,                                 \\\n"
+                    "                __VA_ARGS__                           \\\n"
+                    "        )"
+                    APPEND)
+    endif()
+endforeach()
+
 #################
 ### pp_args.h ###
 #################
