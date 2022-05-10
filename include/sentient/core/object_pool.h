@@ -29,6 +29,7 @@ extern "C"
 // #endif
 // #endif
 #define sentient_cacheline_size (sentient_size)64
+typedef sentient_u8 sentient_object_pool_pad[sentient_cacheline_size];
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
@@ -36,8 +37,8 @@ extern "C"
  */
 struct sentient_object_pool_element
 {
-    sentient_atomic_uptr ptr;
-    sentient_atomic_uptr ref;
+    sentient_atomic_size seq;
+    sentient_void*       data;
 };
 
 /**
@@ -46,11 +47,14 @@ struct sentient_object_pool_element
  */
 struct sentient_object_pool
 {
-    sentient_u8                       padding_[sentient_cacheline_size];
-    sentient_atomic_size              pool_size;
-    struct sentient_object_pool_elem* pool_elem;
-    sentient_atomic_uptr              rear;
-    sentient_atomic_uptr              front;
+    sentient_object_pool_pad             ___pad_0;
+    sentient_size                        ___buffer_mask;
+    struct sentient_object_pool_element* ___buffer;
+    sentient_object_pool_pad             ___pad_1;
+    sentient_atomic_size                 ___tail;
+    sentient_object_pool_pad             ___pad_2;
+    sentient_atomic_size                 ___head;
+    sentient_object_pool_pad             ___pad_3;
 };
 
 // #define sentient_define_object_pool(type, name, size) \
