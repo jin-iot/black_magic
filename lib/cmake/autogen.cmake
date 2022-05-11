@@ -18,6 +18,8 @@
 #             
 #
 
+find_package(PythonInterp REQUIRED)
+
 set(SENTIENT_C_AUTOGEN_DIR
     ${CMAKE_BINARY_DIR}/generated/include/sentient)
 
@@ -195,6 +197,30 @@ endforeach()
 
 set(SENTIENT_C_AUTOGEN_MAX_NUM_ITERATIONS 128)
 
+####################
+### pp_arithmetic.h ###
+####################
+set(SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_ARITHMETIC_H_PATH
+    ${SENTIENT_C_AUTOGEN_DIR}/core/internal/pp_arithmetic.h)
+write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_ARITHMETIC_H_PATH} "")
+set(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_ARITHMETIC_SRC} "")
+exec_program(${PYTHON_EXECUTABLE} ${CMAKE_BINARY_DIR}
+             ARGS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/gen_arithmetic.py "
+                  "${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_ARITHMETIC_H_PATH} "
+                  "64")
+# foreach(SENTIENT_LOOP_I RANGE 0 64 1)
+#     foreach(SENTIENT_LOOP_J RANGE 0 64 1)
+#         # set(EVAL_RES "")
+#         # math(EXPR EVAL_RES "${SENTIENT_LOOP_I}+${SENTIENT_LOOP_J}")
+
+#         # set(SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_ARITHMETIC_SRC
+#         #     "${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_ARITHMETIC_SRC}"
+#         #     "#define ___sentient_pp_add_impl_${SENTIENT_LOOP_I}_${SENTIENT_LOOP_J} ${EVAL_RES}\n")
+#     endforeach()
+# endforeach()
+# write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_ARITHMETIC_H_PATH}
+#             ${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_ARITHMETIC_SRC})
+
 ##################
 ### pp_get_n.h ###
 ##################
@@ -211,8 +237,6 @@ foreach (SENTIENT_LOOP_VAR RANGE 0 ${SENTIENT_C_AUTOGEN_MAX_NUM_ITERATIONS} 1)
                "#define ___sentient_pp_get_${SENTIENT_LOOP_VAR}(${TMP_SRC} ...) _${SENTIENT_LOOP_VAR}"
                APPEND)
 endforeach()
-
-
 
 ####################
 ### pp_foreach.h ###

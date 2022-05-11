@@ -46,7 +46,6 @@ sentient_object_pool
     sentient_atomic_uptr head_object_ptr;
     sentient_size        pool_size;
     sentient_size        object_size;
-    
 };
 
 // #define sentient_define_object_pool(type, name, size) \

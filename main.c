@@ -13,7 +13,13 @@
 
 thrd_t threads[4] = { 0, };
 
-int thread_handler(void* arg)
+struct example_model
+{
+    sentient_u32 number;
+    sentient_u32 val;
+};
+
+sentient_i32 thread_handler(sentient_void* arg)
 {
     printf("thread %ld\n", thrd_current());
 }
@@ -21,8 +27,22 @@ int thread_handler(void* arg)
 #define def_num(num, type, name) \
         const type name ## _ ## num = num ;
 
+#define SENTIENT_OBJECT_POOL_STORAGE_MAX_LEN 6
+
+struct sentient_object_pool_storage
+{
+    sentient_size         pool_len;
+    sentient_atomic_uptr* storage[SENTIENT_OBJECT_POOL_STORAGE_MAX_LEN];
+};
+
+struct example_model pool[5][1024];
+
+
+
 int main(int argc, char** argv)
 {
+    
+
     ___sentient_pp_for(3, 0, increase, def_num, int, fuck)
     printf("%d %d %d \n", fuck_0, fuck_1, fuck_2);
 
