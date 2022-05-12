@@ -140,19 +140,38 @@ extern "C"
 
 #define ___sentient_pp_increase(number) \
         ___sentient_pp_cat(___sentient_pp_increase_impl_, number)
+#define ___sentient_pp_decrease(number) \
+        ___sentient_pp_cat(___sentient_pp_decrease_impl_, number)
 #include <sentient/core/internal/pp_inc_dec.h>
 
 #define ___sentient_pp_add(x, y) \
-        ___sentient_pp_cat_4(___sentient_pp_add_impl_, x, _, y)
+        ___sentient_pp_add_impl(x, y)
+#define ___sentient_pp_add_impl(x, y) (x = y)
 #define ___sentient_pp_sub(x, y) \
-        ___sentient_pp_cat_4(___sentient_pp_sub_impl_, x, _, y)
+        ___sentient_pp_sub_impl(x, y)
+#define ___sentient_pp_sub_impl(x, y) (x - y)
 #define ___sentient_pp_mul(x, y) \
-        ___sentient_pp_cat_4(___sentient_pp_mul_impl_, x, _, y)
+        ___sentient_pp_mul_impl(x, y)
+#define ___sentient_pp_mul_impl(x, y) (x * y)
 #define ___sentient_pp_div(x, y) \
-        ___sentient_pp_cat_4(___sentient_pp_div_impl_, x, _, y)
+        ___sentient_pp_div_impl(x, y)
+#define ___sentient_pp_div_impl(x, y) (x / y)
 #define ___sentient_pp_pow(x, y) \
-        ___sentient_pp_cat_4(___sentient_pp_pow_impl_, x, _, y)
-#include <sentient/core/internal/pp_arithmetic.h>
+        ___sentient_pp_pow_impl(x, y)
+#define ___sentient_pp_pow_impl(x, y)       \
+        (                                   \
+            x                               \
+            ___sentient_pp_for(             \
+                ___sentient_pp_decrease(y), \
+                0,                          \
+                increase,                   \
+                ___sentient_pp_pow_helper,  \
+                x                           \
+            )                               \
+        )
+
+#define ___sentient_pp_pow_helper(dummy, x) \
+        *x
 
 /*!
  * @author Jin (jaehwanspin@gmail.com)
