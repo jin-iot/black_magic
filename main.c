@@ -7,7 +7,7 @@
 #include <sentient/core/types.h>
 #include <sentient/core/field_info.h>
 #include <sentient/core/model_info.h>
-#include <sentient/core/pp_utils.h>
+#include <sentient/core/pp_utils.h>                                                                                                                                                                                                                                 
 #include <sentient/core/generic.h>
 #include <sentient/core/define_model.h>
 
@@ -35,9 +35,8 @@ struct sentient_object_pool_storage
     sentient_atomic_uptr* storage[SENTIENT_OBJECT_POOL_STORAGE_MAX_LEN];
 };
 
-struct example_model pool[5][1024];
 
-
+#define decl_object_pool(loop_var, model_type, )
 
 int main(int argc, char** argv)
 {
