@@ -33,128 +33,128 @@ extern "C"
  * 
  */
 
-#define sentient_nullptr NULL
+#define snt_nullptr NULL
 
-#define sentient_atomic _Atomic
+#define snt_atomic _Atomic
 
-typedef uintptr_t                          sentient_uptr;
-typedef intptr_t                           sentient_iptr;
+typedef uintptr_t                          snt_uptr;
+typedef intptr_t                           snt_iptr;
 
-typedef void                               sentient_void;
-typedef bool                               sentient_bool;
-typedef size_t                             sentient_size;
-typedef ssize_t                            sentient_ssize;
-typedef uint8_t                            sentient_u8;
-typedef uint16_t                           sentient_u16;
-typedef uint32_t                           sentient_u32;
-typedef uint64_t                           sentient_u64;
-typedef int8_t                             sentient_i8;
-typedef int16_t                            sentient_i16;
-typedef int32_t                            sentient_i32;
-typedef int64_t                            sentient_i64;
+typedef void                               snt_void;
+typedef bool                               snt_bool;
+typedef size_t                             snt_size;
+typedef ssize_t                            snt_ssize;
+typedef uint8_t                            snt_u8;
+typedef uint16_t                           snt_u16;
+typedef uint32_t                           snt_u32;
+typedef uint64_t                           snt_u64;
+typedef int8_t                             snt_i8;
+typedef int16_t                            snt_i16;
+typedef int32_t                            snt_i32;
+typedef int64_t                            snt_i64;
 
 
-typedef float                              sentient_f32;
-typedef double                             sentient_f64;
+typedef float                              snt_f32;
+typedef double                             snt_f64;
 
-typedef char                               sentient_str8;
-typedef sentient_i16                       sentient_str16;
-typedef sentient_i32                       sentient_str32;
+typedef char                               snt_str8;
+typedef snt_i16                       snt_str16;
+typedef snt_i32                       snt_str32;
 
-typedef sentient_atomic sentient_uptr      sentient_atomic_uptr;
-typedef sentient_atomic sentient_iptr      sentient_atomic_iptr;
+typedef snt_atomic snt_uptr      snt_atomic_uptr;
+typedef snt_atomic snt_iptr      snt_atomic_iptr;
 
-typedef sentient_atomic sentient_size      sentient_atomic_size;
-typedef sentient_atomic sentient_bool      sentient_atomic_bool;
-typedef sentient_atomic sentient_u8        sentient_atomic_u8;
-typedef sentient_atomic sentient_u16       sentient_atomic_u16;
-typedef sentient_atomic sentient_u32       sentient_atomic_u32;
-typedef sentient_atomic sentient_u64       sentient_atomic_u64;
-typedef sentient_atomic sentient_i8        sentient_atomic_i8;
-typedef sentient_atomic sentient_i16       sentient_atomic_i16;
-typedef sentient_atomic sentient_i32       sentient_atomic_i32;
-typedef sentient_atomic sentient_i64       sentient_atomic_i64;
+typedef snt_atomic snt_size      snt_atomic_size;
+typedef snt_atomic snt_bool      snt_atomic_bool;
+typedef snt_atomic snt_u8        snt_atomic_u8;
+typedef snt_atomic snt_u16       snt_atomic_u16;
+typedef snt_atomic snt_u32       snt_atomic_u32;
+typedef snt_atomic snt_u64       snt_atomic_u64;
+typedef snt_atomic snt_i8        snt_atomic_i8;
+typedef snt_atomic snt_i16       snt_atomic_i16;
+typedef snt_atomic snt_i32       snt_atomic_i32;
+typedef snt_atomic snt_i64       snt_atomic_i64;
 
-typedef sentient_atomic sentient_f32       sentient_atomic_f32;
-typedef sentient_atomic sentient_f64       sentient_atomic_f64;
+typedef snt_atomic snt_f32       snt_atomic_f32;
+typedef snt_atomic snt_f64       snt_atomic_f64;
 
-#define sentient_call_once __attribute__((constructor))
-#define sentient_call_once_prio(prio) __attribute__((constructor(prio)))
+#define snt_call_once __attribute__((constructor))
+#define snt_call_once_prio(prio) __attribute__((constructor(prio)))
 
-typedef sentient_u32 ___sentient_type_id_internal;
-typedef ___sentient_type_id_internal* ___sentient_type_id;
+typedef snt_u32 ___snt_type_id_internal;
+typedef ___snt_type_id_internal* ___snt_type_id;
 
-extern const ___sentient_type_id ___sentient_type_id_sentient_u8;
-extern const ___sentient_type_id ___sentient_type_id_sentient_u16;
-extern const ___sentient_type_id ___sentient_type_id_sentient_u32;
-extern const ___sentient_type_id ___sentient_type_id_sentient_u64;
-extern const ___sentient_type_id ___sentient_type_id_sentient_i8;
-extern const ___sentient_type_id ___sentient_type_id_sentient_i16;
-extern const ___sentient_type_id ___sentient_type_id_sentient_i32;
-extern const ___sentient_type_id ___sentient_type_id_sentient_i64;
-extern const ___sentient_type_id ___sentient_type_id_sentient_f32;
-extern const ___sentient_type_id ___sentient_type_id_sentient_f64;
-extern const ___sentient_type_id ___sentient_type_id_sentient_str8;
-extern const ___sentient_type_id ___sentient_type_id_sentient_str16;
-extern const ___sentient_type_id ___sentient_type_id_sentient_str32;
+extern const ___snt_type_id ___snt_type_id_snt_u8;
+extern const ___snt_type_id ___snt_type_id_snt_u16;
+extern const ___snt_type_id ___snt_type_id_snt_u32;
+extern const ___snt_type_id ___snt_type_id_snt_u64;
+extern const ___snt_type_id ___snt_type_id_snt_i8;
+extern const ___snt_type_id ___snt_type_id_snt_i16;
+extern const ___snt_type_id ___snt_type_id_snt_i32;
+extern const ___snt_type_id ___snt_type_id_snt_i64;
+extern const ___snt_type_id ___snt_type_id_snt_f32;
+extern const ___snt_type_id ___snt_type_id_snt_f64;
+extern const ___snt_type_id ___snt_type_id_snt_str8;
+extern const ___snt_type_id ___snt_type_id_snt_str16;
+extern const ___snt_type_id ___snt_type_id_snt_str32;
 
-typedef sentient_u8   sentient_stx8;
-typedef sentient_u8   sentient_cmd8;
-typedef sentient_u16  sentient_cmd16;
-typedef sentient_u32  sentient_cmd32;
-typedef sentient_u64  sentient_cmd64;
+typedef snt_u8   snt_stx8;
+typedef snt_u8   snt_cmd8;
+typedef snt_u16  snt_cmd16;
+typedef snt_u32  snt_cmd32;
+typedef snt_u64  snt_cmd64;
 
 #include <sentient/core/internal/string_types.h>
 #include <sentient/core/internal/vec_types.h>
 #include <sentient/core/internal/mat_types.h>
 
-struct sentient_subcentury_datetime32
+struct snt_subcentury_datetime32
 {
-	sentient_u32 year : 7;    /* [0-99] a centry */
-	sentient_u32 month : 4;   /* [0-11] */
-	sentient_u32 day : 5;     /* [0-31] */
-	sentient_u32 hours : 5;   /* [0-11] */
-	sentient_u32 minutes : 6; /* [0-59] */
-	sentient_u32 seconds : 5; /* [0-29] 0-59 in 2-second intervals */
+	snt_u32 year : 7;    /* [0-99] a centry */
+	snt_u32 month : 4;   /* [0-11] */
+	snt_u32 day : 5;     /* [0-31] */
+	snt_u32 hours : 5;   /* [0-11] */
+	snt_u32 minutes : 6; /* [0-59] */
+	snt_u32 seconds : 5; /* [0-29] 0-59 in 2-second intervals */
 };
 
-struct sentient_subcentury_datetime64
+struct snt_subcentury_datetime64
 {
-	sentient_u32 year : 7;    /* [0-99] a centry */
-	sentient_u32 month : 4;   /* [0-11] */
-	sentient_u32 day : 5;     /* [0-31] */
-	sentient_u32 hours : 5;   /* [0-11] */
-	sentient_u32 minutes : 6; /* [0-59] */
-	sentient_u32 seconds : 5; /* [0-29] 0-59 in 2-second intervals */
+	snt_u32 year : 7;    /* [0-99] a centry */
+	snt_u32 month : 4;   /* [0-11] */
+	snt_u32 day : 5;     /* [0-31] */
+	snt_u32 hours : 5;   /* [0-11] */
+	snt_u32 minutes : 6; /* [0-59] */
+	snt_u32 seconds : 5; /* [0-29] 0-59 in 2-second intervals */
 
-	sentient_u32 microseconds;
+	snt_u32 microseconds;
 };
 
 struct timespec128
 {
-	sentient_u64 seconds;
-	sentient_u64 microseconds;
+	snt_u64 seconds;
+	snt_u64 microseconds;
 };
 
-typedef sentient_u64                          sentient_posix_time64;
+typedef snt_u64                          snt_posix_time64;
 
-typedef struct sentient_subcentury_datetime32 sentient_scdt32;
-typedef struct sentient_subcentury_datetime64 sentient_scdt64;
-typedef sentient_posix_time64                 sentient_pt64;
-typedef struct sentient_timespec128           sentient_ts128;
+typedef struct snt_subcentury_datetime32 snt_scdt32;
+typedef struct snt_subcentury_datetime64 snt_scdt64;
+typedef snt_posix_time64                 snt_pt64;
+typedef struct snt_timespec128           snt_ts128;
 
-bool sentient_scdt32_local_now(sentient_scdt32*);
-bool sentient_scdt64_local_now(sentient_scdt64*);
-bool sentient_pt64_local_now(sentient_pt64*);
-bool sentient_ts128_local_now(sentient_ts128*);
-bool sentient_scdt32_utc_now(sentient_scdt32*);
-bool sentient_scdt64_utc_now(sentient_scdt64*);
-bool sentient_pt64_utc_now(sentient_pt64*);
-bool sentient_ts128_utc_now(sentient_ts128*);
-bool sentient_get_tm_from_scdt32(struct tm*, sentient_scdt32*);
-bool sentient_get_scdt32_from_tm(sentient_scdt32*, struct tm*);
-bool sentient_get_tm_from_scdt64(struct tm*, sentient_scdt32*);
-bool sentient_get_scdt64_from_tm(sentient_scdt32*, struct tm*);
+bool snt_scdt32_local_now(snt_scdt32*);
+bool snt_scdt64_local_now(snt_scdt64*);
+bool snt_pt64_local_now(snt_pt64*);
+bool snt_ts128_local_now(snt_ts128*);
+bool snt_scdt32_utc_now(snt_scdt32*);
+bool snt_scdt64_utc_now(snt_scdt64*);
+bool snt_pt64_utc_now(snt_pt64*);
+bool snt_ts128_utc_now(snt_ts128*);
+bool snt_get_tm_from_scdt32(struct tm*, snt_scdt32*);
+bool snt_get_scdt32_from_tm(snt_scdt32*, struct tm*);
+bool snt_get_tm_from_scdt64(struct tm*, snt_scdt32*);
+bool snt_get_scdt64_from_tm(snt_scdt32*, struct tm*);
 
 #ifdef __cplusplus
 }

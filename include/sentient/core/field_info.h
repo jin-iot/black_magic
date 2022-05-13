@@ -8,14 +8,14 @@ extern "C"
 {
 #endif
 
-struct sentient_field_info
+struct snt_field_info
 {
-    sentient_str8*            field_name;
-    const ___sentient_type_id type_id;
-    sentient_size             field_offset;
-    sentient_size             array_size;
-    sentient_bool             is_pointer;
-    sentient_bool             is_primary_key;
+    snt_str8*            field_name;
+    const ___snt_type_id type_id;
+    snt_size             field_offset;
+    snt_size             array_size;
+    snt_bool             is_pointer;
+    snt_bool             is_primary_key;
 };
 
 #ifdef __cplusplus

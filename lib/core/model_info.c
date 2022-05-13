@@ -4,27 +4,27 @@
 #include <stdatomic.h>
 
 #ifndef SENTIENT_MODEL_INFO_LIST_MAX_SIZE
-#define SENTIENT_MODEL_INFO_LIST_MAX_SIZE (sentient_size)128U
+#define SENTIENT_MODEL_INFO_LIST_MAX_SIZE (snt_size)128U
 #endif
 
 #include "./builtin_type_ids.h"
 
 static
-struct sentient_model_info*
+struct snt_model_info*
 model_info_list[SENTIENT_MODEL_INFO_LIST_MAX_SIZE] = {
-    &___sentient_model_info_sentient_u8,
-    &___sentient_model_info_sentient_u16,
-    &___sentient_model_info_sentient_u32,
-    &___sentient_model_info_sentient_u64,
-    &___sentient_model_info_sentient_i8,
-    &___sentient_model_info_sentient_i16,
-    &___sentient_model_info_sentient_i32,
-    &___sentient_model_info_sentient_i64,
-    &___sentient_model_info_sentient_f32,
-    &___sentient_model_info_sentient_f64,
-    &___sentient_model_info_sentient_str8,
-    &___sentient_model_info_sentient_str16,
-    &___sentient_model_info_sentient_str32,
+    &___snt_model_info_snt_u8,
+    &___snt_model_info_snt_u16,
+    &___snt_model_info_snt_u32,
+    &___snt_model_info_snt_u64,
+    &___snt_model_info_snt_i8,
+    &___snt_model_info_snt_i16,
+    &___snt_model_info_snt_i32,
+    &___snt_model_info_snt_i64,
+    &___snt_model_info_snt_f32,
+    &___snt_model_info_snt_f64,
+    &___snt_model_info_snt_str8,
+    &___snt_model_info_snt_str16,
+    &___snt_model_info_snt_str32,
 };
 
 static
@@ -39,9 +39,9 @@ model_info_list_size = 13;
  * @param type_id 
  */
 void
-___sentient_model_info_store_model_info(
-    struct sentient_model_info* model_info,
-    ___sentient_type_id type_id)
+___snt_model_info_store_model_info(
+    struct snt_model_info* model_info,
+    ___snt_type_id type_id)
 {
     model_info_list[model_info_list_size] = model_info;
     *type_id = model_info_list_size++;
@@ -51,12 +51,12 @@ ___sentient_model_info_store_model_info(
  * @brief 
  * 
  * @param type_id 
- * @return const struct sentient_model_info* 
+ * @return const struct snt_model_info* 
  */
 const
-struct sentient_model_info*
-___sentient_model_info_get_model_info(
-    const ___sentient_type_id type_id)
+struct snt_model_info*
+___snt_model_info_get_model_info(
+    const ___snt_type_id type_id)
 {
     return model_info_list[*type_id];
 }

@@ -15,11 +15,11 @@ thrd_t threads[4] = { 0, };
 
 struct example_model
 {
-    sentient_u32 number;
-    sentient_u32 val;
+    snt_u32 number;
+    snt_u32 val;
 };
 
-sentient_i32 thread_handler(sentient_void* arg)
+snt_i32 thread_handler(snt_void* arg)
 {
 
     printf("thread %ld\n", thrd_current());
@@ -33,56 +33,56 @@ sentient_i32 thread_handler(sentient_void* arg)
 // so ideal!!!!!!!!!!!!!
 // for i in range(0, 5): print(16**i, int((8**5)/(4**(i+1))))
 
-struct sentient_object_pool_strage_elem
+struct snt_object_pool_strage_elem
 {
-    sentient_size alloc_size;
-    sentient_size elems_size;
+    snt_size alloc_size;
+    snt_size elems_size;
     void*         elems;
 };
-struct sentient_object_pool_storage
+struct snt_object_pool_storage
 {
-    sentient_size                            storage_size;
-    struct sentient_object_pool_strage_elem* storage;
+    snt_size                            storage_size;
+    struct snt_object_pool_strage_elem* storage;
 };
 
-static const
+static
 struct example_model
-___sentient_object_pool_storage_array_1[1][1024];
-static const
-struct sentient_object_pool_strage_elem
-___sentient_object_pool_storage_elem_1 = {
+___snt_object_pool_storage_array_1[1][1024];
+static
+struct snt_object_pool_strage_elem
+___snt_object_pool_storage_elem_1 = {
     .alloc_size = 1,
     .elems_size =
-        sizeof(___sentient_object_pool_storage_array_1[0])  / sizeof(struct example_model),
-    .elems = ___sentient_object_pool_storage_array_1,
+        sizeof(___snt_object_pool_storage_array_1[0])  / sizeof(struct example_model),
+    .elems = ___snt_object_pool_storage_array_1,
 };
-static const
+static
 struct example_model
-___sentient_object_pool_storage_array_2[16][4096];
-static const
-struct sentient_object_pool_strage_elem
-___sentient_object_pool_storage_elem_2 = {
+___snt_object_pool_storage_array_2[16][4096];
+static
+struct snt_object_pool_strage_elem
+___snt_object_pool_storage_elem_2 = {
     .alloc_size = 16,
     .elems_size =
-        sizeof(___sentient_object_pool_storage_array_2[0])  / sizeof(struct example_model),
-    .elems = ___sentient_object_pool_storage_array_1,
+        sizeof(___snt_object_pool_storage_array_2[0])  / sizeof(struct example_model),
+    .elems = ___snt_object_pool_storage_array_1,
 };
-static const
+static
 struct example_model
-___sentient_object_pool_storage_array_3[256][4096];
-static const
-struct sentient_object_pool_strage_elem
-___sentient_object_pool_storage_example_model_elems[] = {
+___snt_object_pool_storage_array_3[256][4096];
+static
+struct snt_object_pool_strage_elem
+___snt_object_pool_storage_example_model_elems[] = {
     {
         .alloc_size = 256,
         .elems_size =
-            sizeof(___sentient_object_pool_storage_array_3[0])  / sizeof(struct example_model),
-        .elems = ___sentient_object_pool_storage_array_1,
+            sizeof(___snt_object_pool_storage_array_3[0])  / sizeof(struct example_model),
+        .elems = ___snt_object_pool_storage_array_1,
     }
 };
-static const
-struct sentient_object_pool_storage
-___sentient_object_pool_example_model = {
+static
+struct snt_object_pool_storage
+___snt_object_pool_example_model = {
     
 };
 
@@ -90,19 +90,19 @@ int main(int argc, char** argv)
 {
     int res = EXIT_SUCCESS;
 
-    for (int i = 0; i < ; i++)
-    {
-        struct example_model* elelelem = ;
-        printf("elelem %d %d",)
-    }
+    // for (int i = 0; i < ; i++)
+    // {
+    //     struct example_model* elelelem = ;
+    //     printf("elelem %d %d",)
+    // }
 
-    const int asdfsadf = ___sentient_pp_is_eq(struct, struct);
+    const int asdfsadf = ___snt_pp_is_eq(struct, struct);
 
     for (int i = 0; i < 4; i++)
     {
         int err = thrd_create(&threads[i],
                               thread_handler,
-                              sentient_nullptr);
+                              snt_nullptr);
 
         if (err < 0)
         {
@@ -114,7 +114,7 @@ int main(int argc, char** argv)
     for (int i = 0; i < 4; i++)
     {
         thrd_join(threads[i],
-                  sentient_nullptr);
+                  snt_nullptr);
     }
 
 exit_label:

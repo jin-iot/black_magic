@@ -14,7 +14,7 @@
 
 #include <sentient/core/types.h>
 #include <sentient/core/hardware_traits.h>
-#include <sentient/core/sentient_config.h>
+#include <sentient/core/snt_config.h>
 
 #ifdef __cplusplus
 extern "C"
@@ -25,12 +25,12 @@ extern "C"
  * @author Jin (jaehwanspin@gmail.com)
  * @brief object pool element descriptor
  */
-struct sentient_object_pool_element
+struct snt_object_pool_element
 {
-    sentient_atomic_uptr next_object_ptr;
-    sentient_u32         magic;
-    sentient_size        index;
-    sentient_atomic_uptr object_ptr;
+    snt_atomic_uptr next_object_ptr;
+    snt_u32         magic;
+    snt_size        index;
+    snt_atomic_uptr object_ptr;
 };
 
 /**
@@ -41,32 +41,32 @@ struct
 #ifdef SENTIENT_MULTIPROCESSING
 __attribute__((aligned(SENTIENT_CACHELINE_SIZE)))
 #endif
-sentient_object_pool
+snt_object_pool
 {
-    sentient_atomic_uptr head_object_ptr;
-    sentient_size        pool_size;
-    sentient_size        object_size;
+    snt_atomic_uptr head_object_ptr;
+    snt_size        pool_size;
+    snt_size        object_size;
 };
 
-// #define sentient_define_object_pool(type, name, size) \
-//         struct sentient_object_pool \
-//             ___sentient_object_pool_ ## name = { \
+// #define snt_define_object_pool(type, name, size) \
+//         struct snt_object_pool \
+//             ___snt_object_pool_ ## name = { \
                 
 //             }
 
-sentient_void*
-___sentient_pool_alloc_impl(
-    const ___sentient_type_id type_id);
+snt_void*
+___snt_pool_alloc_impl(
+    const ___snt_type_id type_id);
 
-sentient_void*
-___sentient_pool_calloc_impl(
-    const sentient_size count,
-    const ___sentient_type_id type_id);
+snt_void*
+___snt_pool_calloc_impl(
+    const snt_size count,
+    const ___snt_type_id type_id);
 
-sentient_void
-___sentient_pool_free_impl(
-    const ___sentient_type_id type_id,
-    sentient_void* mem);
+snt_void
+___snt_pool_free_impl(
+    const ___snt_type_id type_id,
+    snt_void* mem);
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
@@ -75,11 +75,11 @@ ___sentient_pool_free_impl(
  * @param type_id 
  * @return void* 
  */
-#define sentient_pool_alloc(typename) \
-        sentient_pool_alloc_impl(typename)
-#define sentient_pool_alloc_impl(typename) \
-        ___sentient_pool_alloc_impl(       \
-        ___sentient_type_id_ ## typename)
+#define snt_pool_alloc(typename) \
+        snt_pool_alloc_impl(typename)
+#define snt_pool_alloc_impl(typename) \
+        ___snt_pool_alloc_impl(       \
+        ___snt_type_id_ ## typename)
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
@@ -89,12 +89,12 @@ ___sentient_pool_free_impl(
  * @param type_id 
  * @return void* 
  */
-#define sentient_pool_calloc(typename) \
-        sentient_pool_calloc_impl(count, typename)
-#define sentient_pool_calloc_impl(count, typename) \
-        ___sentient_pool_calloc_impl(              \
+#define snt_pool_calloc(typename) \
+        snt_pool_calloc_impl(count, typename)
+#define snt_pool_calloc_impl(count, typename) \
+        ___snt_pool_calloc_impl(              \
             count,                                 \
-            ___sentient_type_id_ ## typename)
+            ___snt_type_id_ ## typename)
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
@@ -102,13 +102,13 @@ ___sentient_pool_free_impl(
  * 
  * @param type_id 
  * @param mem 
- * @return sentient_void 
+ * @return snt_void 
  */
-#define sentient_pool_free(typename, mem_ptr) \
-        sentient_pool_free_impl(typename, mem_ptr)
-#define sentient_pool_free_impl(typename, mem_ptr) \
-        ___sentient_pool_calloc_impl(              \
-            ___sentient_type_id_ ## typename,      \
+#define snt_pool_free(typename, mem_ptr) \
+        snt_pool_free_impl(typename, mem_ptr)
+#define snt_pool_free_impl(typename, mem_ptr) \
+        ___snt_pool_calloc_impl(              \
+            ___snt_type_id_ ## typename,      \
             mem_ptr)
 
 

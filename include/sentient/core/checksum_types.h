@@ -22,7 +22,7 @@ extern "C"
 {
 #endif
 
-enum sentient_checksum_types
+enum snt_checksum_types
 {
     SENTIENT_CHECKSUM_TYPES_NONE,
     SENTIENT_CHECKSUM_TYPES_CRC1,
@@ -43,9 +43,9 @@ enum sentient_checksum_types
     SENTIENT_CHECKSUM_TYPES_CRC128,
 };
 
-sentient_bool sentient_match_checksum(enum sentient_checksum_types,
-                                      sentient_void*,
-                                      sentient_size);
+snt_bool snt_match_checksum(enum snt_checksum_types,
+                                      snt_void*,
+                                      snt_size);
 
 #ifdef __cplusplus
 }

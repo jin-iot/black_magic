@@ -10,12 +10,12 @@ extern "C"
 
 struct example_model
 {
-    sentient_u8 number;
-    sentient_u32 children_size;
+    snt_u8 number;
+    snt_u32 children_size;
     struct example_model* children;
 };
 
-extern const ___sentient_type_id ___type_id_example_model;
+extern const ___snt_type_id ___type_id_example_model;
 
 #ifdef __cplusplus
 }

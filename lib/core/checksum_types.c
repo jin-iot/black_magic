@@ -1,9 +1,9 @@
 #include <sentient/core/checksum_types.h>
 
 static
-sentient_bool
-sentient_match_checksum_crc1(sentient_void* data,
-                             sentient_size data_size)
+snt_bool
+snt_match_checksum_crc1(snt_void* data,
+                             snt_size data_size)
 {
     bool result = false;
 
@@ -11,127 +11,108 @@ sentient_match_checksum_crc1(sentient_void* data,
 }
 
 static
-sentient_bool
-sentient_match_checksum_crc5(sentient_void* data,
-                             sentient_size data_size)
+snt_bool
+snt_match_checksum_crc5(snt_void* data,
+                             snt_size data_size)
 {
     bool result = false;
 
     return result;
 }
 static
-sentient_bool
-sentient_match_checksum_crc7(sentient_void* data,
-                             sentient_size data_size)
+snt_bool
+snt_match_checksum_crc7(snt_void* data,
+                             snt_size data_size)
 {
     bool result = false;
 
     return result;
 }
 static
-sentient_bool
-sentient_match_checksum_crc8(sentient_void* data,
-                             sentient_size data_size)
+snt_bool
+snt_match_checksum_crc8(snt_void* data,
+                             snt_size data_size)
 {
     bool result = false;
 
     return result;
 }
 static
-sentient_bool
-sentient_match_checksum_crc8_fletcher(sentient_void* data,
-                                      sentient_size data_size)
+snt_bool
+snt_match_checksum_crc8_fletcher(snt_void* data,
+                                      snt_size data_size)
 {
     bool result = false;
 
     return result;
 }
 static
-sentient_bool
-sentient_match_checksum_crc16_fletcher(sentient_void* data,
-                                       sentient_size data_size)
+snt_bool
+snt_match_checksum_crc16_fletcher(snt_void* data,
+                                       snt_size data_size)
 {
     bool result = false;
 
     return result;
 }
 static
-sentient_bool
-sentient_match_checksum_crc16_adler_a(sentient_void* data,
-                                      sentient_size data_size)
+snt_bool
+snt_match_checksum_crc16_adler_a(snt_void* data,
+                                      snt_size data_size)
 {
     bool result = false;
 
     return result;
 }
 static
-sentient_bool
-sentient_match_checksum_crc16_adler_b(sentient_void* data,
-                                      sentient_size data_size)
+snt_bool
+snt_match_checksum_crc16_adler_b(snt_void* data,
+                                      snt_size data_size)
 {
     bool result = false;
 
     return result;
 }
 static
-sentient_bool
-sentient_match_checksum_crc16_ccitt(sentient_void* data,
-                                    sentient_size data_size)
+snt_bool
+snt_match_checksum_crc16_ccitt(snt_void* data,
+                                    snt_size data_size)
 {
     bool result = false;
 
     return result;
 }
 static
-sentient_bool
-sentient_match_checksum_crc16_ibm(sentient_void* data,
-                                  sentient_size data_size)
+snt_bool
+snt_match_checksum_crc16_ibm(snt_void* data,
+                                  snt_size data_size)
 {
     bool result = false;
 
     return result;
 }
 static
-sentient_bool
-sentient_match_checksum_crc32_adler(sentient_void* data,
-                                    sentient_size data_size)
+snt_bool
+snt_match_checksum_crc32_adler(snt_void* data,
+                                    snt_size data_size)
 {
     bool result = false;
 
     return result;
 }
 static
-sentient_bool
-sentient_match_checksum_crc32_ieee_802_3(sentient_void* data,
-                                         sentient_size data_size)
+snt_bool
+snt_match_checksum_crc32_ieee_802_3(snt_void* data,
+                                         snt_size data_size)
 {
     bool result = false;
 
     return result;
 }
 static
-sentient_bool
-sentient_match_checksum_crc32_castagnoli(sentient_void* data,
-                                         sentient_size data_size)
-{
-    bool result = false;
-
-    return result;
-}
-
-static
-sentient_bool
-sentient_match_checksum_crc64_iso(sentient_void* data,
-                                  sentient_size data_size)
-{
-    bool result = false;
-
-    return result;
-}
-static
-sentient_bool
-sentient_match_checksum_crc64_ecma_182(sentient_void* data,
-                                       sentient_size data_size)
+snt_bool
+snt_match_checksum_crc32_castagnoli(snt_void* data,
+                                         snt_size data_size)
 {
     bool result = false;
 
@@ -139,21 +120,40 @@ sentient_match_checksum_crc64_ecma_182(sentient_void* data,
 }
 
 static
-sentient_bool
-sentient_match_checksum_crc128(sentient_void* data,
-                               sentient_size data_size)
+snt_bool
+snt_match_checksum_crc64_iso(snt_void* data,
+                                  snt_size data_size)
+{
+    bool result = false;
+
+    return result;
+}
+static
+snt_bool
+snt_match_checksum_crc64_ecma_182(snt_void* data,
+                                       snt_size data_size)
 {
     bool result = false;
 
     return result;
 }
 
-sentient_bool
-sentient_match_checksum(enum sentient_checksum_types cs_type,
-                        sentient_void* cs_data,
-                        sentient_size  cs_data_size)
+static
+snt_bool
+snt_match_checksum_crc128(snt_void* data,
+                               snt_size data_size)
 {
-    sentient_bool result = true;
+    bool result = false;
+
+    return result;
+}
+
+snt_bool
+snt_match_checksum(enum snt_checksum_types cs_type,
+                        snt_void* cs_data,
+                        snt_size  cs_data_size)
+{
+    snt_bool result = true;
 
     switch(cs_type)
     {
@@ -163,57 +163,57 @@ sentient_match_checksum(enum sentient_checksum_types cs_type,
     }
     case SENTIENT_CHECKSUM_TYPES_CRC1:
     {
-        result = sentient_match_checksum_crc1(cs_data, cs_data_size);
+        result = snt_match_checksum_crc1(cs_data, cs_data_size);
         break;
     }
     case SENTIENT_CHECKSUM_TYPES_CRC5:
     {
-        result = sentient_match_checksum_crc1(cs_data, cs_data_size);
+        result = snt_match_checksum_crc1(cs_data, cs_data_size);
         break;
     }
     case SENTIENT_CHECKSUM_TYPES_CRC7:
     {
-        result = sentient_match_checksum_crc1(cs_data, cs_data_size);
+        result = snt_match_checksum_crc1(cs_data, cs_data_size);
         break;
     }
     case SENTIENT_CHECKSUM_TYPES_CRC8:
     {
-        result = sentient_match_checksum_crc1(cs_data, cs_data_size);
+        result = snt_match_checksum_crc1(cs_data, cs_data_size);
         break;
     }
     case SENTIENT_CHECKSUM_TYPES_CRC8_FLETCHER:
     {
-        result = sentient_match_checksum_crc1(cs_data, cs_data_size);
+        result = snt_match_checksum_crc1(cs_data, cs_data_size);
         break;
     }
     case SENTIENT_CHECKSUM_TYPES_CRC16_FLETCHER:
     {
-        result = sentient_match_checksum_crc1(cs_data, cs_data_size);
+        result = snt_match_checksum_crc1(cs_data, cs_data_size);
         break;
     }
     case SENTIENT_CHECKSUM_TYPES_CRC16_ADLER_A:
     {
-        result = sentient_match_checksum_crc1(cs_data, cs_data_size);
+        result = snt_match_checksum_crc1(cs_data, cs_data_size);
         break;
     }
     case SENTIENT_CHECKSUM_TYPES_CRC16_ADLER_B:
     {
-        result = sentient_match_checksum_crc1(cs_data, cs_data_size);
+        result = snt_match_checksum_crc1(cs_data, cs_data_size);
         break;
     }
     case SENTIENT_CHECKSUM_TYPES_CRC16_CCITT:
     {
-        result = sentient_match_checksum_crc1(cs_data, cs_data_size);
+        result = snt_match_checksum_crc1(cs_data, cs_data_size);
         break;
     }
     case SENTIENT_CHECKSUM_TYPES_CRC16_IBM:
     {
-        result = sentient_match_checksum_crc1(cs_data, cs_data_size);
+        result = snt_match_checksum_crc1(cs_data, cs_data_size);
         break;
     }
     case SENTIENT_CHECKSUM_TYPES_CRC32_ADLER:
     {
-        result = sentient_match_checksum_crc1(cs_data, cs_data_size);
+        result = snt_match_checksum_crc1(cs_data, cs_data_size);
         break;
     }
     case SENTIENT_CHECKSUM_TYPES_CRC32_IEEE_802_3:

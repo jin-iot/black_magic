@@ -17,7 +17,7 @@ extern "C"
 {
 #endif
 
-#define sentient_generic _Generic
+#define snt_generic _Generic
 
 #ifdef __cplusplus
 }

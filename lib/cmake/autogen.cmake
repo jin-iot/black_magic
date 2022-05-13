@@ -24,10 +24,10 @@ set(SENTIENT_C_AUTOGEN_DIR
     ${CMAKE_BINARY_DIR}/generated/include/sentient)
 
 #########################
-### sentient_config.h ###
+### snt_config.h ###
 #########################
 set(SENTIENT_C_AUTOGEN_CORE_SENTIENT_CONFIG_H_PATH
-    ${SENTIENT_C_AUTOGEN_DIR}/core/sentient_config.h)
+    ${SENTIENT_C_AUTOGEN_DIR}/core/snt_config.h)
 write_file(${SENTIENT_C_AUTOGEN_CORE_SENTIENT_CONFIG_H_PATH}
            "#ifndef __SENTIENT_CORE_SENTIENT_CONFIG_H__\n"
            "#define __SENTIENT_CORE_SENTIENT_CONFIG_H__\n\n"
@@ -101,18 +101,18 @@ set(SENTIENT_C_AUTOGEN_CORE_INTERNAL_STRING_TYPES_H_PATH
 write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_STRING_TYPES_H_PATH} "")
 foreach(SENTIENT_LOOP_VAR RANGE 1 4096 1)
     write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_STRING_TYPES_H_PATH}
-               "typedef sentient_str8 sentient_str8_${SENTIENT_LOOP_VAR}"
+               "typedef snt_str8 snt_str8_${SENTIENT_LOOP_VAR}"
                "[${SENTIENT_LOOP_VAR}];"
                APPEND)
 endforeach()
 
 set(SENTIENT_C_AUTOGEN_CORE_TYPES
-    sentient_u32
-    sentient_u64
-    sentient_i32
-    sentient_i64
-    sentient_f32
-    sentient_f64)
+    snt_u32
+    snt_u64
+    snt_i32
+    snt_i64
+    snt_f32
+    snt_f64)
 
 ###################
 ### vec_types.h ###
@@ -160,7 +160,7 @@ set(SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_COMPARE_N_H_PATH
 write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_COMPARE_N_H_PATH} "")
 foreach(SENTIENT_LOOP_VAR RANGE 0 2048 1)
     write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_COMPARE_N_H_PATH}
-                "#define ___sentient_pp_compare_${SENTIENT_LOOP_VAR}(x) x"
+                "#define ___snt_pp_compare_${SENTIENT_LOOP_VAR}(x) x"
                 APPEND)
 endforeach()
 
@@ -179,7 +179,7 @@ foreach(SENTIENT_LOOP_VAR RANGE 0 2048 1)
     endif()
     
     write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_INC_DEC_H_PATH}
-                "#define ___sentient_pp_increase_impl_${SENTIENT_LOOP_VAR} ${TMP_INC}"
+                "#define ___snt_pp_increase_impl_${SENTIENT_LOOP_VAR} ${TMP_INC}"
                 APPEND)
 endforeach()
 foreach(SENTIENT_LOOP_VAR RANGE 0 2048 1)
@@ -191,7 +191,7 @@ foreach(SENTIENT_LOOP_VAR RANGE 0 2048 1)
     endif()
     
     write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_INC_DEC_H_PATH}
-                "#define ___sentient_pp_decrease_impl_${SENTIENT_LOOP_VAR} ${TMP_INC}"
+                "#define ___snt_pp_decrease_impl_${SENTIENT_LOOP_VAR} ${TMP_INC}"
                 APPEND)
 endforeach()
 
@@ -215,7 +215,7 @@ exec_program(${PYTHON_EXECUTABLE} ${CMAKE_BINARY_DIR}
 
 #         # set(SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_ARITHMETIC_SRC
 #         #     "${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_ARITHMETIC_SRC}"
-#         #     "#define ___sentient_pp_add_impl_${SENTIENT_LOOP_I}_${SENTIENT_LOOP_J} ${EVAL_RES}\n")
+#         #     "#define ___snt_pp_add_impl_${SENTIENT_LOOP_I}_${SENTIENT_LOOP_J} ${EVAL_RES}\n")
 #     endforeach()
 # endforeach()
 # write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_ARITHMETIC_H_PATH}
@@ -234,7 +234,7 @@ foreach (SENTIENT_LOOP_VAR RANGE 0 ${SENTIENT_C_AUTOGEN_MAX_NUM_ITERATIONS} 1)
     endforeach()
 
     write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_GET_N_H_PATH}
-               "#define ___sentient_pp_get_${SENTIENT_LOOP_VAR}(${TMP_SRC} ...) _${SENTIENT_LOOP_VAR}"
+               "#define ___snt_pp_get_${SENTIENT_LOOP_VAR}(${TMP_SRC} ...) _${SENTIENT_LOOP_VAR}"
                APPEND)
 endforeach()
 
@@ -247,12 +247,12 @@ write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_FOREACH_H_PATH} "")
 foreach (SENTIENT_LOOP_VAR RANGE 0 ${SENTIENT_C_AUTOGEN_MAX_NUM_ITERATIONS} 1)
     if (${SENTIENT_LOOP_VAR} EQUAL "0")
         write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_FOREACH_H_PATH}
-                    "#define ___sentient_pp_foreach_${SENTIENT_LOOP_VAR}(...)")
+                    "#define ___snt_pp_foreach_${SENTIENT_LOOP_VAR}(...)")
     else()
         math(EXPR PREVIOUS_COUNT_VAR "${SENTIENT_LOOP_VAR}-1")
         write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_FOREACH_H_PATH}
-                    "#define ___sentient_pp_foreach_${SENTIENT_LOOP_VAR}(expr, arg, ...) "
-                    "expr(arg) ___sentient_pp_foreach_${PREVIOUS_COUNT_VAR}(expr, __VA_ARGS__)" APPEND)
+                    "#define ___snt_pp_foreach_${SENTIENT_LOOP_VAR}(expr, arg, ...) "
+                    "expr(arg) ___snt_pp_foreach_${PREVIOUS_COUNT_VAR}(expr, __VA_ARGS__)" APPEND)
     endif()
 endforeach()
 
@@ -265,14 +265,14 @@ write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_FOR_H_PATH} "")
 foreach (SENTIENT_LOOP_VAR RANGE 0 ${SENTIENT_C_AUTOGEN_MAX_NUM_ITERATIONS} 1)
     if (${SENTIENT_LOOP_VAR} EQUAL "0")
         write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_FOR_H_PATH}
-                    "#define ___sentient_pp_for_increase_${SENTIENT_LOOP_VAR}(idx, expr, ...)\n")
+                    "#define ___snt_pp_for_increase_${SENTIENT_LOOP_VAR}(idx, expr, ...)\n")
     else()
         math(EXPR PREVIOUS_COUNT_VAR "${SENTIENT_LOOP_VAR}-1")
         write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_FOR_H_PATH}
-                    "#define ___sentient_pp_for_increase_${SENTIENT_LOOP_VAR}(idx, expr, ...) \\\n"
+                    "#define ___snt_pp_for_increase_${SENTIENT_LOOP_VAR}(idx, expr, ...) \\\n"
                     "        expr(idx, __VA_ARGS__)                        \\\n"
-                    "        ___sentient_pp_for_increase_${PREVIOUS_COUNT_VAR}(                \\\n"
-                    "            ___sentient_pp_increase(idx),             \\\n"
+                    "        ___snt_pp_for_increase_${PREVIOUS_COUNT_VAR}(                \\\n"
+                    "            ___snt_pp_increase(idx),             \\\n"
                     "                expr,                                 \\\n"
                     "                __VA_ARGS__                           \\\n"
                     "        )"
@@ -282,14 +282,14 @@ endforeach()
 foreach (SENTIENT_LOOP_VAR RANGE 0 ${SENTIENT_C_AUTOGEN_MAX_NUM_ITERATIONS} 1)
     if (${SENTIENT_LOOP_VAR} EQUAL "0")
         write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_FOR_H_PATH}
-                    "#define ___sentient_pp_for_decrease_${SENTIENT_LOOP_VAR}(idx, expr, ...)\n" APPEND)
+                    "#define ___snt_pp_for_decrease_${SENTIENT_LOOP_VAR}(idx, expr, ...)\n" APPEND)
     else()
         math(EXPR PREVIOUS_COUNT_VAR "${SENTIENT_LOOP_VAR}-1")
         write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_FOR_H_PATH}
-                    "#define ___sentient_pp_for_decrease_${SENTIENT_LOOP_VAR}(idx, expr, ...) \\\n"
+                    "#define ___snt_pp_for_decrease_${SENTIENT_LOOP_VAR}(idx, expr, ...) \\\n"
                     "        expr(idx, __VA_ARGS__)                        \\\n"
-                    "        ___sentient_pp_for_decrease_${PREVIOUS_COUNT_VAR}(                \\\n"
-                    "            ___sentient_pp_decrease(idx),             \\\n"
+                    "        ___snt_pp_for_decrease_${PREVIOUS_COUNT_VAR}(                \\\n"
+                    "            ___snt_pp_decrease(idx),             \\\n"
                     "                expr,                                 \\\n"
                     "                __VA_ARGS__                           \\\n"
                     "        )"
@@ -303,7 +303,7 @@ endforeach()
 set(SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_ARGS_H_PATH
     ${SENTIENT_C_AUTOGEN_DIR}/core/internal/pp_args.h)
 write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_ARGS_H_PATH} "")
-set(SENTIENT_PP_ARGS_SRC "#define ___sentient_pp_args(")
+set(SENTIENT_PP_ARGS_SRC "#define ___snt_pp_args(")
 write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_ARGS_H_PATH} "" APPEND)
 foreach (SENTIENT_LOOP_VAR RANGE 1 ${SENTIENT_C_AUTOGEN_MAX_NUM_ITERATIONS} 1)
     set(SENTIENT_PP_ARGS_SRC "${SENTIENT_PP_ARGS_SRC} \\\n                            "
@@ -318,8 +318,8 @@ write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_ARGS_H_PATH} ${SENTIENT_PP_ARGS
 set(SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_COUNT_ARGS_H_PATH
     ${SENTIENT_C_AUTOGEN_DIR}/core/internal/pp_count_args.h)
 write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_COUNT_ARGS_H_PATH} "")
-set(SENTIENT_PP_COUNT_ARGS_SRC "#define ___sentient_pp_count_args_impl(...) \\\n"
-                               "        ___sentient_pp_args(__VA_ARGS__, ")
+set(SENTIENT_PP_COUNT_ARGS_SRC "#define ___snt_pp_count_args_impl(...) \\\n"
+                               "        ___snt_pp_args(__VA_ARGS__, ")
 math(EXPR SENTIENT_COUNT_ARGS_START "${SENTIENT_C_AUTOGEN_MAX_NUM_ITERATIONS}-2")
 foreach (SENTIENT_LOOP_VAR RANGE ${SENTIENT_COUNT_ARGS_START} 0 -1)
     set(SENTIENT_PP_COUNT_ARGS_SRC "${SENTIENT_PP_COUNT_ARGS_SRC} \\\n                            "
@@ -334,8 +334,8 @@ write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_COUNT_ARGS_H_PATH} ${SENTIENT_P
 set(SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_HAS_COMMA_H_PATH
     ${SENTIENT_C_AUTOGEN_DIR}/core/internal/pp_has_comma.h)
 write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_HAS_COMMA_H_PATH} "")
-set(SENTIENT_PP_HAS_COMMA_SRC "#define ___sentient_pp_has_comma_impl(...) \\\n"
-                               "        ___sentient_pp_args(__VA_ARGS__, ")
+set(SENTIENT_PP_HAS_COMMA_SRC "#define ___snt_pp_has_comma_impl(...) \\\n"
+                               "        ___snt_pp_args(__VA_ARGS__, ")
 math(EXPR SENTIENT_HAS_COMMA_ARGS_COUNT "${SENTIENT_C_AUTOGEN_MAX_NUM_ITERATIONS}-3")
 foreach (SENTIENT_LOOP_VAR RANGE ${SENTIENT_HAS_COMMA_ARGS_COUNT} 0 -1)
     set(SENTIENT_PP_HAS_COMMA_SRC "${SENTIENT_PP_HAS_COMMA_SRC} \\\n                            "

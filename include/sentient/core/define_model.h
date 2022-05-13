@@ -20,8 +20,8 @@ extern "C"
 {
 #endif
 
-#define sentient_define_model(...) \
-        ___sentient_pp_define_model(__VA_ARGS__)
+#define snt_define_model(...) \
+        ___snt_pp_define_model(__VA_ARGS__)
 
 #ifdef __cplusplus
 }

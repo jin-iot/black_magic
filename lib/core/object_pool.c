@@ -9,20 +9,20 @@
  * @brief 
  * 
  * @param type_id 
- * @return sentient_void* 
+ * @return snt_void* 
  */
-sentient_void*
-___sentient_pool_alloc_impl(
-    const ___sentient_type_id type_id)
+snt_void*
+___snt_pool_alloc_impl(
+    const ___snt_type_id type_id)
 {
-    void* mem = sentient_nullptr;
-    const struct sentient_model_info* minfo =
-        ___sentient_model_info_get_model_info(type_id);
+    void* mem = snt_nullptr;
+    const struct snt_model_info* minfo =
+        ___snt_model_info_get_model_info(type_id);
 
-    if (minfo != sentient_nullptr &&
-        minfo->object_pool != sentient_nullptr)
+    if (minfo != snt_nullptr &&
+        minfo->object_pool != snt_nullptr)
     {
-        struct sentient_object_pool* pool =
+        struct snt_object_pool* pool =
             minfo->object_pool;
     }
 
@@ -35,32 +35,32 @@ ___sentient_pool_alloc_impl(
  * 
  * @param count 
  * @param type_id 
- * @return sentient_void* 
+ * @return snt_void* 
  */
-sentient_void*
-___sentient_pool_calloc_impl(
-    const sentient_size count,
-    const ___sentient_type_id type_id)
+snt_void*
+___snt_pool_calloc_impl(
+    const snt_size count,
+    const ___snt_type_id type_id)
 {
-    void* mem = sentient_nullptr;
+    void* mem = snt_nullptr;
 
-    const struct sentient_model_info* minfo =
-        ___sentient_model_info_get_model_info(type_id);
+    const struct snt_model_info* minfo =
+        ___snt_model_info_get_model_info(type_id);
     
-    if (minfo != sentient_nullptr &&
-        minfo->object_pool != sentient_nullptr)
+    if (minfo != snt_nullptr &&
+        minfo->object_pool != snt_nullptr)
     {
-        struct sentient_object_pool* pool =
+        struct snt_object_pool* pool =
             minfo->object_pool;
     }
 
     return mem;
 }
 
-sentient_void
-___sentient_pool_free_impl(
-    const ___sentient_type_id type_id,
-    sentient_void* mem)
+snt_void
+___snt_pool_free_impl(
+    const ___snt_type_id type_id,
+    snt_void* mem)
 {
 
 }
