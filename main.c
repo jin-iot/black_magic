@@ -30,30 +30,73 @@ sentient_i32 thread_handler(sentient_void* arg)
 
 #define SENTIENT_OBJECT_POOL_STORAGE_MAX_LEN 6
 
+// so ideal!!!!!!!!!!!!!
+// for i in range(0, 5): print(16**i, int((8**5)/(4**(i+1))))
+
+struct sentient_object_pool_strage_elem
+{
+    sentient_size alloc_size;
+    sentient_size elems_size;
+    void*         elems;
+};
 struct sentient_object_pool_storage
 {
-    ___sentient_type_id   type_id;
-    sentient_size         pool_len;
-    sentient_atomic_uptr* storage[SENTIENT_OBJECT_POOL_STORAGE_MAX_LEN];
+    sentient_size                            storage_size;
+    struct sentient_object_pool_strage_elem* storage;
 };
 
-#define ___sentient_pp_add(x, y) \
-        ___sentient_pp_pow()
-
-#define ___sentient_decl_object_pool(loop_var, model_type) \
-        ___sentient_decl_object_pool_impl(loop_var, model_type)
-
-static sentient_i32 ___sentient_pool_storage_count_1[4096];
-static sentient_i32 ___sentient_pool_storage_count_1[4096];
-int* aaaa[SENTIENT_OBJECT_POOL_STORAGE_MAX_LEN] = {
-    ___sentient_pool_storage_count_1,
+static const
+struct example_model
+___sentient_object_pool_storage_array_1[1][1024];
+static const
+struct sentient_object_pool_strage_elem
+___sentient_object_pool_storage_elem_1 = {
+    .alloc_size = 1,
+    .elems_size =
+        sizeof(___sentient_object_pool_storage_array_1[0])  / sizeof(struct example_model),
+    .elems = ___sentient_object_pool_storage_array_1,
+};
+static const
+struct example_model
+___sentient_object_pool_storage_array_2[16][4096];
+static const
+struct sentient_object_pool_strage_elem
+___sentient_object_pool_storage_elem_2 = {
+    .alloc_size = 16,
+    .elems_size =
+        sizeof(___sentient_object_pool_storage_array_2[0])  / sizeof(struct example_model),
+    .elems = ___sentient_object_pool_storage_array_1,
+};
+static const
+struct example_model
+___sentient_object_pool_storage_array_3[256][4096];
+static const
+struct sentient_object_pool_strage_elem
+___sentient_object_pool_storage_example_model_elems[] = {
+    {
+        .alloc_size = 256,
+        .elems_size =
+            sizeof(___sentient_object_pool_storage_array_3[0])  / sizeof(struct example_model),
+        .elems = ___sentient_object_pool_storage_array_1,
+    }
+};
+static const
+struct sentient_object_pool_storage
+___sentient_object_pool_example_model = {
+    
 };
 
 int main(int argc, char** argv)
 {
     int res = EXIT_SUCCESS;
 
-    const int asdfsadf = ___sentient_pp_pow(4, 6);
+    for (int i = 0; i < ; i++)
+    {
+        struct example_model* elelelem = ;
+        printf("elelem %d %d",)
+    }
+
+    const int asdfsadf = ___sentient_pp_is_eq(struct, struct);
 
     for (int i = 0; i < 4; i++)
     {

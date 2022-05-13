@@ -109,7 +109,9 @@ extern "C"
  */
 #include <sentient/core/internal/pp_compare_n.h>
 #define ___sentient_pp_compare_struct(x) x
+#define ___sentient_pp_compare_primitive(x) x
 #define ___sentient_pp_compare_bit_field(x) x
+#define ___sentient_pp_compare_array(x) x
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
@@ -171,7 +173,7 @@ extern "C"
         )
 
 #define ___sentient_pp_pow_helper(dummy, x) \
-        *x
+        * x
 
 /*!
  * @author Jin (jaehwanspin@gmail.com)
@@ -293,6 +295,30 @@ extern "C"
 #define ___sentient_pp_decl_field_3_impl(type, name, arr_size) \
         type name [ arr_size ] ;
 
+#define ___sentient_pp_decl_reserved_keyword(model_type) \
+        ___sentient_pp_decl_reserved_keyword_impl(model_type)
+#define ___sentient_pp_decl_reserved_keyword_impl(model_type) \
+        ___sentient_pp_if(___sentient_pp_is_eq(model_type, struct)) \
+        (                                                           \
+            struct                                                  \
+        )                                                           \
+        (                                                           \
+                                                                    \
+        )
+
+#define ___sentient_pp_decl_object_pool(storage_len, type, model_type, pool_size) \
+        ___sentient_pp_decl_object_pool_impl(storage_len, type, model_type, pool_size)
+#define ___sentient_pp_decl_object_pool_impl(storage_len, type, model_type, pool_size) \
+        static const                                                                \
+        ___sentient_pp_decl_reserved_keyword(model_type)                            \
+        type ___sentient_object_pool_storage = {                                    \
+        ___sentient_pp_cat(                                                         \
+            ___sentient_pp_decled_object_pool_storage,                              \
+            model_type,                                                             \
+        )                                                                           \
+        }
+
+#define ___sentient_pp_decl_object_pool_storage()
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
@@ -302,13 +328,12 @@ extern "C"
 #define ___sentient_pp_define_model(...) \
         ___sentient_pp_define_model_impl(__VA_ARGS__)
 
-#define ___sentient_pp_define_model_impl(model_name, ...) \
+#define ___sentient_pp_define_model_impl(model_name, model_type, ...) \
         ___sentient_pp_decl_model_name(model_name)        \
         }
 
-#define ___sentient_pp_decl_model_name(model_name) \
-        struct model_name {
-
+#define ___sentient_pp_decl_struct_model_name(model_name, model_type) \
+        ___sentient_pp_decl_reserved_keyword(model_type)              \
 
 #ifdef __cplusplus
 }
