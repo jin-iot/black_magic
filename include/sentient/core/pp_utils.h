@@ -34,11 +34,11 @@ extern "C"
         ___snt_pp_lparen() __VA_ARGS__  ___snt_pp_rparen()
 #define ___snt_pp_unwrap(args) \
         ___snt_pp_if_else(___snt_pp_is_in_paren(args)) \
-        (                                                        \
-            ___snt_pp_pass args                             \
-        )                                                        \
-        (                                                        \
-            args                                                 \
+        (                                              \
+            ___snt_pp_pass args                        \
+        )                                              \
+        (                                              \
+            args                                       \
         )
 
 
@@ -58,13 +58,13 @@ extern "C"
 #define ___snt_pp_detect_paren(...) ,
 #define ___snt_pp_is_in_paren(...) \
         ___snt_pp_is_in_paren_impl(__VA_ARGS__)
-#define ___snt_pp_is_in_paren_impl(...)                                      \
-        ___snt_pp_has_comma(                                                 \
-            ___snt_pp_cat_3(                                                 \
-                ___snt_pp_is_in_paren_,                                      \
-                ___snt_pp_has_comma(__VA_ARGS__),                            \
+#define ___snt_pp_is_in_paren_impl(...)                                 \
+        ___snt_pp_has_comma(                                            \
+            ___snt_pp_cat_3(                                            \
+                ___snt_pp_is_in_paren_,                                 \
+                ___snt_pp_has_comma(__VA_ARGS__),                       \
                 ___snt_pp_has_comma(___snt_pp_detect_paren __VA_ARGS__) \
-            )                                                                     \
+            )                                                           \
         )
 #define ___snt_pp_is_in_paren_01 ,
 
@@ -98,17 +98,17 @@ extern "C"
  */
 #define ___snt_pp_is_eq(x, y) \
         ___snt_pp_is_eq_impl(x, y)
-#define ___snt_pp_is_eq_impl(x, y)                                           \
-        ___snt_pp_not(                                                       \
-            ___snt_pp_is_paren(                                              \
+#define ___snt_pp_is_eq_impl(x, y)                                      \
+        ___snt_pp_not(                                                  \
+            ___snt_pp_is_paren(                                         \
                 ___snt_pp_compare_ ## x (___snt_pp_compare_ ## y ) (()) \
-            )                                                                     \
+            )                                                           \
         )
 /**
  * macro numeric, keyword constants ( 0 ~ N, keywords... ) to compare
  */
 #include <sentient/core/internal/pp_compare_n.h>
-#define ___snt_pp_compare_struct(x) x
+#define ___snt_pp_compare_structure(x) x
 #define ___snt_pp_compare_primitive(x) x
 #define ___snt_pp_compare_bit_field(x) x
 #define ___snt_pp_compare_array(x) x
@@ -161,15 +161,21 @@ extern "C"
 #define ___snt_pp_pow(x, y) \
         ___snt_pp_pow_impl(x, y)
 #define ___snt_pp_pow_impl(x, y)       \
-        (                                   \
-            x                               \
-            ___snt_pp_for(             \
-                ___snt_pp_decrease(y), \
-                0,                          \
-                increase,                   \
-                ___snt_pp_pow_helper,  \
-                x                           \
-            )                               \
+        ___snt_pp_if_else(___snt_pp_is_eq(y, 0)) \
+        (                                        \
+            1                                    \
+        )                                        \
+        (                                        \
+            (                                    \
+                x                                \
+                ___snt_pp_for(                   \
+                    ___snt_pp_decrease(y),       \
+                    0,                           \
+                    increase,                    \
+                    ___snt_pp_pow_helper,        \
+                    x                            \
+                )                                \
+            )                                    \
         )
 
 #define ___snt_pp_pow_helper(dummy, x) \
@@ -220,9 +226,9 @@ extern "C"
 #define ___snt_pp_for(num_loop, start_number, inc_dec, expr, ...) \
         ___snt_pp_cat_4(                                          \
                 ___snt_pp_for_,                                   \
-                inc_dec,                                               \
-                _,                                                     \
-                num_loop                                               \
+                inc_dec,                                          \
+                _,                                                \
+                num_loop                                          \
         ) (start_number, expr, __VA_ARGS__)
 #include <sentient/core/internal/pp_for.h>
 
@@ -298,25 +304,36 @@ extern "C"
 #define ___snt_pp_decl_reserved_keyword(model_type) \
         ___snt_pp_decl_reserved_keyword_impl(model_type)
 #define ___snt_pp_decl_reserved_keyword_impl(model_type) \
-        ___snt_pp_if(___snt_pp_is_eq(model_type, struct)) \
-        (                                                           \
-            struct                                                  \
-        )                                                           \
-        (                                                           \
-                                                                    \
+        ___snt_pp_if_else(___snt_pp_is_eq(model_type, structure)) \
+        (                                                         \
+            struct                                                \
+        )                                                         \
+        (                                                         \
+                                                                  \
         )
 
-#define ___snt_pp_decl_object_pool(storage_len, type, model_type, pool_size) \
-        ___snt_pp_decl_object_pool_impl(storage_len, type, model_type, pool_size)
-#define ___snt_pp_decl_object_pool_impl(storage_len, type, model_type, pool_size) \
-        static const                                                                \
-        ___snt_pp_decl_reserved_keyword(model_type)                            \
-        type ___snt_object_pool_storage = {                                    \
-        ___snt_pp_cat(                                                         \
-            ___snt_pp_decled_object_pool_storage,                              \
-            model_type,                                                             \
-        )                                                                           \
+#define ___snt_pp_decl_object_pool(storage_len, type, model_type) \
+        ___snt_pp_decl_object_pool_impl(storage_len, type, model_type)
+#define ___snt_pp_decl_object_pool_impl(storage_len, type, model_type) \
+        static const                                                   \
+        ___snt_pp_decl_reserved_keyword(model_type)                    \
+        type ___snt_object_pool_storage = {                            \
+                                                                       \
         }
+
+#define ___snt_pp_decl_object_pool_elems(storage_len, type, model_type) \
+
+#define ___snt_pp_decl_object_pool_elems_helper_handler(num, max, type, model_type) \
+        static                                                                    \
+        ___snt_pp_decl_reserved_keyword(model_type)                               \
+        ___snt_object_pool_storage_elem_arr_ ## type ## _ ## num                  \
+        [___snt_pp_pow(16, num)][___snt_pp_pow(8, max) / ___snt_pp_pow(4, (num + 1))];
+#define ___snt_pp_decl_object_pool_elems_loop_handler(num, max, type, model_type) \
+        static                                                                    \
+        struct snt_obejct_pool_stroage_elem                                       \
+        ___snt_object_pool_storage_elem_ ## type ## _ ## num                      \
+        [___snt_pp_pow(16, num)][(___snt_pp_pow(8, max)) / (___snt_pp_pow(4, (num + 1)))];
+
 
 #define ___snt_pp_decl_object_pool_storage()
 

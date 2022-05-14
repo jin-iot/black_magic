@@ -39,6 +39,7 @@ struct snt_object_pool_strage_elem
     snt_size elems_size;
     void*         elems;
 };
+
 struct snt_object_pool_storage
 {
     snt_size                            storage_size;
@@ -86,15 +87,13 @@ ___snt_object_pool_example_model = {
     
 };
 
-int main(int argc, char** argv)
-{
-    int res = EXIT_SUCCESS;
+___snt_pp_decl_object_pool_elems_helper_handler(0, 5, snt_u32, primitive);
 
-    // for (int i = 0; i < ; i++)
-    // {
-    //     struct example_model* elelelem = ;
-    //     printf("elelem %d %d",)
-    // }
+int main(int argc, char** argv)  
+{
+    ___snt_obj
+
+    int res = EXIT_SUCCESS;
 
     const int asdfsadf = ___snt_pp_is_eq(struct, struct);
 
