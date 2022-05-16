@@ -239,6 +239,24 @@ foreach (SENTIENT_LOOP_VAR RANGE 0 ${SENTIENT_C_AUTOGEN_MAX_NUM_ITERATIONS} 1)
 endforeach()
 
 ####################
+### pp_defer.h ###
+####################
+set(SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_DEFER_H_PATH
+    ${SENTIENT_C_AUTOGEN_DIR}/core/internal/pp_defer.h)
+write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_DEFER_H_PATH} "")
+foreach (SENTIENT_LOOP_VAR RANGE 0 ${SENTIENT_C_AUTOGEN_MAX_NUM_ITERATIONS} 1)
+    if (${SENTIENT_LOOP_VAR} EQUAL "0")
+        write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_DEFER_H_PATH}
+                    "#define ___snt_pp_defer_${SENTIENT_LOOP_VAR}(...) __VA_ARGS__ ___snt_pp_empty()")
+    else()
+        math(EXPR PREVIOUS_COUNT_VAR "${SENTIENT_LOOP_VAR}-1")
+        write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_DEFER_H_PATH}
+                    "#define ___snt_pp_defer_${SENTIENT_LOOP_VAR}(...) "
+                    "__VA_ARGS__ ___snt_pp_defer_${PREVIOUS_COUNT_VAR}(___snt_pp_empty) ()" APPEND)
+    endif()
+endforeach()
+
+####################
 ### pp_foreach.h ###
 ####################
 set(SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_FOREACH_H_PATH

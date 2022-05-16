@@ -41,6 +41,9 @@ extern "C"
             args                                       \
         )
 
+#define ___snt_pp_defer(...) \
+        ___snt_pp_empty() __VA_ARGS__
+#include <sentient/core/internal/pp_defer.h>
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
@@ -163,7 +166,7 @@ extern "C"
 #define ___snt_pp_pow_impl(x, y)       \
         ___snt_pp_if_else(___snt_pp_is_eq(y, 0)) \
         (                                        \
-            1                                    \
+            (1)                                    \
         )                                        \
         (                                        \
             (                                    \
@@ -179,6 +182,8 @@ extern "C"
         )
 
 #define ___snt_pp_pow_helper(dummy, x) \
+        ___snt_pp_pow_helper_impl(dummy, x)
+#define ___snt_pp_pow_helper_impl(dummy, x) \
         * x
 
 /*!
@@ -312,27 +317,46 @@ extern "C"
                                                                   \
         )
 
-#define ___snt_pp_decl_object_pool(storage_len, type, model_type) \
-        ___snt_pp_decl_object_pool_impl(storage_len, type, model_type)
-#define ___snt_pp_decl_object_pool_impl(storage_len, type, model_type) \
-        static const                                                   \
-        ___snt_pp_decl_reserved_keyword(model_type)                    \
-        type ___snt_object_pool_storage = {                            \
-                                                                       \
+// so ideal!!!!!!!!!!!!!
+// for i in range(0, 5): print(16**i, int((8**5)/(4**(i+1))))
+
+#define ___snt_pp_decl_object_pool(storage_len, model_name, model_type) \
+        ___snt_pp_decl_object_pool_impl(storage_len, model_name, model_type)
+#define ___snt_pp_decl_object_pool_impl(storage_len, model_name, model_type) \
+        static const                                                         \
+        ___snt_pp_decl_reserved_keyword(model_type)                          \
+        type ___snt_object_pool_storage = {                                  \
+                                                                             \
         }
 
-#define ___snt_pp_decl_object_pool_elems(storage_len, type, model_type) \
+#define ___snt_pp_decl_object_pool_elems(num_loop, model_name, model_type) \
+        ___snt_pp_decl_object_pool_elems_impl(num_loop, model_name, model_type)
+#define ___snt_pp_decl_object_pool_elems_impl(num_loop, model_name, model_type) \
+        ___snt_pp_for(num_loop,                                                 \
+                      0,                                                        \
+                      increase,                                                 \
+                      ___snt_pp_decl_object_pool_elems_handler,                 \
+                      num_loop,                                                 \
+                      model_name,                                               \
+                      model_type)
 
-#define ___snt_pp_decl_object_pool_elems_helper_handler(num, max, type, model_type) \
-        static                                                                    \
-        ___snt_pp_decl_reserved_keyword(model_type)                               \
-        ___snt_object_pool_storage_elem_arr_ ## type ## _ ## num                  \
-        [___snt_pp_pow(16, num)][___snt_pp_pow(8, max) / ___snt_pp_pow(4, (num + 1))];
-#define ___snt_pp_decl_object_pool_elems_loop_handler(num, max, type, model_type) \
-        static                                                                    \
-        struct snt_obejct_pool_stroage_elem                                       \
-        ___snt_object_pool_storage_elem_ ## type ## _ ## num                      \
-        [___snt_pp_pow(16, num)][(___snt_pp_pow(8, max)) / (___snt_pp_pow(4, (num + 1)))];
+#define ___snt_pp_decl_object_pool_elems_handler(num, max, model_name, model_type) \
+        ___snt_pp_decl_object_pool_elems_handler_impl(num, max, model_name, model_type)
+
+#define ___snt_pp_decl_object_pool_elems_handler_impl(num, max, model_name, model_type) \
+        static                                                                          \
+        ___snt_pp_decl_reserved_keyword(model_type)                                     \
+        model_name                                                                      \
+        ___snt_pp_cat_4(___snt_object_pool_storage_elem_arr_, model_name, _, num)       \
+        [___snt_pp_pow(16, num)]                                                        \
+        [___snt_pp_pow(8, max) / ___snt_pp_pow(4, ___snt_pp_increase(num))] ;
+
+// #define ___snt_pp_decl_object_pool_elems_loop_handler(num, max, model_name, model_type) \
+//         static                                                                          \
+//         struct snt_obejct_pool_stroage_elem                                             \
+//         ___snt_object_pool_storage_elem_ ## model_name ## _ ## num                      \
+//         [___snt_pp_pow(16, num)]                                                        \
+//         [(___snt_pp_pow(8, max)) / (___snt_pp_pow(4, ___snt_pp_increase(num)))];
 
 
 #define ___snt_pp_decl_object_pool_storage()

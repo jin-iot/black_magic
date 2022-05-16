@@ -30,9 +30,6 @@ snt_i32 thread_handler(snt_void* arg)
 
 #define SENTIENT_OBJECT_POOL_STORAGE_MAX_LEN 6
 
-// so ideal!!!!!!!!!!!!!
-// for i in range(0, 5): print(16**i, int((8**5)/(4**(i+1))))
-
 struct snt_object_pool_strage_elem
 {
     snt_size alloc_size;
@@ -46,56 +43,28 @@ struct snt_object_pool_storage
     struct snt_object_pool_strage_elem* storage;
 };
 
-static
-struct example_model
-___snt_object_pool_storage_array_1[1][1024];
-static
-struct snt_object_pool_strage_elem
-___snt_object_pool_storage_elem_1 = {
-    .alloc_size = 1,
-    .elems_size =
-        sizeof(___snt_object_pool_storage_array_1[0])  / sizeof(struct example_model),
-    .elems = ___snt_object_pool_storage_array_1,
-};
-static
-struct example_model
-___snt_object_pool_storage_array_2[16][4096];
-static
-struct snt_object_pool_strage_elem
-___snt_object_pool_storage_elem_2 = {
-    .alloc_size = 16,
-    .elems_size =
-        sizeof(___snt_object_pool_storage_array_2[0])  / sizeof(struct example_model),
-    .elems = ___snt_object_pool_storage_array_1,
-};
-static
-struct example_model
-___snt_object_pool_storage_array_3[256][4096];
-static
-struct snt_object_pool_strage_elem
-___snt_object_pool_storage_example_model_elems[] = {
-    {
-        .alloc_size = 256,
-        .elems_size =
-            sizeof(___snt_object_pool_storage_array_3[0])  / sizeof(struct example_model),
-        .elems = ___snt_object_pool_storage_array_1,
-    }
-};
-static
-struct snt_object_pool_storage
-___snt_object_pool_example_model = {
-    
-};
 
-___snt_pp_decl_object_pool_elems_helper_handler(0, 5, snt_u32, primitive);
+#define ahah(a, b, c, d) \
+        printf("%d %d %d %d\n", a, ___snt_pp_increase(b), c, d);
+
+___snt_pp_cat_4( ___snt_pp_for_, increase, _, 1 ) (0, ___snt_pp_decl_object_pool_elems_handler, 1, snt_u32, primitive)
+
+// ___snt_pp_for(1, 0, increase, ___snt_pp_decl_object_pool_elems_handler, 1, snt_u32, primitive)
+
+
+// ___snt_pp_decl_object_pool_elems_impl(1, snt_u32, primitive)
+
+// ___snt_pp_decl_object_pool_elems_handler(0, 5, snt_u32, primitive);
+// ___snt_pp_decl_object_pool_elems_handler(1, 5, snt_u32, primitive);
+// ___snt_pp_decl_object_pool_elems_handler(2, 5, snt_u32, primitive);
+// ___snt_pp_decl_object_pool_elems_handler(3, 5, snt_u32, primitive);
+// ___snt_pp_decl_object_pool_elems_handler(2, 5, snt_u32, primitive);
 
 int main(int argc, char** argv)  
 {
-    ___snt_obj
-
     int res = EXIT_SUCCESS;
 
-    const int asdfsadf = ___snt_pp_is_eq(struct, struct);
+    ___snt_pp_for(5, 0, increase, ahah, 5, 6, 6);
 
     for (int i = 0; i < 4; i++)
     {
