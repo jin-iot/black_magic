@@ -28,7 +28,7 @@ extern "C"
  * @brief expands to nothing
  * @date 2022-05-04
  */
-#define ___snt_pp_empty(...)
+#define ___snt_pp_empty()
 
 #define ___snt_pp_wrap(...) \
         ___snt_pp_lparen() __VA_ARGS__  ___snt_pp_rparen()
@@ -41,8 +41,9 @@ extern "C"
             args                                       \
         )
 
-#define ___snt_pp_defer(...) \
-        ___snt_pp_empty() __VA_ARGS__
+// #define ___snt_pp_defer(...) \
+//         ___snt_pp_empty() __VA_ARGS__
+#include <sentient/core/internal/pp_eval.h>
 #include <sentient/core/internal/pp_defer.h>
 
 /**
@@ -166,11 +167,11 @@ extern "C"
 #define ___snt_pp_pow_impl(x, y)       \
         ___snt_pp_if_else(___snt_pp_is_eq(y, 0)) \
         (                                        \
-            (1)                                    \
+            1                                    \
         )                                        \
         (                                        \
             (                                    \
-                x                                \
+                ___snt_pp_eval_ ## y (___snt_pp_defer_ ## y(x))                                \
                 ___snt_pp_for(                   \
                     ___snt_pp_decrease(y),       \
                     0,                           \
