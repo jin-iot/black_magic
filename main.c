@@ -47,21 +47,31 @@ struct snt_object_pool_storage
 #define ahah(a, b, c, d) \
         printf("%d %d %d %d\n", a, ___snt_pp_increase(b), c, d);
 
-// ___snt_pp_for(5, 0, increase, ___snt_pp_decl_object_pool_elems_handler, 5, snt_u32, primitive)
-
 // ___snt_pp_decl_object_pool_elems_impl(5, snt_u32, primitive)
+// ___snt_pp_cat_4( ___snt_pp_for_, increase, _, 1 ) (0, ___snt_pp_decl_object_pool_elems_handler, 1, snt_u32, primitive)
 
 // ___snt_pp_decl_object_pool_elems_handler(0, 5, snt_u32, primitive);
 // ___snt_pp_decl_object_pool_elems_handler(1, 5, snt_u32, primitive);
 // ___snt_pp_decl_object_pool_elems_handler(2, 5, snt_u32, primitive);
 // ___snt_pp_decl_object_pool_elems_handler(3, 5, snt_u32, primitive);
-// ___snt_pp_decl_object_pool_elems_handler(2, 5, snt_u32, primitive);
+// ___snt_pp_decl_object_pool_elems_handler(4, 5, snt_u32, primitive);
+
+// ___snt_pp_for_impl(num_loop, 0, increase, ___snt_pp_decl_object_pool_elems_handler, 5, snt_u32, primitive)
+
+// ___snt_pp_for_increase_5(0, ___snt_pp_decl_object_pool_elems_handler, 5, snt_u32, primitive)
+
+___snt_pp_decl_object_pool_elems_handler(0, 5, snt_u32, primitive)
+___snt_pp_decl_object_pool_elems_handler(1, 5, snt_u32, primitive)
+___snt_pp_decl_object_pool_elems_handler(2, 5, snt_u32, primitive)
+___snt_pp_decl_object_pool_elems_handler(3, 5, snt_u32, primitive)
+___snt_pp_decl_object_pool_elems_handler(4, 5, snt_u32, primitive)
+___snt_pp_for_increase_0(5, ___snt_pp_decl_object_pool_elems_handler, 5, snt_u32, primitive)
 
 int main(int argc, char** argv)  
 {
     int res = EXIT_SUCCESS;
 
-    // const int hey = ___snt_pp_pow(5, 5) ;
+    ___snt_
 
     ___snt_pp_for(5, 0, increase, ahah, 5, 6, 6);
 

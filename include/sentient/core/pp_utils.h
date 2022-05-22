@@ -171,7 +171,7 @@ extern "C"
         )                                        \
         (                                        \
             (                                    \
-                ___snt_pp_eval_ ## y (___snt_pp_defer_ ## y(x))                                \
+                x                                \
                 ___snt_pp_for(                   \
                     ___snt_pp_decrease(y),       \
                     0,                           \
@@ -230,11 +230,13 @@ extern "C"
  * @date 2022-05-10
  */
 #define ___snt_pp_for(num_loop, start_number, inc_dec, expr, ...) \
-        ___snt_pp_cat_4(                                          \
-                ___snt_pp_for_,                                   \
-                inc_dec,                                          \
-                _,                                                \
-                num_loop                                          \
+        ___snt_pp_for_impl(num_loop, start_number, inc_dec, expr, __VA_ARGS__)
+#define ___snt_pp_for_impl(num_loop, start_number, inc_dec, expr, ...) \
+        ___snt_pp_cat_4(                                               \
+                ___snt_pp_for_,                                        \
+                inc_dec,                                               \
+                _,                                                     \
+                num_loop                                               \
         ) (start_number, expr, __VA_ARGS__)
 #include <sentient/core/internal/pp_for.h>
 
@@ -343,14 +345,13 @@ extern "C"
 
 #define ___snt_pp_decl_object_pool_elems_handler(num, max, model_name, model_type) \
         ___snt_pp_decl_object_pool_elems_handler_impl(num, max, model_name, model_type)
-
 #define ___snt_pp_decl_object_pool_elems_handler_impl(num, max, model_name, model_type) \
         static                                                                          \
         ___snt_pp_decl_reserved_keyword(model_type)                                     \
         model_name                                                                      \
         ___snt_pp_cat_4(___snt_object_pool_storage_elem_arr_, model_name, _, num)       \
         [___snt_pp_pow(16, num)]                                                        \
-        [___snt_pp_pow(8, max) / ___snt_pp_pow(4, ___snt_pp_increase(num))] ;
+        [___snt_pp_pow(8, max) / ___snt_pp_pow(4, ___snt_pp_increase(num) )] ;
 
 // #define ___snt_pp_decl_object_pool_elems_loop_handler(num, max, model_name, model_type) \
 //         static                                                                          \
