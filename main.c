@@ -27,14 +27,14 @@ snt_i32 thread_handler(snt_void* arg)
 
 #define def_num(num, type, name) \
         const type name ## _ ## num = num ;
-
-#define SENTIENT_OBJECT_POOL_STORAGE_MAX_LEN 6
+#define def_num_iter(num, type, name) \
+        ___snt_pp_for(5, num, type, name)
 
 struct snt_object_pool_strage_elem
 {
     snt_size alloc_size;
     snt_size elems_size;
-    void*         elems;
+    void*    elems;
 };
 
 struct snt_object_pool_storage
@@ -43,37 +43,13 @@ struct snt_object_pool_storage
     struct snt_object_pool_strage_elem* storage;
 };
 
-
-#define ahah(a, b, c, d) \
-        printf("%d %d %d %d\n", a, ___snt_pp_increase(b), c, d);
-
-// ___snt_pp_decl_object_pool_elems_impl(5, snt_u32, primitive)
-// ___snt_pp_cat_4( ___snt_pp_for_, increase, _, 1 ) (0, ___snt_pp_decl_object_pool_elems_handler, 1, snt_u32, primitive)
-
-// ___snt_pp_decl_object_pool_elems_handler(0, 5, snt_u32, primitive);
-// ___snt_pp_decl_object_pool_elems_handler(1, 5, snt_u32, primitive);
-// ___snt_pp_decl_object_pool_elems_handler(2, 5, snt_u32, primitive);
-// ___snt_pp_decl_object_pool_elems_handler(3, 5, snt_u32, primitive);
-// ___snt_pp_decl_object_pool_elems_handler(4, 5, snt_u32, primitive);
-
-// ___snt_pp_for_impl(num_loop, 0, increase, ___snt_pp_decl_object_pool_elems_handler, 5, snt_u32, primitive)
-
-// ___snt_pp_for_increase_5(0, ___snt_pp_decl_object_pool_elems_handler, 5, snt_u32, primitive)
-
-___snt_pp_decl_object_pool_elems_handler(0, 5, snt_u32, primitive)
-___snt_pp_decl_object_pool_elems_handler(1, 5, snt_u32, primitive)
-___snt_pp_decl_object_pool_elems_handler(2, 5, snt_u32, primitive)
-___snt_pp_decl_object_pool_elems_handler(3, 5, snt_u32, primitive)
-___snt_pp_decl_object_pool_elems_handler(4, 5, snt_u32, primitive)
-___snt_pp_for_increase_0(5, ___snt_pp_decl_object_pool_elems_handler, 5, snt_u32, primitive)
+___snt_pp_decl_object_pool_elems(5, snt_u32, primitive)
 
 int main(int argc, char** argv)  
 {
     int res = EXIT_SUCCESS;
 
-    ___snt_
-
-    ___snt_pp_for(5, 0, increase, ahah, 5, 6, 6);
+    
 
     for (int i = 0; i < 4; i++)
     {

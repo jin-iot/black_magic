@@ -22,6 +22,10 @@ extern "C"
 #define ___snt_pp_comma() ,
 #define ___snt_pp_lparen() (
 #define ___snt_pp_rparen() )
+#define ___snt_pp_lsquare() [
+#define ___snt_pp_rsquare() ]
+#define ___snt_pp_semicolon() ;
+#define ___snt_pp_arr(expr) [expr]
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
@@ -150,42 +154,63 @@ extern "C"
         ___snt_pp_cat(___snt_pp_decrease_impl_, number)
 #include <sentient/core/internal/pp_inc_dec.h>
 
+// #define ___snt_pp_add(x, y) \
+//         ___snt_pp_add_impl(x, y)
+// #define ___snt_pp_add_impl(x, y) (x + y)
+// #define ___snt_pp_sub(x, y) \
+//         ___snt_pp_sub_impl(x, y)
+// #define ___snt_pp_sub_impl(x, y) (x - y)
+// #define ___snt_pp_mul(x, y) \
+//         ___snt_pp_mul_impl(x, y)
+// #define ___snt_pp_mul_impl(x, y) (x * y)
+// #define ___snt_pp_div(x, y) \
+//         ___snt_pp_div_impl(x, y)
+// #define ___snt_pp_div_impl(x, y) (x / y)
+// #define ___snt_pp_pow(x, y) \
+//         ___snt_pp_pow_impl(x, y)
+// #define ___snt_pp_pow_impl(x, y)                 \
+//         ___snt_pp_if_else(___snt_pp_is_eq(y, 0)) \
+//         (                                        \
+//             1                                    \
+//         )                                        \
+//         (                                        \
+//             x                                    \
+//             ___snt_pp_for(                       \
+//                 ___snt_pp_decrease(y),           \
+//                 0,                               \
+//                 increase,                        \
+//                 ___snt_pp_pow_helper,            \
+//                 x                                \
+//             )                                    \
+//         )                                        
+
+// #define ___snt_pp_pow_helper(dummy, x) \
+//         ___snt_pp_pow_helper_impl(dummy, x)
+// #define ___snt_pp_pow_helper_impl(dummy, x) \
+//         * x
+
+
 #define ___snt_pp_add(x, y) \
         ___snt_pp_add_impl(x, y)
-#define ___snt_pp_add_impl(x, y) (x = y)
+#define ___snt_pp_add_impl(x, y) \
+        ___snt_pp_cat_4(___snt_pp_add_impl_, x, _, y)
 #define ___snt_pp_sub(x, y) \
         ___snt_pp_sub_impl(x, y)
-#define ___snt_pp_sub_impl(x, y) (x - y)
+#define ___snt_pp_sub_impl(x, y) \
+        ___snt_pp_cat_4(___snt_pp_sub_impl_, x, _, y)
 #define ___snt_pp_mul(x, y) \
         ___snt_pp_mul_impl(x, y)
-#define ___snt_pp_mul_impl(x, y) (x * y)
+#define ___snt_pp_mul_impl(x, y) \
+        ___snt_pp_cat_4(___snt_pp_mul_impl_, x, _, y)
 #define ___snt_pp_div(x, y) \
         ___snt_pp_div_impl(x, y)
-#define ___snt_pp_div_impl(x, y) (x / y)
+#define ___snt_pp_div_impl(x, y) \
+        ___snt_pp_cat_4(___snt_pp_div_impl_, x, _, y)
 #define ___snt_pp_pow(x, y) \
         ___snt_pp_pow_impl(x, y)
-#define ___snt_pp_pow_impl(x, y)       \
-        ___snt_pp_if_else(___snt_pp_is_eq(y, 0)) \
-        (                                        \
-            1                                    \
-        )                                        \
-        (                                        \
-            (                                    \
-                x                                \
-                ___snt_pp_for(                   \
-                    ___snt_pp_decrease(y),       \
-                    0,                           \
-                    increase,                    \
-                    ___snt_pp_pow_helper,        \
-                    x                            \
-                )                                \
-            )                                    \
-        )
-
-#define ___snt_pp_pow_helper(dummy, x) \
-        ___snt_pp_pow_helper_impl(dummy, x)
-#define ___snt_pp_pow_helper_impl(dummy, x) \
-        * x
+#define ___snt_pp_pow_impl(x, y) \
+        ___snt_pp_cat_4(___snt_pp_pow_impl_, x, _, y)
+#include <sentient/core/internal/pp_arithmetic.h>
 
 /*!
  * @author Jin (jaehwanspin@gmail.com)
@@ -317,7 +342,7 @@ extern "C"
             struct                                                \
         )                                                         \
         (                                                         \
-                                                                  \
+            ___snt_pp_empty()                                     \
         )
 
 // so ideal!!!!!!!!!!!!!
@@ -349,19 +374,13 @@ extern "C"
         static                                                                          \
         ___snt_pp_decl_reserved_keyword(model_type)                                     \
         model_name                                                                      \
-        ___snt_pp_cat_4(___snt_object_pool_storage_elem_arr_, model_name, _, num)       \
-        [___snt_pp_pow(16, num)]                                                        \
-        [___snt_pp_pow(8, max) / ___snt_pp_pow(4, ___snt_pp_increase(num) )] ;
+        ___snt_object_pool_storage_elem_arr_ ## model_name ## _ ## num                  \
+        [___snt_pp_pow( 16, num )]                                                      \
+        [(___snt_pp_pow( 8, max )) / (___snt_pp_pow( 4, ___snt_pp_increase(num) ))];
 
-// #define ___snt_pp_decl_object_pool_elems_loop_handler(num, max, model_name, model_type) \
-//         static                                                                          \
-//         struct snt_obejct_pool_stroage_elem                                             \
-//         ___snt_object_pool_storage_elem_ ## model_name ## _ ## num                      \
-//         [___snt_pp_pow(16, num)]                                                        \
-//         [(___snt_pp_pow(8, max)) / (___snt_pp_pow(4, ___snt_pp_increase(num)))];
+// ___snt_pp_cat_4(___snt_object_pool_storage_elem_arr_, model_name, _, num)       \
 
-
-#define ___snt_pp_decl_object_pool_storage()
+// #define ___snt_pp_decl_object_pool_storage()
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
@@ -371,12 +390,8 @@ extern "C"
 #define ___snt_pp_define_model(...) \
         ___snt_pp_define_model_impl(__VA_ARGS__)
 
-#define ___snt_pp_define_model_impl(model_name, model_type, ...) \
-        ___snt_pp_decl_model_name(model_name)        \
-        }
+#define ___snt_pp_define_model_impl(model_name, model_type, ...)
 
-#define ___snt_pp_decl_struct_model_name(model_name, model_type) \
-        ___snt_pp_decl_reserved_keyword(model_type)              \
 
 #ifdef __cplusplus
 }

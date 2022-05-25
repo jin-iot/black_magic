@@ -238,9 +238,9 @@ foreach (SENTIENT_LOOP_VAR RANGE 0 ${SENTIENT_C_AUTOGEN_MAX_NUM_ITERATIONS} 1)
                APPEND)
 endforeach()
 
-####################
+##################
 ### pp_defer.h ###
-####################
+##################
 set(SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_DEFER_H_PATH
     ${SENTIENT_C_AUTOGEN_DIR}/core/internal/pp_defer.h)
 write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_DEFER_H_PATH} "")
@@ -306,7 +306,7 @@ foreach (SENTIENT_LOOP_VAR RANGE 0 ${SENTIENT_C_AUTOGEN_MAX_NUM_ITERATIONS} 1)
         math(EXPR PREVIOUS_COUNT_VAR "${SENTIENT_LOOP_VAR}-1")
         write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_FOR_H_PATH}
                     "#define ___snt_pp_for_increase_${SENTIENT_LOOP_VAR}(idx, expr, ...) \\\n"
-                    "        expr(idx, __VA_ARGS__)                        \\\n"
+                    "        expr (idx, __VA_ARGS__)                        \\\n"
                     "        ___snt_pp_for_increase_${PREVIOUS_COUNT_VAR}(                \\\n"
                     "            ___snt_pp_increase(idx),             \\\n"
                     "                expr,                                 \\\n"
@@ -323,7 +323,7 @@ foreach (SENTIENT_LOOP_VAR RANGE 0 ${SENTIENT_C_AUTOGEN_MAX_NUM_ITERATIONS} 1)
         math(EXPR PREVIOUS_COUNT_VAR "${SENTIENT_LOOP_VAR}-1")
         write_file(${SENTIENT_C_AUTOGEN_CORE_INTERNAL_PP_FOR_H_PATH}
                     "#define ___snt_pp_for_decrease_${SENTIENT_LOOP_VAR}(idx, expr, ...) \\\n"
-                    "        expr(idx, __VA_ARGS__)                        \\\n"
+                    "        expr (idx, __VA_ARGS__)                        \\\n"
                     "        ___snt_pp_for_decrease_${PREVIOUS_COUNT_VAR}(                \\\n"
                     "            ___snt_pp_decrease(idx),             \\\n"
                     "                expr,                                 \\\n"
