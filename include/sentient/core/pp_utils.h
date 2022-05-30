@@ -348,35 +348,76 @@ extern "C"
 // so ideal!!!!!!!!!!!!!
 // for i in range(0, 5): print(16**i, int((8**5)/(4**(i+1))))
 
-#define ___snt_pp_decl_object_pool(storage_len, model_name, model_type) \
-        ___snt_pp_decl_object_pool_impl(storage_len, model_name, model_type)
-#define ___snt_pp_decl_object_pool_impl(storage_len, model_name, model_type) \
-        static const                                                         \
-        ___snt_pp_decl_reserved_keyword(model_type)                          \
-        type ___snt_object_pool_storage = {                                  \
-                                                                             \
-        }
+#define ___snt_pp_decl_object_pool_storage(model_name, model_type) \
+        ___snt_pp_decl_object_pool_storage_impl(model_name, model_type)
+#define ___snt_pp_decl_object_pool_storage_impl(model_name, model_type) \
+        ___snt_pp_decl_object_pool_storage_elem_arrays(                 \
+                SENTIENT_C_NUM_POOL_LOOP,                               \
+                model_name,                                             \
+                model_type)                                             \
+        ___snt_pp_decl_object_pool_storage_elems(                       \
+                SENTIENT_C_NUM_POOL_LOOP,                               \
+                model_name,                                             \
+                model_type)                                             \
+        static                                                          \
+        struct snt_object_pool_storage                                  \
+        ___snt_object_pool_storage_ ## model_name = {                   \
+            .storage_size = SENTIENT_C_NUM_POOL_LOOP,                   \
+            .storage_size =                                             \
+                ___snt_object_pool_storage_elems_ ## model_name         \
+        };
+        
 
-#define ___snt_pp_decl_object_pool_elems(num_loop, model_name, model_type) \
-        ___snt_pp_decl_object_pool_elems_impl(num_loop, model_name, model_type)
-#define ___snt_pp_decl_object_pool_elems_impl(num_loop, model_name, model_type) \
+#define ___snt_pp_decl_object_pool_storage_elems(num_loop, model_name, model_type) \
+        ___snt_pp_decl_object_pool_storage_elems_impl(num_loop, model_name, model_type)
+#define ___snt_pp_decl_object_pool_storage_elems_impl(num_loop, model_name, model_type) \
+        static                                                                          \
+        struct snt_object_pool_storage_elem                                             \
+        ___snt_object_pool_storage_elems_ ## model_name [] = {                          \
+        ___snt_pp_for(num_loop,                                                         \
+                      0,                                                                \
+                      increase,                                                         \
+                      ___snt_pp_decl_object_pool_storage_elems_handler,                 \
+                      num_loop,                                                         \
+                      model_name,                                                       \
+                      model_type)                                                       \
+        };
+
+#define ___snt_pp_decl_object_pool_storage_elems_handler(num, max, model_name, model_type) \
+        ___snt_pp_decl_object_pool_storage_elems_handler_impl(num, max, model_name, model_type)
+#define ___snt_pp_decl_object_pool_storage_elems_handler_impl(num, max, model_name, model_type)   \
+        {                                                                                         \
+            .alloc_size = (snt_size)(___snt_pp_pow( 16, num ) *                                   \
+                sizeof(___snt_pp_decl_reserved_keyword(model_type) model_name)),                  \
+            .array_size = (snt_size)(___snt_pp_pow( 8, max )) /                                   \
+                (___snt_pp_pow( 4, ___snt_pp_increase(num) )),                                    \
+            .elems = (snt_void*)___snt_object_pool_storage_elem_array_ ## model_name ## _ ## num, \
+        },
+
+
+
+#define ___snt_pp_decl_object_pool_storage_elem_arrays(num_loop, model_name, model_type) \
+        ___snt_pp_decl_object_pool_storage_elem_arrays_impl(num_loop, model_name, model_type)
+#define ___snt_pp_decl_object_pool_storage_elem_arrays_impl(num_loop, model_name, model_type) \
         ___snt_pp_for(num_loop,                                                 \
                       0,                                                        \
                       increase,                                                 \
-                      ___snt_pp_decl_object_pool_elems_handler,                 \
+                      ___snt_pp_decl_object_pool_storage_elem_arrays_handler,   \
                       num_loop,                                                 \
                       model_name,                                               \
                       model_type)
 
-#define ___snt_pp_decl_object_pool_elems_handler(num, max, model_name, model_type) \
-        ___snt_pp_decl_object_pool_elems_handler_impl(num, max, model_name, model_type)
-#define ___snt_pp_decl_object_pool_elems_handler_impl(num, max, model_name, model_type) \
-        static                                                                          \
-        ___snt_pp_decl_reserved_keyword(model_type)                                     \
-        model_name                                                                      \
-        ___snt_object_pool_storage_elem_arr_ ## model_name ## _ ## num                  \
-        [___snt_pp_pow( 16, num )]                                                      \
+#define ___snt_pp_decl_object_pool_storage_elem_arrays_handler(num, max, model_name, model_type) \
+        ___snt_pp_decl_object_pool_storage_elem_arrays_handler_impl(num, max, model_name, model_type)
+#define ___snt_pp_decl_object_pool_storage_elem_arrays_handler_impl(num, max, model_name, model_type) \
+        static                                                                                        \
+        ___snt_pp_decl_reserved_keyword(model_type)                                                   \
+        model_name                                                                                    \
+        ___snt_object_pool_storage_elem_array_ ## model_name ## _ ## num                              \
+        [___snt_pp_pow( 16, num )]                                                                    \
         [(___snt_pp_pow( 8, max )) / (___snt_pp_pow( 4, ___snt_pp_increase(num) ))];
+
+
 
 // ___snt_pp_cat_4(___snt_object_pool_storage_elem_arr_, model_name, _, num)       \
 

@@ -22,6 +22,23 @@ extern "C"
 #endif
 
 /**
+ * @brief 
+ * 
+ */
+struct snt_object_pool_storage_elem
+{
+    snt_size  alloc_size;
+    snt_size  array_size;
+    snt_void* elems;
+};
+
+struct snt_object_pool_storage
+{
+    snt_size                            storage_size;
+    struct snt_object_pool_strage_elem* storage;
+};
+
+/**
  * @author Jin (jaehwanspin@gmail.com)
  * @brief object pool element descriptor
  */

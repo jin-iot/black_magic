@@ -30,28 +30,17 @@ snt_i32 thread_handler(snt_void* arg)
 #define def_num_iter(num, type, name) \
         ___snt_pp_for(5, num, type, name)
 
-struct snt_object_pool_strage_elem
-{
-    snt_size alloc_size;
-    snt_size elems_size;
-    void*    elems;
-};
 
-struct snt_object_pool_storage
-{
-    snt_size                            storage_size;
-    struct snt_object_pool_strage_elem* storage;
-};
 
-___snt_pp_decl_object_pool_elems(5, snt_u32, primitive)
+___snt_pp_decl_object_pool_storage(snt_u32, primitive)
+// ___snt_pp_decl_object_pool_storage_elems_impl(5, snt_u32, primitive)
+// ___snt_pp_decl_object_pool_storage_elems_handler_impl(0, 5, snt_u32, primitive)
 
-int main(int argc, char** argv)  
+int main(int argc, char** argv)
 {
     int res = EXIT_SUCCESS;
 
-    
-
-    for (int i = 0; i < 4; i++)
+    for (snt_i32 i = 0; i < 4; i++)
     {
         int err = thrd_create(&threads[i],
                               thread_handler,
@@ -64,7 +53,7 @@ int main(int argc, char** argv)
         }
     }
 
-    for (int i = 0; i < 4; i++)
+    for (snt_i32 i = 0; i < 4; i++)
     {
         thrd_join(threads[i],
                   snt_nullptr);
