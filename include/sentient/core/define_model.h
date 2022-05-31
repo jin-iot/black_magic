@@ -20,8 +20,11 @@ extern "C"
 {
 #endif
 
-#define snt_define_model(...) \
-        ___snt_pp_define_model(__VA_ARGS__)
+#define SNT_DEFINE_MODEL(...) \
+        ___SNT_PP_DEFINE_MODEL(__VA_ARGS__)
+
+#define SNT_DEFINE_BIT_FIELD(...) \
+        ___SNT_PP_DEFINE_BIT_FIELD(__VA_ARGS__)
 
 #ifdef __cplusplus
 }

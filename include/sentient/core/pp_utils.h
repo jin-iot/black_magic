@@ -17,36 +17,34 @@ extern "C"
 {
 #endif
 
-#define ___snt_pp_pass(args) args
-#define ___snt_pp_is_va_arg(...) ,
-#define ___snt_pp_comma() ,
-#define ___snt_pp_lparen() (
-#define ___snt_pp_rparen() )
-#define ___snt_pp_lsquare() [
-#define ___snt_pp_rsquare() ]
-#define ___snt_pp_semicolon() ;
-#define ___snt_pp_arr(expr) [expr]
+#define ___SNT_PP_PASS(ARGS) args
+#define ___SNT_PP_IS_VA_ARG(...) ,
+#define ___SNT_PP_COMMA()) ,
+#define ___SNT_PP_LPAREN() (
+#define ___SNT_PP_RPAREN() )
+#define ___SNT_PP_LSQUARE() [
+#define ___SNT_PP_RSQUARE() ]
+#define ___SNT_PP_SEMICOLON() ;
+#define ___SNT_PP_ARR(EXPR) [EXPR]
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
  * @brief expands to nothing
  * @date 2022-05-04
  */
-#define ___snt_pp_empty()
+#define ___SNT_PP_EMPTY()
 
-#define ___snt_pp_wrap(...) \
-        ___snt_pp_lparen() __VA_ARGS__  ___snt_pp_rparen()
-#define ___snt_pp_unwrap(args) \
-        ___snt_pp_if_else(___snt_pp_is_in_paren(args)) \
+#define ___SNT_PP_WRAP(...) \
+        ___SNT_PP_LPAREN() __VA_ARGS__  ___SNT_PP_RPAREN()
+#define ___SNT_PP_UNWRAP(ARGS) \
+        ___SNT_PP_IF_ELSE(___SNT_PP_IS_IN_PAREN(ARGS)) \
         (                                              \
-            ___snt_pp_pass args                        \
+            ___SNT_PP_PASS ARGS                        \
         )                                              \
         (                                              \
-            args                                       \
+            ARGS                                       \
         )
 
-// #define ___snt_pp_defer(...) \
-//         ___snt_pp_empty() __VA_ARGS__
 #include <sentient/core/internal/pp_eval.h>
 #include <sentient/core/internal/pp_defer.h>
 
@@ -55,185 +53,149 @@ extern "C"
  * @brief gets an element from the token list
  * @date 2022-05-04
  */
-#define ___snt_pp_first(x, ...) x
-#define ___snt_pp_second(x, y, ...) y
+#define ___SNT_PP_FIRST(X, ...) x
+#define ___SNT_PP_SECOND(X, Y, ...) Y
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
  * @brief check if the arg is in parenthesis
  * @date 2022-05-06
  */
-#define ___snt_pp_detect_paren(...) ,
-#define ___snt_pp_is_in_paren(...) \
-        ___snt_pp_is_in_paren_impl(__VA_ARGS__)
-#define ___snt_pp_is_in_paren_impl(...)                                 \
-        ___snt_pp_has_comma(                                            \
-            ___snt_pp_cat_3(                                            \
-                ___snt_pp_is_in_paren_,                                 \
-                ___snt_pp_has_comma(__VA_ARGS__),                       \
-                ___snt_pp_has_comma(___snt_pp_detect_paren __VA_ARGS__) \
+#define ___SNT_PP_DETECT_PAREN(...) ,
+#define ___SNT_PP_IS_IN_PAREN(...) \
+        ___SNT_PP_IS_IN_PAREN_IMPL(__VA_ARGS__)
+#define ___SNT_PP_IS_IN_PAREN_IMPL(...)                                 \
+        ___SNT_PP_HAS_COMMA(                                            \
+            ___SNT_PP_CAT_3(                                            \
+                ___SNT_PP_IS_IN_PAREN_,                                 \
+                ___SNT_PP_HAS_COMMA(__VA_ARGS__),                       \
+                ___SNT_PP_HAS_COMMA(___SNT_PP_DETECT_PAREN __VA_ARGS__) \
             )                                                           \
         )
-#define ___snt_pp_is_in_paren_01 ,
+#define ___SNT_PP_IS_IN_PAREN_01 ,
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
  * @brief check if the arg is parenthesis
  * @date 2022-05-06
  */
-#define ___snt_pp_check(...) \
-        ___snt_pp_get_1(__VA_ARGS__, 0, )
+#define ___SNT_PP_CHECK(...) \
+        ___SNT_PP_GET_1(__VA_ARGS__, 0, )
 
-#define ___snt_pp_is_paren(x) \
-        ___snt_pp_check(___snt_pp_is_paren_probe x)
-#define ___snt_pp_is_paren_probe(...) \
-        ___snt_pp_probe()
+#define ___SNT_PP_IS_PAREN(x) \
+        ___SNT_PP_CHECK(___SNT_PP_IS_PAREN_PROBE x)
+#define ___SNT_PP_IS_PAREN_PROBE(...) \
+        ___SNT_PP_PROBE()
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
- * @brief and operator macro, usage: ___snt_pp_and(1)(1)
+ * @brief and operator macro, usage: ___SNT_PP_AND(1)(1)
  * @date 2022-05-06
  */
-#define ___snt_pp_and(arg_1) \
-        ___snt_pp_cat(___snt_pp_and_, arg_1)
-#define ___snt_pp_and_0(arg_2) 0
-#define ___snt_pp_and_1(arg_2) arg_2
+#define ___SNT_PP_AND(ARG_1) \
+        ___SNT_PP_CAT(___SNT_PP_AND_, ARG_1)
+#define ___SNT_PP_AND_0(ARG_2) 0
+#define ___SNT_PP_AND_1(ARG_2) ARG_2
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
  * @brief compares each arg
  * @date 2022-05-07
  */
-#define ___snt_pp_is_eq(x, y) \
-        ___snt_pp_is_eq_impl(x, y)
-#define ___snt_pp_is_eq_impl(x, y)                                      \
-        ___snt_pp_not(                                                  \
-            ___snt_pp_is_paren(                                         \
-                ___snt_pp_compare_ ## x (___snt_pp_compare_ ## y ) (()) \
+#define ___SNT_PP_IS_EQ(X, Y) \
+        ___SNT_PP_IS_EQ_IMPL(X, Y)
+#define ___SNT_PP_IS_EQ_IMPL(X, Y)                                      \
+        ___SNT_PP_NOT(                                                  \
+            ___SNT_PP_IS_PAREN(                                         \
+                ___SNT_PP_COMPARE_ ## X (___SNT_PP_COMPARE_ ## Y ) (()) \
             )                                                           \
         )
 /**
  * macro numeric, keyword constants ( 0 ~ N, keywords... ) to compare
  */
 #include <sentient/core/internal/pp_compare_n.h>
-#define ___snt_pp_compare_structure(x) x
-#define ___snt_pp_compare_primitive(x) x
-#define ___snt_pp_compare_bit_field(x) x
-#define ___snt_pp_compare_array(x) x
+#define ___SNT_PP_COMPARE_STRUCTURE(X) X
+#define ___SNT_PP_COMPARE_PRIMITIVE(X) X
+#define ___SNT_PP_COMPARE_BIT_FIELD(X) X
+#define ___SNT_PP_COMPARE_ARRAY(X) X
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
  * @brief gets an element from the token list with specific index
  * @date 2022-05-04
  */
-#define ___snt_pp_get(N, ...) \
-        ___snt_pp_cat(___snt_pp_get_, N) (__VA_ARGS__)
+#define ___SNT_PP_GET(N, ...) \
+        ___SNT_PP_CAT(___SNT_PP_GET_, N) (__VA_ARGS__)
 #include <sentient/core/internal/pp_get_n.h>
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
- * @brief concatenates tokens
+ * @brief conCATenates tokens
  * @date 2022-05-04
  */
-#define ___snt_pp_cat(x, ...) \
-        ___snt_pp_cat_impl(x, __VA_ARGS__)
-#define ___snt_pp_cat_impl(x, ...) x ## __VA_ARGS__
-#define ___snt_pp_cat_2(x, y, ...) \
-        ___snt_pp_cat_2_impl(x, y, __VA_ARGS__)
-#define ___snt_pp_cat_2_impl(x, y, ...) x ## y ## __VA_ARGS__
-#define ___snt_pp_cat_3(x, y, z, ...) \
-        ___snt_pp_cat_3_impl(x, y, z, __VA_ARGS__)
-#define ___snt_pp_cat_3_impl(x, y, z, ...) x ## y ## z ## __VA_ARGS__
-#define ___snt_pp_cat_4(x, y, z, a, ...) \
-        ___snt_pp_cat_4_impl(x, y, z, a, __VA_ARGS__)
-#define ___snt_pp_cat_4_impl(x, y, z, a, ...) x ## y ## z ## a ## __VA_ARGS__
+#define ___SNT_PP_CAT(X, ...) \
+        ___SNT_PP_CAT_IMPL(X, __VA_ARGS__)
+#define ___SNT_PP_CAT_IMPL(X, ...) X ## __VA_ARGS__
+#define ___SNT_PP_CAT_2(X, Y, ...) \
+        ___SNT_PP_CAT_2_IMPL(X, Y, __VA_ARGS__)
+#define ___SNT_PP_CAT_2_IMPL(X, Y, ...) X ## Y ## __VA_ARGS__
+#define ___SNT_PP_CAT_3(X, Y, Z, ...) \
+        ___SNT_PP_CAT_3_IMPL(X, Y, Z, __VA_ARGS__)
+#define ___SNT_PP_CAT_3_IMPL(X, Y, Z, ...) X ## Y ## Z ## __VA_ARGS__
+#define ___SNT_PP_CAT_4(X, Y, Z, A, ...) \
+        ___SNT_PP_CAT_4_IMPL(X, Y, Z, A, __VA_ARGS__)
+#define ___SNT_PP_CAT_4_IMPL(X, Y, Z, A, ...) X ## Y ## Z ## A ## __VA_ARGS__
 
-#define ___snt_pp_increase(number) \
-        ___snt_pp_cat(___snt_pp_increase_impl_, number)
-#define ___snt_pp_decrease(number) \
-        ___snt_pp_cat(___snt_pp_decrease_impl_, number)
+#define ___SNT_PP_INCREASE(NUMBER) \
+        ___SNT_PP_CAT(___SNT_PP_INCREASE_IMPL_, NUMBER)
+#define ___SNT_PP_decrease(NUMBER) \
+        ___SNT_PP_CAT(___SNT_PP_DECREASE_IMPL_, NUMBER)
 #include <sentient/core/internal/pp_inc_dec.h>
 
-// #define ___snt_pp_add(x, y) \
-//         ___snt_pp_add_impl(x, y)
-// #define ___snt_pp_add_impl(x, y) (x + y)
-// #define ___snt_pp_sub(x, y) \
-//         ___snt_pp_sub_impl(x, y)
-// #define ___snt_pp_sub_impl(x, y) (x - y)
-// #define ___snt_pp_mul(x, y) \
-//         ___snt_pp_mul_impl(x, y)
-// #define ___snt_pp_mul_impl(x, y) (x * y)
-// #define ___snt_pp_div(x, y) \
-//         ___snt_pp_div_impl(x, y)
-// #define ___snt_pp_div_impl(x, y) (x / y)
-// #define ___snt_pp_pow(x, y) \
-//         ___snt_pp_pow_impl(x, y)
-// #define ___snt_pp_pow_impl(x, y)                 \
-//         ___snt_pp_if_else(___snt_pp_is_eq(y, 0)) \
-//         (                                        \
-//             1                                    \
-//         )                                        \
-//         (                                        \
-//             x                                    \
-//             ___snt_pp_for(                       \
-//                 ___snt_pp_decrease(y),           \
-//                 0,                               \
-//                 increase,                        \
-//                 ___snt_pp_pow_helper,            \
-//                 x                                \
-//             )                                    \
-//         )                                        
-
-// #define ___snt_pp_pow_helper(dummy, x) \
-//         ___snt_pp_pow_helper_impl(dummy, x)
-// #define ___snt_pp_pow_helper_impl(dummy, x) \
-//         * x
-
-
-#define ___snt_pp_add(x, y) \
-        ___snt_pp_add_impl(x, y)
-#define ___snt_pp_add_impl(x, y) \
-        ___snt_pp_cat_4(___snt_pp_add_impl_, x, _, y)
-#define ___snt_pp_sub(x, y) \
-        ___snt_pp_sub_impl(x, y)
-#define ___snt_pp_sub_impl(x, y) \
-        ___snt_pp_cat_4(___snt_pp_sub_impl_, x, _, y)
-#define ___snt_pp_mul(x, y) \
-        ___snt_pp_mul_impl(x, y)
-#define ___snt_pp_mul_impl(x, y) \
-        ___snt_pp_cat_4(___snt_pp_mul_impl_, x, _, y)
-#define ___snt_pp_div(x, y) \
-        ___snt_pp_div_impl(x, y)
-#define ___snt_pp_div_impl(x, y) \
-        ___snt_pp_cat_4(___snt_pp_div_impl_, x, _, y)
-#define ___snt_pp_pow(x, y) \
-        ___snt_pp_pow_impl(x, y)
-#define ___snt_pp_pow_impl(x, y) \
-        ___snt_pp_cat_4(___snt_pp_pow_impl_, x, _, y)
+#define ___SNT_PP_ADD(X, Y) \
+        ___SNT_PP_ADD_IMPL(X, Y)
+#define ___SNT_PP_ADD_IMPL(X, Y) \
+        ___SNT_PP_CAT_4(___SNT_PP_ADD_IMPL_, X, _, Y)
+#define ___SNT_PP_SUB(X, Y) \
+        ___SNT_PP_SUB_IMPL(X, Y)
+#define ___SNT_PP_SUB_IMPL(X, Y) \
+        ___SNT_PP_CAT_4(___SNT_PP_SUB_IMPL_, X, _, Y)
+#define ___SNT_PP_MUL(X, Y) \
+        ___SNT_PP_MUL_IMPL(X, Y)
+#define ___SNT_PP_MUL_IMPL(X, Y) \
+        ___SNT_PP_CAT_4(___SNT_PP_mul_IMPL_, X, _, Y)
+#define ___SNT_PP_DIV(X, Y) \
+        ___SNT_PP_DIV_IMPL(X, Y)
+#define ___SNT_PP_DIV_IMPL(X, Y) \
+        ___SNT_PP_CAT_4(___SNT_PP_div_IMPL_, X, _, Y)
+#define ___SNT_PP_POW(X, Y) \
+        ___SNT_PP_POW_IMPL(X, Y)
+#define ___SNT_PP_POW_IMPL(X, Y) \
+        ___SNT_PP_CAT_4(___SNT_PP_POW_IMPL_, X, _, Y)
 #include <sentient/core/internal/pp_arithmetic.h>
 
 /*!
  * @author Jin (jaehwanspin@gmail.com)
  * @brief preprocessor if else statement
  *
- * > const int val = ___snt_pp_if_else(5) (0xdead)(0xbeef);
- * > const int val = ___snt_pp_if_else_impl(___snt_pp_bool(5)) (0xdead)(0xbeef);
- * > const int val = ___snt_pp_if_else_impl(1) (0xdead)(0xbeef);
- * > const int val = ___snt_pp_cat(___snt_pp_if_else_1) (0xdead)(0xbeef);
- * > const int val = ___snt_pp_if_else_1 (0xdead)(0xbeef);
- * > const int val = (0xdead) ___snt_pp_if_1_else (0xbeef);
+ * > const int val = ___SNT_PP_IF_ELSE(5) (0xdead)(0xbeef);
+ * > const int val = ___SNT_PP_IF_ELSE_IMPL(___SNT_PP_bool(5)) (0xdead)(0xbeef);
+ * > const int val = ___SNT_PP_IF_ELSE_IMPL(1) (0xdead)(0xbeef);
+ * > const int val = ___SNT_PP_CAT(___SNT_PP_IF_ELSE_1) (0xdead)(0xbeef);
+ * > const int val = ___SNT_PP_IF_ELSE_1 (0xdead)(0xbeef);
+ * > const int val = (0xdead) ___SNT_PP_if_1_else (0xbeef);
  * > const int val = (0xdead);
  */
-#define ___snt_pp_if_else(cond) \
-        ___snt_pp_if_else_impl(___snt_pp_bool(cond))
-#define ___snt_pp_if_else_impl(cond) \
-        ___snt_pp_cat(___snt_pp_if_else_, cond)
-#define ___snt_pp_if_else_1(...) \
-        __VA_ARGS__ ___snt_pp_if_1_else
-#define ___snt_pp_if_else_0(...) \
-        ___snt_pp_if_0_else
-#define ___snt_pp_if_1_else(...)
-#define ___snt_pp_if_0_else(...) \
+#define ___SNT_PP_IF_ELSE(COND) \
+        ___SNT_PP_IF_ELSE_IMPL(___SNT_PP_BOOL(COND))
+#define ___SNT_PP_IF_ELSE_IMPL(COND) \
+        ___SNT_PP_CAT(___SNT_PP_IF_ELSE_, COND)
+#define ___SNT_PP_IF_ELSE_1(...) \
+        __VA_ARGS__ ___SNT_PP_IF_1_ELSE
+#define ___SNT_PP_IF_ELSE_0(...) \
+        ___SNT_PP_IF_0_ELSE
+#define ___SNT_PP_IF_1_ELSE(...)
+#define ___SNT_PP_IF_0_ELSE(...) \
         __VA_ARGS__
 
 
@@ -242,11 +204,11 @@ extern "C"
  * @brief evaluates each expressions
  * @date 2022-05-04
  */
-#define ___snt_pp_foreach(expr, ...)              \
-        ___snt_pp_cat(                            \
-                ___snt_pp_foreach_,               \
-                ___snt_pp_count_args(__VA_ARGS__) \
-        ) (expr, __VA_ARGS__)
+#define ___SNT_PP_FOREACH(EXPR, ...)              \
+        ___SNT_PP_CAT(                            \
+                ___SNT_PP_FOREACH_,               \
+                ___SNT_PP_COUNT_ARGS(__VA_ARGS__) \
+        ) (EXPR, __VA_ARGS__)
 #include <sentient/core/internal/pp_foreach.h>
 
 /**
@@ -254,15 +216,15 @@ extern "C"
  * @brief evaluates expressions in the loop
  * @date 2022-05-10
  */
-#define ___snt_pp_for(num_loop, start_number, inc_dec, expr, ...) \
-        ___snt_pp_for_impl(num_loop, start_number, inc_dec, expr, __VA_ARGS__)
-#define ___snt_pp_for_impl(num_loop, start_number, inc_dec, expr, ...) \
-        ___snt_pp_cat_4(                                               \
-                ___snt_pp_for_,                                        \
-                inc_dec,                                               \
+#define ___SNT_PP_FOR(NUM_LOOP, START_NUMBER, INC_DEC, EXPR, ...) \
+        ___SNT_PP_FOR_IMPL(NUM_LOOP, START_NUMBER, INC_DEC, EXPR, __VA_ARGS__)
+#define ___SNT_PP_FOR_IMPL(NUM_LOOP, START_NUMBER, INC_DEC, EXPR, ...) \
+        ___SNT_PP_CAT_4(                                               \
+                ___SNT_PP_FOR_,                                        \
+                INC_DEC,                                               \
                 _,                                                     \
-                num_loop                                               \
-        ) (start_number, expr, __VA_ARGS__)
+                NUM_LOOP                                               \
+        ) (START_NUMBER, EXPR, __VA_ARGS__)
 #include <sentient/core/internal/pp_for.h>
 
 /**
@@ -277,8 +239,8 @@ extern "C"
  * @brief counts number of tokens
  * @date 2022-05-04
  */
-#define ___snt_pp_count_args(...) \
-        ___snt_pp_count_args_impl(0, ## __VA_ARGS__)
+#define ___SNT_PP_COUNT_ARGS(...) \
+        ___SNT_PP_COUNT_ARGS_IMPL(0, ## __VA_ARGS__)
 #include <sentient/core/internal/pp_count_args.h>
 
 /**
@@ -286,153 +248,156 @@ extern "C"
  * @brief check if the args have comma
  * @date 2022-05-06
  */
-#define ___snt_pp_has_comma(...) \
-        ___snt_pp_has_comma_impl(__VA_ARGS__)
+#define ___SNT_PP_HAS_COMMA(...) \
+        ___SNT_PP_HAS_COMMA_IMPL(__VA_ARGS__)
 #include <sentient/core/internal/pp_has_comma.h>
 
 /**
  * @author Jin
  * @brief preprocessor not operator
  * 
- * > ___snt_pp_not(123)
- * > ___snt_pp_is_probe(___snt_pp_not_123)
- * > ___snt_pp_second(___snt_pp_not_123, 0)
+ * > ___SNT_PP_not(123)
+ * > ___SNT_PP_is_probe(___SNT_PP_not_123)
+ * > ___SNT_PP_second(___SNT_PP_not_123, 0)
  * > 0
  * 
- * > ___snt_pp_not(0)
- * > ___snt_pp_is_probe(___snt_pp_not_0)
- * > ___snt_pp_second(~, 1, 0)
+ * > ___SNT_PP_not(0)
+ * > ___SNT_PP_is_probe(___SNT_PP_not_0)
+ * > ___SNT_PP_second(~, 1, 0)
  * > 1
  * 
  */
-#define ___snt_pp_not(x) \
-        ___snt_pp_is_probe(___snt_pp_cat(___snt_pp_not_, x))
-#define ___snt_pp_is_probe(...) \
-        ___snt_pp_second(__VA_ARGS__, 0)
-#define ___snt_pp_probe() \
+#define ___SNT_PP_NOT(X) \
+        ___SNT_PP_IS_PROBE(___SNT_PP_CAT(___SNT_PP_NOT_, X))
+#define ___SNT_PP_IS_PROBE(...) \
+        ___SNT_PP_SECOND(__VA_ARGS__, 0)
+#define ___SNT_PP_PROBE() \
         ~, 1
-#define ___snt_pp_not_0 \
-        ___snt_pp_probe()
+#define ___SNT_PP_NOT_0 \
+        ___SNT_PP_PROBE()
 
-#define ___snt_pp_bool(x) \
-        ___snt_pp_not(___snt_pp_not(x))
+#define ___SNT_PP_BOOL(X) \
+        ___SNT_PP_NOT(___SNT_PP_NOT(X))
 
-#define ___snt_pp_decl_field(...)             \
-        ___snt_pp_cat(                        \
-            ___snt_pp_decl_field_,            \
-            ___snt_pp_count_args(__VA_ARGS__) \
+#define ___SNT_PP_DECL_FIELD(...)             \
+        ___SNT_PP_CAT(                        \
+            ___SNT_PP_DECL_FIELD_,            \
+            ___SNT_PP_COUNT_ARGS(__VA_ARGS__) \
         ) (__VA_ARGS__)
 
-#define ___snt_pp_decl_field_2(type, name) \
-        ___snt_pp_decl_field_2_impl(type, name)
-#define ___snt_pp_decl_field_2_impl(type, name) \
-        type name ;
+#define ___SNT_PP_DECL_FIELD_2(TYPE, NAME) \
+        ___SNT_PP_DECL_FIELD_2_IMPL(TYPE, NAME)
+#define ___SNT_PP_DECL_FIELD_2_IMPL(TYPE, NAME) \
+        TYPE NAME ;
 
 
-#define ___snt_pp_decl_field_3(type, name, arr_size) \
-        ___snt_pp_decl_field_3_impl(type, name, arr_size)
-#define ___snt_pp_decl_field_3_impl(type, name, arr_size) \
-        type name [ arr_size ] ;
+#define ___SNT_PP_DECL_FIELD_3(TYPE, NAME, ARR_SIZE) \
+        ___SNT_PP_DECL_FIELD_3_IMPL(TYPE, NAME, ARR_SIZE)
+#define ___SNT_PP_DECL_FIELD_3_IMPL(TYPE, NAME, ARR_SIZE) \
+        TYPE NAME ___SNT_PP_ARR(ARR_SIZE) ;
 
-#define ___snt_pp_decl_reserved_keyword(model_type) \
-        ___snt_pp_decl_reserved_keyword_impl(model_type)
-#define ___snt_pp_decl_reserved_keyword_impl(model_type) \
-        ___snt_pp_if_else(___snt_pp_is_eq(model_type, structure)) \
+#define ___SNT_PP_DECL_RESERVED_KEYWORD(MODEL_TYPE) \
+        ___SNT_PP_DECL_RESERVED_KEYWORD_IMPL(MODEL_TYPE)
+#define ___SNT_PP_DECL_RESERVED_KEYWORD_IMPL(MODEL_TYPE) \
+        ___SNT_PP_IF_ELSE(___SNT_PP_IS_EQ(MODEL_TYPE, STRUCTURE)) \
         (                                                         \
             struct                                                \
         )                                                         \
         (                                                         \
-            ___snt_pp_empty()                                     \
+            ___SNT_PP_EMPTY()                                     \
         )
 
 // so ideal!!!!!!!!!!!!!
 // for i in range(0, 5): print(16**i, int((8**5)/(4**(i+1))))
 
-#define ___snt_pp_decl_object_pool_storage(model_name, model_type) \
-        ___snt_pp_decl_object_pool_storage_impl(model_name, model_type)
-#define ___snt_pp_decl_object_pool_storage_impl(model_name, model_type) \
-        ___snt_pp_decl_object_pool_storage_elem_arrays(                 \
+#define ___SNT_PP_DECL_OBJECT_POOL_STORAGE(MODEL_NAME, MODEL_TYPE) \
+        ___SNT_PP_DECL_OBJECT_POOL_STORAGE_IMPL(MODEL_NAME, MODEL_TYPE)
+#define ___SNT_PP_DECL_OBJECT_POOL_STORAGE_IMPL(MODEL_NAME, MODEL_TYPE) \
+        ___SNT_PP_DECL_OBJECT_POOL_STORAGE_ELEM_ARRAYS(                 \
                 SENTIENT_C_NUM_POOL_LOOP,                               \
-                model_name,                                             \
-                model_type)                                             \
-        ___snt_pp_decl_object_pool_storage_elems(                       \
+                MODEL_NAME,                                             \
+                MODEL_TYPE)                                             \
+        ___SNT_PP_DECL_OBJECT_POOL_STORAGE_ELEMS(                       \
                 SENTIENT_C_NUM_POOL_LOOP,                               \
-                model_name,                                             \
-                model_type)                                             \
+                MODEL_NAME,                                             \
+                MODEL_TYPE)                                             \
         static                                                          \
         struct snt_object_pool_storage                                  \
-        ___snt_object_pool_storage_ ## model_name = {                   \
+        ___snt_object_pool_storage_ ## MODEL_NAME = {                   \
             .storage_size = SENTIENT_C_NUM_POOL_LOOP,                   \
-            .storage_size =                                             \
-                ___snt_object_pool_storage_elems_ ## model_name         \
+            .storage =                                             \
+                ___snt_object_pool_storage_elems_ ## MODEL_NAME         \
         };
         
 
-#define ___snt_pp_decl_object_pool_storage_elems(num_loop, model_name, model_type) \
-        ___snt_pp_decl_object_pool_storage_elems_impl(num_loop, model_name, model_type)
-#define ___snt_pp_decl_object_pool_storage_elems_impl(num_loop, model_name, model_type) \
+#define ___SNT_PP_DECL_OBJECT_POOL_STORAGE_ELEMS(NUM_LOOP, MODEL_NAME, MODEL_TYPE) \
+        ___SNT_PP_DECL_OBJECT_POOL_STORAGE_ELEMS_IMPL(NUM_LOOP, MODEL_NAME, MODEL_TYPE)
+#define ___SNT_PP_DECL_OBJECT_POOL_STORAGE_ELEMS_IMPL(NUM_LOOP, MODEL_NAME, MODEL_TYPE) \
         static                                                                          \
         struct snt_object_pool_storage_elem                                             \
-        ___snt_object_pool_storage_elems_ ## model_name [] = {                          \
-        ___snt_pp_for(num_loop,                                                         \
+        ___snt_object_pool_storage_elems_ ## MODEL_NAME [] = {                          \
+        ___SNT_PP_FOR(NUM_LOOP,                                                         \
                       0,                                                                \
-                      increase,                                                         \
-                      ___snt_pp_decl_object_pool_storage_elems_handler,                 \
-                      num_loop,                                                         \
-                      model_name,                                                       \
-                      model_type)                                                       \
+                      INCREASE,                                                         \
+                      ___SNT_PP_DECL_OBJECT_POOL_STORAGE_ELEMS_HANDLER,                 \
+                      NUM_LOOP,                                                         \
+                      MODEL_NAME,                                                       \
+                      MODEL_TYPE)                                                       \
         };
 
-#define ___snt_pp_decl_object_pool_storage_elems_handler(num, max, model_name, model_type) \
-        ___snt_pp_decl_object_pool_storage_elems_handler_impl(num, max, model_name, model_type)
-#define ___snt_pp_decl_object_pool_storage_elems_handler_impl(num, max, model_name, model_type)   \
+#define ___SNT_PP_DECL_OBJECT_POOL_STORAGE_ELEMS_HANDLER(NUM, MAX, MODEL_NAME, MODEL_TYPE) \
+        ___SNT_PP_DECL_OBJECT_POOL_STORAGE_ELEMS_HANDLER_IMPL(NUM, MAX, MODEL_NAME, MODEL_TYPE)
+#define ___SNT_PP_DECL_OBJECT_POOL_STORAGE_ELEMS_HANDLER_IMPL(NUM, MAX, MODEL_NAME, MODEL_TYPE)   \
         {                                                                                         \
-            .alloc_size = (snt_size)(___snt_pp_pow( 16, num ) *                                   \
-                sizeof(___snt_pp_decl_reserved_keyword(model_type) model_name)),                  \
-            .array_size = (snt_size)(___snt_pp_pow( 8, max )) /                                   \
-                (___snt_pp_pow( 4, ___snt_pp_increase(num) )),                                    \
-            .elems = (snt_void*)___snt_object_pool_storage_elem_array_ ## model_name ## _ ## num, \
+            .alloc_size = (snt_size)(___SNT_PP_POW( 16, NUM ) *                                   \
+                sizeof(___SNT_PP_DECL_RESERVED_KEYWORD(MODEL_TYPE) MODEL_NAME)),                  \
+            .array_size = (snt_size)(___SNT_PP_POW( 8, MAX )) /                                   \
+                (___SNT_PP_POW( 4, ___SNT_PP_INCREASE(NUM) )),                                    \
+            .elems = (snt_void*)___snt_object_pool_storage_elem_array_ ## MODEL_NAME ## _ ## NUM, \
         },
 
 
 
-#define ___snt_pp_decl_object_pool_storage_elem_arrays(num_loop, model_name, model_type) \
-        ___snt_pp_decl_object_pool_storage_elem_arrays_impl(num_loop, model_name, model_type)
-#define ___snt_pp_decl_object_pool_storage_elem_arrays_impl(num_loop, model_name, model_type) \
-        ___snt_pp_for(num_loop,                                                 \
+#define ___SNT_PP_DECL_OBJECT_POOL_STORAGE_ELEM_ARRAYS(NUM_LOOP, MODEL_NAME, MODEL_TYPE) \
+        ___SNT_PP_DECL_OBJECT_POOL_STORAGE_ELEM_ARRAYS_IMPL(NUM_LOOP, MODEL_NAME, MODEL_TYPE)
+#define ___SNT_PP_DECL_OBJECT_POOL_STORAGE_ELEM_ARRAYS_IMPL(NUM_LOOP, MODEL_NAME, MODEL_TYPE) \
+        ___SNT_PP_FOR(NUM_LOOP,                                                 \
                       0,                                                        \
-                      increase,                                                 \
-                      ___snt_pp_decl_object_pool_storage_elem_arrays_handler,   \
-                      num_loop,                                                 \
-                      model_name,                                               \
-                      model_type)
+                      INCREASE,                                                 \
+                      ___SNT_PP_DECL_OBJECT_POOL_STORAGE_ELEM_ARRAYS_HANDLER,   \
+                      NUM_LOOP,                                                 \
+                      MODEL_NAME,                                               \
+                      MODEL_TYPE)
 
-#define ___snt_pp_decl_object_pool_storage_elem_arrays_handler(num, max, model_name, model_type) \
-        ___snt_pp_decl_object_pool_storage_elem_arrays_handler_impl(num, max, model_name, model_type)
-#define ___snt_pp_decl_object_pool_storage_elem_arrays_handler_impl(num, max, model_name, model_type) \
+#define ___SNT_PP_DECL_OBJECT_POOL_STORAGE_ELEM_ARRAYS_HANDLER(NUM, MAX, MODEL_NAME, MODEL_TYPE) \
+        ___SNT_PP_DECL_OBJECT_POOL_STORAGE_ELEM_ARRAYS_HANDLER_IMPL(NUM, MAX, MODEL_NAME, MODEL_TYPE)
+#define ___SNT_PP_DECL_OBJECT_POOL_STORAGE_ELEM_ARRAYS_HANDLER_IMPL(NUM, MAX, MODEL_NAME, MODEL_TYPE) \
         static                                                                                        \
-        ___snt_pp_decl_reserved_keyword(model_type)                                                   \
-        model_name                                                                                    \
-        ___snt_object_pool_storage_elem_array_ ## model_name ## _ ## num                              \
-        [___snt_pp_pow( 16, num )]                                                                    \
-        [(___snt_pp_pow( 8, max )) / (___snt_pp_pow( 4, ___snt_pp_increase(num) ))];
+        ___SNT_PP_DECL_RESERVED_KEYWORD(MODEL_TYPE)                                                   \
+        MODEL_NAME                                                                                    \
+        ___snt_object_pool_storage_elem_array_ ## MODEL_NAME ## _ ## NUM                              \
+        [___SNT_PP_POW( 16, NUM )]                                                                    \
+        [(___SNT_PP_POW( 8, MAX )) / (___SNT_PP_POW( 4, ___SNT_PP_INCREASE(NUM) ))];
 
 
+#define ___SNT_PP_DEFINE_BIT_FIELD(...) \
+        ___SNT_PP_DEFINE_BIT_FIELD_IMPL(__VA_ARGS__)
+#define ___SNT_PP_DEFINE_BIT_FIELD_IMPL(...) \
+        ___SNT_PP_FOREACH(___SNT_PP_DEFINE_BIT_FIELD_HANDLER, __VA_ARGS__)
 
-// ___snt_pp_cat_4(___snt_object_pool_storage_elem_arr_, model_name, _, num)       \
-
-// #define ___snt_pp_decl_object_pool_storage()
+#define ___SNT_PP_DEFINE_BIT_FIELD_HANDLER(ARG) \
+        ___SNT_PP_DEFINE_BIT_FIELD_HANDLER_IMPL ARG
+#define ___SNT_PP_DEFINE_BIT_FIELD_HANDLER_IMPL(TYPE, NAME, BITS) \
+        TYPE NAME : BITS ;
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
  * @brief defines a model structure with the model info
  * @date 2022-05-07
  */
-#define ___snt_pp_define_model(...) \
-        ___snt_pp_define_model_impl(__VA_ARGS__)
-
-#define ___snt_pp_define_model_impl(model_name, model_type, ...)
-
+#define ___SNT_PP_DEFINE_MODEL(...) \
+        ___SNT_PP_DEFINE_MODEL_IMPL(__VA_ARGS__)
+#define ___SNT_PP_DEFINE_MODEL_IMPL(MODEL_NAME, MODEL_TYPE, ...)
 
 #ifdef __cplusplus
 }

@@ -7,8 +7,8 @@
 #include <sentient/core/types.h>
 #include <sentient/core/field_info.h>
 #include <sentient/core/model_info.h>
-#include <sentient/core/pp_utils.h>                                                                                                                                                                                                                                 
-#include <sentient/core/generic.h>
+#include <sentient/core/pp_utils.h>
+#include <sentient/core/object_pool.h>
 #include <sentient/core/define_model.h>
 
 thrd_t threads[4] = { 0, };
@@ -30,14 +30,22 @@ snt_i32 thread_handler(snt_void* arg)
 #define def_num_iter(num, type, name) \
         ___snt_pp_for(5, num, type, name)
 
+struct bf_model
+{
+    ___SNT_PP_DEFINE_BIT_FIELD_IMPL(
+        (snt_u32, a1, 1),
+        (snt_u32, a2, 1),
+        (snt_u32, a3, 1),
+        (snt_u32, a4, 1),
+        )
+};
 
-
-___snt_pp_decl_object_pool_storage(snt_u32, primitive)
-// ___snt_pp_decl_object_pool_storage_elems_impl(5, snt_u32, primitive)
-// ___snt_pp_decl_object_pool_storage_elems_handler_impl(0, 5, snt_u32, primitive)
+___SNT_PP_DECL_OBJECT_POOL_STORAGE(snt_u32, PRIMITIVE)
 
 int main(int argc, char** argv)
 {
+    
+
     int res = EXIT_SUCCESS;
 
     for (snt_i32 i = 0; i < 4; i++)
