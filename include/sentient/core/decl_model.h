@@ -1,5 +1,5 @@
-#ifndef __SENTIENT_CORE_DEFINE_MODEL_H__
-#define __SENTIENT_CORE_DEFINE_MODEL_H__
+#ifndef __SENTIENT_CORE_DECL_MODEL_H__
+#define __SENTIENT_CORE_DECL_MODEL_H__
 
 /**
  * @file define_model.h

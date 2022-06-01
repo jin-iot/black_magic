@@ -279,12 +279,6 @@ extern "C"
 #define ___SNT_PP_BOOL(X) \
         ___SNT_PP_NOT(___SNT_PP_NOT(X))
 
-#define ___SNT_PP_DECL_FIELD(...)             \
-        ___SNT_PP_CAT(                        \
-            ___SNT_PP_DECL_FIELD_,            \
-            ___SNT_PP_COUNT_ARGS(__VA_ARGS__) \
-        ) (__VA_ARGS__)
-
 #define ___SNT_PP_DECL_RESERVED_KEYWORD(MODEL_TYPE) \
         ___SNT_PP_DECL_RESERVED_KEYWORD_IMPL(MODEL_TYPE)
 #define ___SNT_PP_DECL_RESERVED_KEYWORD_IMPL(MODEL_TYPE) \
@@ -379,22 +373,38 @@ extern "C"
 #define ___SNT_PP_DECL_BIT_FIELD_HANDLER_IMPL(TYPE, NAME, BITS) \
         TYPE NAME : BITS ;
 
+/**
+ * @author Jin (jaehwanspin@gmail.com)
+ * @brief determines how to declare a field
+ */
 #define ___SNT_PP_DECL_FIELD(...)             \
         ___SNT_PP_CAT_2(                      \
             ___SNT_PP_DECL_FIELD_,            \
             ___SNT_PP_COUNT_ARGS(__VA_ARGS__) \
         ) (__VA_ARGS__)
 
+/**
+ * @author Jin (jaehwanspin@gmail.com)
+ * @brief declares a field with an expression
+ */
 #define ___SNT_PP_DECL_FIELD_1(EXPR) \
         ___SNT_PP_DECL_FIELD_1_IMPL(EXPR)
 #define ___SNT_PP_DECL_FIELD_1_IMPL(EXPR) \
         EXPR
 
+/**
+ * @author Jin (jaehwanspin@gmail.com)
+ * @brief common field
+ */
 #define ___SNT_PP_DECL_FIELD_2(TYPE, NAME) \
         ___SNT_PP_DECL_FIELD_2_IMPL(TYPE, NAME)
 #define ___SNT_PP_DECL_FIELD_2_IMPL(TYPE, NAME) \
         TYPE NAME ;
 
+/**
+ * @author Jin (jaehwanspin@gmail.com)
+ * @brief array field
+ */
 #define ___SNT_PP_DECL_FIELD_3(TYPE, NAME, ARR_SIZE) \
         ___SNT_PP_DECL_FIELD_3_IMPL(TYPE, NAME, ARR_SIZE)
 #define ___SNT_PP_DECL_FIELD_3_IMPL(TYPE, NAME, ARR_SIZE) \
@@ -407,7 +417,10 @@ extern "C"
  */
 #define ___SNT_PP_DEF_MODEL(...) \
         ___SNT_PP_DEF_MODEL_IMPL(__VA_ARGS__)
-#define ___SNT_PP_DEF_MODEL_IMPL(MODEL_NAME, MODEL_TYPE, ...)
+#define ___SNT_PP_DEF_MODEL_IMPL(MODEL_NAME, ...) \
+        struct MODEL_NAME                         \
+        {                                         \
+            ___SNT_PP_FOREACH()
 
 #ifdef __cplusplus
 }

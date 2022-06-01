@@ -9,7 +9,7 @@
 #include <sentient/core/model_info.h>
 #include <sentient/core/pp_utils.h>
 #include <sentient/core/object_pool.h>
-#include <sentient/core/define_model.h>
+#include <sentient/core/decl_model.h>
 
 thrd_t threads[4] = { 0, };
 
@@ -46,8 +46,14 @@ ___SNT_PP_DECL_OBJECT_POOL_STORAGE(snt_u32, PRIMITIVE)
 int main(int argc, char** argv)
 {
     struct bf_model mm = {
-        
-    }; 
+        .num = { 1, 2, 3, 4, 5, },
+        1,
+        1,
+        1,
+        1
+    };
+
+    printf("%u\n", mm.num[0]);
 
     int res = EXIT_SUCCESS;
 
