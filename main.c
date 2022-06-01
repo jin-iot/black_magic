@@ -32,19 +32,22 @@ snt_i32 thread_handler(snt_void* arg)
 
 struct bf_model
 {
-    ___SNT_PP_DEFINE_BIT_FIELD_IMPL(
+    ___SNT_PP_DECL_FIELD(snt_u32, num, 32)
+    SNT_DECL_BIT_FIELD(
         (snt_u32, a1, 1),
         (snt_u32, a2, 1),
         (snt_u32, a3, 1),
-        (snt_u32, a4, 1),
-        )
+        (snt_u32, a4, 1)
+    )
 };
 
 ___SNT_PP_DECL_OBJECT_POOL_STORAGE(snt_u32, PRIMITIVE)
 
 int main(int argc, char** argv)
 {
-    
+    struct bf_model mm = {
+        
+    }; 
 
     int res = EXIT_SUCCESS;
 

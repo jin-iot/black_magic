@@ -285,17 +285,6 @@ extern "C"
             ___SNT_PP_COUNT_ARGS(__VA_ARGS__) \
         ) (__VA_ARGS__)
 
-#define ___SNT_PP_DECL_FIELD_2(TYPE, NAME) \
-        ___SNT_PP_DECL_FIELD_2_IMPL(TYPE, NAME)
-#define ___SNT_PP_DECL_FIELD_2_IMPL(TYPE, NAME) \
-        TYPE NAME ;
-
-
-#define ___SNT_PP_DECL_FIELD_3(TYPE, NAME, ARR_SIZE) \
-        ___SNT_PP_DECL_FIELD_3_IMPL(TYPE, NAME, ARR_SIZE)
-#define ___SNT_PP_DECL_FIELD_3_IMPL(TYPE, NAME, ARR_SIZE) \
-        TYPE NAME ___SNT_PP_ARR(ARR_SIZE) ;
-
 #define ___SNT_PP_DECL_RESERVED_KEYWORD(MODEL_TYPE) \
         ___SNT_PP_DECL_RESERVED_KEYWORD_IMPL(MODEL_TYPE)
 #define ___SNT_PP_DECL_RESERVED_KEYWORD_IMPL(MODEL_TYPE) \
@@ -380,24 +369,45 @@ extern "C"
         [(___SNT_PP_POW( 8, MAX )) / (___SNT_PP_POW( 4, ___SNT_PP_INCREASE(NUM) ))];
 
 
-#define ___SNT_PP_DEFINE_BIT_FIELD(...) \
-        ___SNT_PP_DEFINE_BIT_FIELD_IMPL(__VA_ARGS__)
-#define ___SNT_PP_DEFINE_BIT_FIELD_IMPL(...) \
-        ___SNT_PP_FOREACH(___SNT_PP_DEFINE_BIT_FIELD_HANDLER, __VA_ARGS__)
+#define ___SNT_PP_DECL_BIT_FIELD(...) \
+        ___SNT_PP_DECL_BIT_FIELD_IMPL(__VA_ARGS__)
+#define ___SNT_PP_DECL_BIT_FIELD_IMPL(...) \
+        ___SNT_PP_FOREACH(___SNT_PP_DECL_BIT_FIELD_HANDLER, __VA_ARGS__)
 
-#define ___SNT_PP_DEFINE_BIT_FIELD_HANDLER(ARG) \
-        ___SNT_PP_DEFINE_BIT_FIELD_HANDLER_IMPL ARG
-#define ___SNT_PP_DEFINE_BIT_FIELD_HANDLER_IMPL(TYPE, NAME, BITS) \
+#define ___SNT_PP_DECL_BIT_FIELD_HANDLER(ARGS) \
+        ___SNT_PP_DECL_BIT_FIELD_HANDLER_IMPL ARGS
+#define ___SNT_PP_DECL_BIT_FIELD_HANDLER_IMPL(TYPE, NAME, BITS) \
         TYPE NAME : BITS ;
+
+#define ___SNT_PP_DECL_FIELD(...)             \
+        ___SNT_PP_CAT_2(                      \
+            ___SNT_PP_DECL_FIELD_,            \
+            ___SNT_PP_COUNT_ARGS(__VA_ARGS__) \
+        ) (__VA_ARGS__)
+
+#define ___SNT_PP_DECL_FIELD_1(EXPR) \
+        ___SNT_PP_DECL_FIELD_1_IMPL(EXPR)
+#define ___SNT_PP_DECL_FIELD_1_IMPL(EXPR) \
+        EXPR
+
+#define ___SNT_PP_DECL_FIELD_2(TYPE, NAME) \
+        ___SNT_PP_DECL_FIELD_2_IMPL(TYPE, NAME)
+#define ___SNT_PP_DECL_FIELD_2_IMPL(TYPE, NAME) \
+        TYPE NAME ;
+
+#define ___SNT_PP_DECL_FIELD_3(TYPE, NAME, ARR_SIZE) \
+        ___SNT_PP_DECL_FIELD_3_IMPL(TYPE, NAME, ARR_SIZE)
+#define ___SNT_PP_DECL_FIELD_3_IMPL(TYPE, NAME, ARR_SIZE) \
+        TYPE NAME ___SNT_PP_ARR(ARR_SIZE) ;
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
  * @brief defines a model structure with the model info
  * @date 2022-05-07
  */
-#define ___SNT_PP_DEFINE_MODEL(...) \
-        ___SNT_PP_DEFINE_MODEL_IMPL(__VA_ARGS__)
-#define ___SNT_PP_DEFINE_MODEL_IMPL(MODEL_NAME, MODEL_TYPE, ...)
+#define ___SNT_PP_DEF_MODEL(...) \
+        ___SNT_PP_DEF_MODEL_IMPL(__VA_ARGS__)
+#define ___SNT_PP_DEF_MODEL_IMPL(MODEL_NAME, MODEL_TYPE, ...)
 
 #ifdef __cplusplus
 }
