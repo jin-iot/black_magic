@@ -30,31 +30,41 @@ snt_i32 thread_handler(snt_void* arg)
 #define def_num_iter(num, type, name) \
         ___snt_pp_for(5, num, type, name)
 
-struct bf_model
-{
-    ___SNT_PP_DECL_FIELD(snt_u32, num, 32)
-    SNT_DECL_BIT_FIELD(
-        (snt_u32, a1, 1),
-        (snt_u32, a2, 1),
-        (snt_u32, a3, 1),
-        (snt_u32, a4, 1)
-    )
-};
+// struct bf_model
+// {
+//     ___SNT_PP_DECL_FIELD((snt_u32, num, 32))
+//     SNT_DECL_BIT_FIELD(
+//         (snt_u32, a1, 1),
+//         (snt_u32, a2, 1),
+//         (snt_u32, a3, 1),
+//         (snt_u32, a4, 1)
+//     )
+// };
+
+___SNT_PP_DEF_MODEL_IMPL(oioi,
+    (snt_u32, num),
+    (snt_str8, name, SNT_ARRAY, 30),
+    (snt_u32, hey, SNT_BIT_FIELD, 16),
+    (snt_u32, hey_you, SNT_BIT_FIELD, 16)
+)
 
 ___SNT_PP_DECL_OBJECT_POOL_STORAGE(snt_u32, PRIMITIVE)
 
 int main(int argc, char** argv)
 {
-    struct bf_model mm = {
-        .num = { 1, 2, 3, 4, 5, },
-        1,
-        1,
-        1,
-        1
+    struct oioi oioi = {
+        .hey = 1,
+        .hey_you = 0,
+        .name = u8"jin",
+        .num = 123,
     };
 
-    printf("%u\n", mm.num[0]);
+    int x __attribute__ ((aligned (16), packed)) = 0;
 
+    const snt_size sizee = sizeof(struct oioi);
+
+    // const snt_size ahah = ___SNT_PP_COUNT_ARGS(FIELD(snt_u32, num), FIELD(snt_str8, name, 30))
+    
     int res = EXIT_SUCCESS;
 
     for (snt_i32 i = 0; i < 4; i++)

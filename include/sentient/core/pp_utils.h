@@ -26,6 +26,7 @@ extern "C"
 #define ___SNT_PP_RSQUARE() ]
 #define ___SNT_PP_SEMICOLON() ;
 #define ___SNT_PP_ARR(EXPR) [EXPR]
+#define ___SNT_PP_BF(EXPR) : EXPR
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
@@ -116,8 +117,8 @@ extern "C"
 #include <sentient/core/internal/pp_compare_n.h>
 #define ___SNT_PP_COMPARE_STRUCTURE(X) X
 #define ___SNT_PP_COMPARE_PRIMITIVE(X) X
-#define ___SNT_PP_COMPARE_BIT_FIELD(X) X
-#define ___SNT_PP_COMPARE_ARRAY(X) X
+#define ___SNT_PP_COMPARE_SNT_BIT_FIELD(X) X
+#define ___SNT_PP_COMPARE_SNT_ARRAY(X) X
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
@@ -380,8 +381,8 @@ extern "C"
 #define ___SNT_PP_DECL_FIELD(...)             \
         ___SNT_PP_CAT_2(                      \
             ___SNT_PP_DECL_FIELD_,            \
-            ___SNT_PP_COUNT_ARGS(__VA_ARGS__) \
-        ) (__VA_ARGS__)
+            ___SNT_PP_COUNT_ARGS __VA_ARGS__  \
+        ) __VA_ARGS__
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
@@ -405,10 +406,22 @@ extern "C"
  * @author Jin (jaehwanspin@gmail.com)
  * @brief array field
  */
-#define ___SNT_PP_DECL_FIELD_3(TYPE, NAME, ARR_SIZE) \
-        ___SNT_PP_DECL_FIELD_3_IMPL(TYPE, NAME, ARR_SIZE)
-#define ___SNT_PP_DECL_FIELD_3_IMPL(TYPE, NAME, ARR_SIZE) \
-        TYPE NAME ___SNT_PP_ARR(ARR_SIZE) ;
+#define ___SNT_PP_DECL_FIELD_4(TYPE, NAME, KEYWORD, SIZE) \
+        ___SNT_PP_DECL_FIELD_4_IMPL(TYPE, NAME, KEYWORD, SIZE)
+#define ___SNT_PP_DECL_FIELD_4_IMPL(TYPE, NAME, KEYWORD, SIZE)         \
+        TYPE NAME                                                      \
+        ___SNT_PP_IF_ELSE(___SNT_PP_IS_EQ(KEYWORD, SNT_ARRAY))         \
+        (                                                              \
+            ___SNT_PP_ARR(SIZE) ;                                      \
+        )                                                              \
+        (                                                              \
+            ___SNT_PP_IF_ELSE(___SNT_PP_IS_EQ(KEYWORD, SNT_BIT_FIELD)) \
+            (                                                          \
+                ___SNT_PP_BF(SIZE) ;                                   \
+            )                                                          \
+            ()                                                         \
+        )
+        
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
@@ -420,7 +433,13 @@ extern "C"
 #define ___SNT_PP_DEF_MODEL_IMPL(MODEL_NAME, ...) \
         struct MODEL_NAME                         \
         {                                         \
-            ___SNT_PP_FOREACH()
+            ___SNT_PP_FOREACH(                    \
+                ___SNT_PP_DECL_FIELD,             \
+                __VA_ARGS__                       \
+            )                                     \
+        };
+
+        
 
 #ifdef __cplusplus
 }
