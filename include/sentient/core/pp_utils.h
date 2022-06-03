@@ -115,6 +115,7 @@ extern "C"
  * macro numeric, keyword constants ( 0 ~ N, keywords... ) to compare
  */
 #include <sentient/core/internal/pp_compare_n.h>
+#define ___SNT_PP_COMPARE_(...) 
 #define ___SNT_PP_COMPARE_STRUCTURE(X) X
 #define ___SNT_PP_COMPARE_PRIMITIVE(X) X
 #define ___SNT_PP_COMPARE_SNT_BIT_FIELD(X) X
@@ -416,7 +417,7 @@ extern "C"
         ___SNT_PP_DECL_FIELD_5_IMPL(TYPE, NAME, KEYWORD, SIZE, ATTRIBUTES)
 #define ___SNT_PP_DECL_FIELD_5_IMPL(TYPE, NAME, KEYWORD, SIZE, ATTRIBUTES) \
         TYPE                                                               \
-        __attribute__(ATTRIBUTES)                                          \
+        __attribute__((ATTRIBUTES))                                        \
         NAME                                                               \
         ___SNT_PP_IF_ELSE(___SNT_PP_IS_EQ(KEYWORD, SNT_ARRAY))             \
         (                                                                  \
@@ -438,24 +439,25 @@ extern "C"
  */
 #define ___SNT_PP_DECL_MODEL(...) \
         ___SNT_PP_DECL_MODEL_IMPL(__VA_ARGS__)
-#define ___SNT_PP_DECL_MODEL_IMPL(MODEL_NAME, ATTRS, ...)      \
-        struct MODEL_NAME                                      \
-        {                                                      \
-            ___SNT_PP_FOREACH(                                 \
-                ___SNT_PP_DECL_FIELD,                          \
-                __VA_ARGS__                                    \
-            )                                                  \
-        }                                                      \
-        ___SNT_PP_IF_ELSE(___SNT_PP_IS_EQ(ATTRS, SNT_NO_ATTR)) \
-        (                                                      \
-            ___SNT_PP_EMPTY()                                  \
-        )                                                      \
-        (                                                      \
-            __attribute__(ATTRS)                               \
-        )                                                      \
+#define ___SNT_PP_DECL_MODEL_IMPL(MODEL_NAME, ATTRS, ...) \
+        extern                                            \
+        ___snt_type_id                                    \
+        ___SNT_PP_CAT(___snt_type_id_, MODEL_NAME) ;      \
+        struct MODEL_NAME                                 \
+        {                                                 \
+            ___SNT_PP_FOREACH(                            \
+                ___SNT_PP_DECL_FIELD,                     \
+                __VA_ARGS__                               \
+            )                                             \
+        }                                                 \
+        __attribute__((ATTRS))                            \
         ;
 
-        
+#define ___SNT_PP_IMPL_MODEL(...) \
+        ___SNT_PP_IMPL_MODEL_IMPL(__VA_ARGS__)
+#define ___SNT_PP_IMPL_MODEL_IMPL(MODEL_NAME, ATTRS, ...)
+
+
 
 #ifdef __cplusplus
 }

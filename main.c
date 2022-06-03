@@ -44,13 +44,13 @@ snt_i32 thread_handler(snt_void* arg)
 
 ___SNT_PP_DECL_OBJECT_POOL_STORAGE(snt_u32, PRIMITIVE)
 
-
-SNT_DECL_MODEL(oioi, SNT_NO_ATTR,
+SNT_DECL_MODEL(oioi,,
     (snt_u32, model_num),
     (snt_str8, name, SNT_ARRAY, 30),
     (snt_u32, hey, SNT_BIT_FIELD, 16),
     (snt_u32, howru, SNT_BIT_FIELD, 16)
 )
+
 
 int main(int argc, char** argv)
 {

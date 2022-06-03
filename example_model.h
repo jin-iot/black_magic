@@ -1,21 +1,19 @@
 #ifndef __EXAMPLE_MODEL_H__
 #define __EXAMPLE_MODEL_H__
 
-#include <sentient/core/types.h>
+#include <sentient/core/decl_model.h>
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
-struct example_model
-{
-    snt_u8 number;
-    snt_u32 children_size;
-    struct example_model* children;
-};
-
-extern const ___snt_type_id ___type_id_example_model;
+SNT_DECL_MODEL(oioi, SNT_NO_ATTR,
+    (snt_u32, model_num),
+    (snt_str8, name, SNT_ARRAY, 30),
+    (snt_u32, hey, SNT_BIT_FIELD, 16),
+    (snt_u32, howru, SNT_BIT_FIELD, 16)
+)
 
 #ifdef __cplusplus
 }

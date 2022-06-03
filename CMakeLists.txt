@@ -11,5 +11,5 @@ include_directories(${CMAKE_INCLUDE_PATH}
                     include
                     ${CMAKE_BINARY_DIR}/generated/include)
 
-add_executable(black_magic main.c example_model.c)
+add_executable(black_magic main.c example_model.c builtin_types.c)
 target_link_libraries(black_magic sentient)

@@ -7,25 +7,9 @@
 #define SENTIENT_MODEL_INFO_LIST_MAX_SIZE (snt_size)128U
 #endif
 
-#include "./builtin_type_ids.h"
-
 static
 struct snt_model_info*
-model_info_list[SENTIENT_MODEL_INFO_LIST_MAX_SIZE] = {
-    &___snt_model_info_snt_u8,
-    &___snt_model_info_snt_u16,
-    &___snt_model_info_snt_u32,
-    &___snt_model_info_snt_u64,
-    &___snt_model_info_snt_i8,
-    &___snt_model_info_snt_i16,
-    &___snt_model_info_snt_i32,
-    &___snt_model_info_snt_i64,
-    &___snt_model_info_snt_f32,
-    &___snt_model_info_snt_f64,
-    &___snt_model_info_snt_str8,
-    &___snt_model_info_snt_str16,
-    &___snt_model_info_snt_str32,
-};
+model_info_list[SENTIENT_MODEL_INFO_LIST_MAX_SIZE] = { 0, };
 
 static
 atomic_size_t
