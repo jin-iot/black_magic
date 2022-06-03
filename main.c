@@ -41,25 +41,35 @@ snt_i32 thread_handler(snt_void* arg)
 //     )
 // };
 
-___SNT_PP_DEF_MODEL_IMPL(oioi,
-    (snt_u32, num),
-    (snt_str8, name, SNT_ARRAY, 30),
-    (snt_u32, hey, SNT_BIT_FIELD, 16),
-    (snt_u32, hey_you, SNT_BIT_FIELD, 16)
-)
 
 ___SNT_PP_DECL_OBJECT_POOL_STORAGE(snt_u32, PRIMITIVE)
+
+
+SNT_DECL_MODEL(oioi, SNT_NO_ATTR,
+    (snt_u32, model_num),
+    (snt_str8, name, SNT_ARRAY, 30),
+    (snt_u32, hey, SNT_BIT_FIELD, 16),
+    (snt_u32, howru, SNT_BIT_FIELD, 16)
+)
 
 int main(int argc, char** argv)
 {
     struct oioi oioi = {
-        .hey = 1,
-        .hey_you = 0,
+        .model_num = 123,
         .name = u8"jin",
-        .num = 123,
+        .hey = 123,
+        .howru = 1234,
     };
 
-    int x __attribute__ ((aligned (16), packed)) = 0;
+    const snt_size iya = ___SNT_PP_COUNT_ARGS(
+        (snt_u32, model_num),
+        (snt_str8, name, SNT_ARRAY, 30),
+        (snt_u32, hey, SNT_BIT_FIELD, 16),
+        (snt_u32, howru, SNT_BIT_FIELD, 16),
+        (hey(123), oioi(123))
+    );
+
+
 
     const snt_size sizee = sizeof(struct oioi);
 

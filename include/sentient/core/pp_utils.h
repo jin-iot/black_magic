@@ -119,6 +119,7 @@ extern "C"
 #define ___SNT_PP_COMPARE_PRIMITIVE(X) X
 #define ___SNT_PP_COMPARE_SNT_BIT_FIELD(X) X
 #define ___SNT_PP_COMPARE_SNT_ARRAY(X) X
+#define ___SNT_PP_COMPARE_SNT_NO_ATTR(X) X
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
@@ -363,17 +364,6 @@ extern "C"
         [___SNT_PP_POW( 16, NUM )]                                                                    \
         [(___SNT_PP_POW( 8, MAX )) / (___SNT_PP_POW( 4, ___SNT_PP_INCREASE(NUM) ))];
 
-
-#define ___SNT_PP_DECL_BIT_FIELD(...) \
-        ___SNT_PP_DECL_BIT_FIELD_IMPL(__VA_ARGS__)
-#define ___SNT_PP_DECL_BIT_FIELD_IMPL(...) \
-        ___SNT_PP_FOREACH(___SNT_PP_DECL_BIT_FIELD_HANDLER, __VA_ARGS__)
-
-#define ___SNT_PP_DECL_BIT_FIELD_HANDLER(ARGS) \
-        ___SNT_PP_DECL_BIT_FIELD_HANDLER_IMPL ARGS
-#define ___SNT_PP_DECL_BIT_FIELD_HANDLER_IMPL(TYPE, NAME, BITS) \
-        TYPE NAME : BITS ;
-
 /**
  * @author Jin (jaehwanspin@gmail.com)
  * @brief determines how to declare a field
@@ -388,10 +378,10 @@ extern "C"
  * @author Jin (jaehwanspin@gmail.com)
  * @brief declares a field with an expression
  */
-#define ___SNT_PP_DECL_FIELD_1(EXPR) \
-        ___SNT_PP_DECL_FIELD_1_IMPL(EXPR)
-#define ___SNT_PP_DECL_FIELD_1_IMPL(EXPR) \
-        EXPR
+#define ___SNT_PP_DECL_FIELD_1(MODEL_EXTRA_ATTR) \
+        ___SNT_PP_DECL_FIELD_1_IMPL(MODEL_EXTRA_ATTR)
+#define ___SNT_PP_DECL_FIELD_1_IMPL(MODEL_EXTRA_ATTR) \
+        ___SNT_PP_FOREACH(MODEL_EXTRA_ATTR)
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
@@ -421,23 +411,49 @@ extern "C"
             )                                                          \
             ()                                                         \
         )
-        
+
+#define ___SNT_PP_DECL_FIELD_5(TYPE, NAME, KEYWORD, SIZE, ATTRIBUTES) \
+        ___SNT_PP_DECL_FIELD_5_IMPL(TYPE, NAME, KEYWORD, SIZE, ATTRIBUTES)
+#define ___SNT_PP_DECL_FIELD_5_IMPL(TYPE, NAME, KEYWORD, SIZE, ATTRIBUTES) \
+        TYPE                                                               \
+        __attribute__(ATTRIBUTES)                                          \
+        NAME                                                               \
+        ___SNT_PP_IF_ELSE(___SNT_PP_IS_EQ(KEYWORD, SNT_ARRAY))             \
+        (                                                                  \
+            ___SNT_PP_ARR(SIZE) ;                                          \
+        )                                                                  \
+        (                                                                  \
+            ___SNT_PP_IF_ELSE(___SNT_PP_IS_EQ(KEYWORD, SNT_BIT_FIELD))     \
+            (                                                              \
+                ___SNT_PP_BF(SIZE) ;                                       \
+            )                                                              \
+            ()                                                             \
+        )
+
 
 /**
  * @author Jin (jaehwanspin@gmail.com)
  * @brief defines a model structure with the model info
  * @date 2022-05-07
  */
-#define ___SNT_PP_DEF_MODEL(...) \
-        ___SNT_PP_DEF_MODEL_IMPL(__VA_ARGS__)
-#define ___SNT_PP_DEF_MODEL_IMPL(MODEL_NAME, ...) \
-        struct MODEL_NAME                         \
-        {                                         \
-            ___SNT_PP_FOREACH(                    \
-                ___SNT_PP_DECL_FIELD,             \
-                __VA_ARGS__                       \
-            )                                     \
-        };
+#define ___SNT_PP_DECL_MODEL(...) \
+        ___SNT_PP_DECL_MODEL_IMPL(__VA_ARGS__)
+#define ___SNT_PP_DECL_MODEL_IMPL(MODEL_NAME, ATTRS, ...)      \
+        struct MODEL_NAME                                      \
+        {                                                      \
+            ___SNT_PP_FOREACH(                                 \
+                ___SNT_PP_DECL_FIELD,                          \
+                __VA_ARGS__                                    \
+            )                                                  \
+        }                                                      \
+        ___SNT_PP_IF_ELSE(___SNT_PP_IS_EQ(ATTRS, SNT_NO_ATTR)) \
+        (                                                      \
+            ___SNT_PP_EMPTY()                                  \
+        )                                                      \
+        (                                                      \
+            __attribute__(ATTRS)                               \
+        )                                                      \
+        ;
 
         
 
