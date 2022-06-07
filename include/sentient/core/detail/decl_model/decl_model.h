@@ -32,9 +32,26 @@ extern "C"
 #define ___SNT_PP_IMPL_MODEL(...) \
         ___SNT_PP_IMPL_MODEL_IMPL(__VA_ARGS__)
 #define ___SNT_PP_IMPL_MODEL_IMPL(MODEL_NAME, ATTRS, ...)
+        ___snt_type_id                                    \
+        ___SNT_PP_CAT(___snt_type_id_, MODEL_NAME) ;      \
+        
 
-#ifdef __cplusplus
-}
-#endif
 
-#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        

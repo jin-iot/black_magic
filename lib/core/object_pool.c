@@ -62,5 +62,5 @@ ___snt_pool_free_impl(
     const ___snt_type_id type_id,
     snt_void* mem)
 {
-
+    
 }
