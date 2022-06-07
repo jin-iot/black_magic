@@ -34,7 +34,7 @@ struct snt_object_pool_storage_elem
 
 struct snt_object_pool_storage
 {
-    snt_size                            storage_size;
+    snt_size                             storage_size;
     struct snt_object_pool_storage_elem* storage;
 };
 
