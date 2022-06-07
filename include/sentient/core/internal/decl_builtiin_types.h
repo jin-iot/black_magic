@@ -3,7 +3,7 @@
 
 #include <sentient/core/types.h>
 #include <sentient/core/model_info.h>
-#include <sentient/core/pp_utils.h>
+#include <sentient/core/decl_model.h>
 
 #ifdef __cplusplus
 extern "C"
