@@ -13,7 +13,10 @@
  */
 
 #include <sentient/core/types.h>
-#include <sentient/core/pp_utils.h>
+#include <sentient/core/detail/decl_model/decl_reserved_keyword.h>
+#include <sentient/core/detail/decl_model/decl_object_pool.h>
+#include <sentient/core/detail/decl_model/decl_field.h>
+#include <sentient/core/detail/decl_model/decl_model.h>
 
 #ifdef __cplusplus
 extern "C"
