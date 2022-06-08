@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <threads.h>
 #include <string.h>
+#include <time.h>
 
 #include <sentient/core/types.h>
 
@@ -12,7 +13,6 @@ thrd_t threads[4] = { 0, };
 
 snt_i32 thread_handler(snt_void* arg)
 {
-
     printf("thread %ld\n", thrd_current());
 }
 
@@ -22,6 +22,8 @@ ___SNT_PP_DECL_OBJECT_POOL_STORAGE(snt_i32, PRIMITIVE)
 
 int main(int argc, char** argv)
 {
+    const snt_size tssize = sizeof(struct timespec);
+
     struct oioi oioi = {
         .model_num = 123,
         .name = u8"jin",

@@ -96,7 +96,7 @@ typedef snt_u64  snt_cmd64;
 
 struct snt_subcentury_datetime32
 {
-	snt_u32 year : 7;    /* [0-99] a centry */
+	snt_u32 year : 7;    /* [0-99] year of a centry */
 	snt_u32 month : 4;   /* [0-11] */
 	snt_u32 day : 5;     /* [0-31] */
 	snt_u32 hours : 5;   /* [0-11] */
@@ -106,7 +106,7 @@ struct snt_subcentury_datetime32
 
 struct snt_subcentury_datetime64
 {
-	snt_u32 year : 7;    /* [0-99] a centry */
+	snt_u32 year : 7;    /* [0-99] year of a centry */
 	snt_u32 month : 4;   /* [0-11] */
 	snt_u32 day : 5;     /* [0-31] */
 	snt_u32 hours : 5;   /* [0-11] */
@@ -116,7 +116,7 @@ struct snt_subcentury_datetime64
 	snt_u32 microseconds;
 };
 
-struct timespec128
+struct snt_timespec128
 {
 	snt_u64 seconds;
 	snt_u64 microseconds;
