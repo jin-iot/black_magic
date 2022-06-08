@@ -29,6 +29,10 @@ int main(int argc, char** argv)
         .howru = 1234,
     };
 
+    struct snt_subcentury_datetime64 ahah = {
+        .microseconds = 5,
+    };
+
     const snt_size sizee = sizeof(struct oioi);
 
     // const snt_size ahah = ___SNT_PP_COUNT_ARGS(FIELD(snt_u32, num), FIELD(snt_str8, name, 30))

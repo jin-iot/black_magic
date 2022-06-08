@@ -84,20 +84,6 @@ typedef snt_atomic snt_f64       snt_atomic_f64;
 typedef snt_u32 ___snt_type_id_internal;
 typedef ___snt_type_id_internal* ___snt_type_id;
 
-// extern ___snt_type_id ___snt_type_id_snt_u8;
-// extern ___snt_type_id ___snt_type_id_snt_u16;
-// extern ___snt_type_id ___snt_type_id_snt_u32;
-// extern ___snt_type_id ___snt_type_id_snt_u64;
-// extern ___snt_type_id ___snt_type_id_snt_i8;
-// extern ___snt_type_id ___snt_type_id_snt_i16;
-// extern ___snt_type_id ___snt_type_id_snt_i32;
-// extern ___snt_type_id ___snt_type_id_snt_i64;
-// extern ___snt_type_id ___snt_type_id_snt_f32;
-// extern ___snt_type_id ___snt_type_id_snt_f64;
-// extern ___snt_type_id ___snt_type_id_snt_str8;
-// extern ___snt_type_id ___snt_type_id_snt_str16;
-// extern ___snt_type_id ___snt_type_id_snt_str32;
-
 typedef snt_u8   snt_stx8;
 typedef snt_u8   snt_cmd8;
 typedef snt_u16  snt_cmd16;
@@ -155,6 +141,25 @@ bool snt_get_tm_from_scdt32(struct tm*, snt_scdt32*);
 bool snt_get_scdt32_from_tm(snt_scdt32*, struct tm*);
 bool snt_get_tm_from_scdt64(struct tm*, snt_scdt32*);
 bool snt_get_scdt64_from_tm(snt_scdt32*, struct tm*);
+
+extern ___snt_type_id ___snt_type_id_snt_u8;
+extern ___snt_type_id ___snt_type_id_snt_u16;
+extern ___snt_type_id ___snt_type_id_snt_u32;
+extern ___snt_type_id ___snt_type_id_snt_u64;
+extern ___snt_type_id ___snt_type_id_snt_i8;
+extern ___snt_type_id ___snt_type_id_snt_i16;
+extern ___snt_type_id ___snt_type_id_snt_i32;
+extern ___snt_type_id ___snt_type_id_snt_i64;
+extern ___snt_type_id ___snt_type_id_snt_f32;
+extern ___snt_type_id ___snt_type_id_snt_f64;
+extern ___snt_type_id ___snt_type_id_snt_str8;
+extern ___snt_type_id ___snt_type_id_snt_str16;
+extern ___snt_type_id ___snt_type_id_snt_str32;
+
+extern ___snt_type_id ___snt_type_id_snt_scdt32;
+extern ___snt_type_id ___snt_type_id_snt_scdt64;
+extern ___snt_type_id ___snt_type_id_snt_pt64;
+extern ___snt_type_id ___snt_type_id_snt_ts128;
 
 #ifdef __cplusplus
 }
