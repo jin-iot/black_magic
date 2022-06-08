@@ -23,7 +23,7 @@ extern "C"
 {
 #endif
 
-#ifdef SNT_MODEL_IMPL
+#ifdef SNT_IMPL_MODEL
 #define SNT_DECL_MODEL(...) \
         ___SNT_PP_IMPL_MODEL(__VA_ARGS__)
 #else
