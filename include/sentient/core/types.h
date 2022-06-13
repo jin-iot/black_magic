@@ -101,7 +101,7 @@ struct snt_subcentury_datetime32
 	snt_u32 day : 5;     /* [0-31] */
 	snt_u32 hours : 5;   /* [0-11] */
 	snt_u32 minutes : 6; /* [0-59] */
-	snt_u32 seconds : 5; /* [0-29] 0-59 in 2-second intervals */
+	snt_u32 seconds : 5; /* [0-29] 0-59 in 2 seconds intervals */
 };
 
 struct snt_subcentury_datetime64
@@ -111,7 +111,7 @@ struct snt_subcentury_datetime64
 	snt_u32 day : 5;     /* [0-31] */
 	snt_u32 hours : 5;   /* [0-11] */
 	snt_u32 minutes : 6; /* [0-59] */
-	snt_u32 seconds : 5; /* [0-29] 0-59 in 2-second intervals */
+	snt_u32 seconds : 5; /* [0-29] 0-59 in 2 seconds intervals */
 
 	snt_u32 microseconds;
 };

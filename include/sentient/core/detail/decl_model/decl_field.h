@@ -37,6 +37,18 @@ extern "C"
 #define ___SNT_PP_DECL_FIELD_2_IMPL(TYPE, NAME) \
         TYPE NAME ;
 
+#define ___SNT_PP_DECL_FIELD_3(TYPE, NAME, KEYWORD) \
+        ___SNT_PP_DECL_FIELD_3_IMPL(TYPE, NAME, KEYWORD)
+#define ___SNT_PP_DECL_FIELD_3_IMPL(TYPE, NAME, KEYWORD)     \
+        ___SNT_PP_IF_ELSE(___SNT_PP_IS_EQ(SNT_PTR, KEYWORD)) \
+        (                                                    \
+            TYPE * NAME ;                                    \
+        )                                                    \
+        (                                                    \
+                                                             \
+        )
+        
+
 /**
  * @author Jin (jaehwanspin@gmail.com)
  * @brief array field

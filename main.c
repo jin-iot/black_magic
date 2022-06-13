@@ -17,12 +17,11 @@ snt_i32 thread_handler(snt_void* arg)
 }
 
 
-___SNT_PP_DECL_OBJECT_POOL_STORAGE(snt_i32, PRIMITIVE)
-
+___SNT_PP_DECL_OBJECT_POOL_STORAGE(snt_i32, SNT_PRIMITIVE)
 
 int main(int argc, char** argv)
 {
-    const snt_size tssize = sizeof(struct timespec);
+    const snt_bool fucking = __builtin_types_compatible_p(void*, void*);
 
     struct oioi oioi = {
         .model_num = 123,

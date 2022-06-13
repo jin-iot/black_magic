@@ -54,11 +54,12 @@ extern "C"
  * macro numeric, keyword constants ( 0 ~ N, keywords... ) to compare
  */
 #include <sentient/core/internal/pp_compare_n.h>
-#define ___SNT_PP_COMPARE_(...) 
-#define ___SNT_PP_COMPARE_STRUCTURE(X) X
-#define ___SNT_PP_COMPARE_PRIMITIVE(X) X
+#define ___SNT_PP_COMPARE_(...) 0
+#define ___SNT_PP_COMPARE_SNT_STRUCTURE(X) X
+#define ___SNT_PP_COMPARE_SNT_PRIMITIVE(X) X
 #define ___SNT_PP_COMPARE_SNT_BIT_FIELD(X) X
 #define ___SNT_PP_COMPARE_SNT_ARRAY(X) X
+#define ___SNT_PP_COMPARE_SNT_PTR(X) X
 #define ___SNT_PP_COMPARE_SNT_NO_ATTR(X) X
 
 #ifdef __cplusplus
