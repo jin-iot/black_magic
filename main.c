@@ -16,7 +16,6 @@ snt_i32 thread_handler(snt_void* arg)
     printf("thread %ld\n", thrd_current());
 }
 
-
 ___SNT_PP_DECL_OBJECT_POOL_STORAGE(snt_i32, SNT_PRIMITIVE)
 
 int main(int argc, char** argv)

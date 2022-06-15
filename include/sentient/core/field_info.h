@@ -14,8 +14,12 @@ struct snt_field_info
     const ___snt_type_id type_id;
     snt_size             field_offset;
     snt_size             array_size;
+    snt_bool             is_unique;
+    snt_bool             is_bit_field;
     snt_bool             is_pointer;
     snt_bool             is_primary_key;
+    snt_bool             is_time;
+    snt_bool             is_auto_increment;
 };
 
 #ifdef __cplusplus

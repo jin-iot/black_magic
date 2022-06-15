@@ -59,8 +59,8 @@ extern "C"
 #define ___SNT_PP_COMPARE_SNT_PRIMITIVE(X) X
 #define ___SNT_PP_COMPARE_SNT_BIT_FIELD(X) X
 #define ___SNT_PP_COMPARE_SNT_ARRAY(X) X
-#define ___SNT_PP_COMPARE_SNT_PTR(X) X
-#define ___SNT_PP_COMPARE_SNT_NO_ATTR(X) X
+#define ___SNT_PP_COMPARE_SNT_POINTER(X) X
+#define ___SNT_PP_COMPARE_SNT_PRIMARY_KEY(X) X
 
 #ifdef __cplusplus
 }

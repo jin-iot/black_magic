@@ -94,7 +94,7 @@ typedef snt_u64  snt_cmd64;
 #include <sentient/core/internal/vec_types.h>
 #include <sentient/core/internal/mat_types.h>
 
-struct snt_subcentury_datetime32
+typedef struct snt_subcentury_datetime32
 {
 	snt_u32 year : 7;    /* [0-99] year of a centry */
 	snt_u32 month : 4;   /* [0-11] */
@@ -102,9 +102,10 @@ struct snt_subcentury_datetime32
 	snt_u32 hours : 5;   /* [0-11] */
 	snt_u32 minutes : 6; /* [0-59] */
 	snt_u32 seconds : 5; /* [0-29] 0-59 in 2 seconds intervals */
-};
+}
+snt_scdt32;
 
-struct snt_subcentury_datetime64
+typedef struct snt_subcentury_datetime64
 {
 	snt_u32 year : 7;    /* [0-99] year of a centry */
 	snt_u32 month : 4;   /* [0-11] */
@@ -114,20 +115,18 @@ struct snt_subcentury_datetime64
 	snt_u32 seconds : 5; /* [0-29] 0-59 in 2 seconds intervals */
 
 	snt_u32 microseconds;
-};
+}
+snt_scdt64;
 
-struct snt_timespec128
+typedef struct snt_timespec128
 {
 	snt_u64 seconds;
 	snt_u64 microseconds;
-};
+}
+snt_ts128;
 
-typedef snt_u64                          snt_posix_time64;
-
-typedef struct snt_subcentury_datetime32 snt_scdt32;
-typedef struct snt_subcentury_datetime64 snt_scdt64;
-typedef snt_posix_time64                 snt_pt64;
-typedef struct snt_timespec128           snt_ts128;
+typedef snt_u64          snt_posix_time64;
+typedef snt_posix_time64 snt_pt64;
 
 bool snt_scdt32_local_now(snt_scdt32*);
 bool snt_scdt64_local_now(snt_scdt64*);

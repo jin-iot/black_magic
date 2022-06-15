@@ -8,7 +8,6 @@ extern "C"
 {
 #endif
 
-
 /**
  * @author Jin (jaehwanspin@gmail.com)
  * @brief determines how to declare a field
@@ -48,10 +47,9 @@ extern "C"
                                                              \
         )
         
-
 /**
  * @author Jin (jaehwanspin@gmail.com)
- * @brief array field
+ * @brief array or bit field
  */
 #define ___SNT_PP_DECL_FIELD_4(TYPE, NAME, KEYWORD, SIZE) \
         ___SNT_PP_DECL_FIELD_4_IMPL(TYPE, NAME, KEYWORD, SIZE)
@@ -86,6 +84,19 @@ extern "C"
             )                                                              \
             ()                                                             \
         )
+
+#define ___SNT_PP_PARSE_KEYWORDS(...) \
+        ___SNT_PP_PARSE_KEYWORDS_IMPL(__VA_ARGS__)
+#define ___SNT_PP_PARSE_KEYWORDS_IMPL(...)    \
+        ___SNT_PP_FOREACH(                    \
+            ___SNT_PP_PARSE_KEYWORDS_HANDLER, \
+            __VA_ARGS__                       \
+        )
+
+#define ___SNT_PP_PARSE_KEYWORDS_HANDLER(KEYWORD) \
+        ___SNT_PP_PARSE_KEYWORDS_HANDLER_IMPL(KEYWORD)
+#define ___SNT_PP_PARSE_KEYWORDS_HANDLER_IMPL(KEYWORD) \
+        ___SNT_PP_IF_ELSE()
 
 #ifdef __cplusplus
 }
