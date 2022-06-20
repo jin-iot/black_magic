@@ -38,13 +38,19 @@ extern "C"
 
 #define ___SNT_PP_DECL_FIELD_3(TYPE, NAME, KEYWORD) \
         ___SNT_PP_DECL_FIELD_3_IMPL(TYPE, NAME, KEYWORD)
-#define ___SNT_PP_DECL_FIELD_3_IMPL(TYPE, NAME, KEYWORD)     \
-        ___SNT_PP_IF_ELSE(___SNT_PP_IS_EQ(SNT_PTR, KEYWORD)) \
-        (                                                    \
-            TYPE * NAME ;                                    \
-        )                                                    \
-        (                                                    \
-                                                             \
+#define ___SNT_PP_DECL_FIELD_3_IMPL(TYPE, NAME, KEYWORD)         \
+        ___SNT_PP_IF_ELSE(___SNT_PP_HAS_COMMA(KEYWORD))          \
+        (                                                        \
+                                                                 \
+        )                                                        \
+        (                                                        \
+            ___SNT_PP_IF_ELSE(___SNT_PP_IS_EQ(SNT_PTR, KEYWORD)) \
+            (                                                    \
+                TYPE * NAME ;                                    \
+            )                                                    \
+            (                                                    \
+                                                                 \
+            )                                                    \
         )
         
 /**
@@ -70,9 +76,6 @@ extern "C"
 #define ___SNT_PP_DECL_FIELD_5(TYPE, NAME, KEYWORD, SIZE, ATTRIBUTES) \
         ___SNT_PP_DECL_FIELD_5_IMPL(TYPE, NAME, KEYWORD, SIZE, ATTRIBUTES)
 #define ___SNT_PP_DECL_FIELD_5_IMPL(TYPE, NAME, KEYWORD, SIZE, ATTRIBUTES) \
-        TYPE                                                               \
-        __attribute__((ATTRIBUTES))                                        \
-        NAME                                                               \
         ___SNT_PP_IF_ELSE(___SNT_PP_IS_EQ(KEYWORD, SNT_ARRAY))             \
         (                                                                  \
             ___SNT_PP_ARR(SIZE) ;                                          \

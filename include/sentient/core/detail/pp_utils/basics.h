@@ -6,7 +6,7 @@ extern "C"
 {
 #endif
 
-#define ___SNT_PP_PASS(ARGS) args
+#define ___SNT_PP_PASS(ARGS) ARGS
 #define ___SNT_PP_IS_VA_ARG(...) ,
 #define ___SNT_PP_COMMA()) ,
 #define ___SNT_PP_LPAREN() (

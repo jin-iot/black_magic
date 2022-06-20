@@ -18,6 +18,15 @@ snt_i32 thread_handler(snt_void* arg)
 
 ___SNT_PP_DECL_OBJECT_POOL_STORAGE(snt_i32, SNT_PRIMITIVE)
 
+#define ___SNT_PP_COMPARE_HEY(x) x
+
+___SNT_PP_UNWRAP(snt_u32 ah);
+
+struct ahah
+{
+    snt_f32 __attribute__((aligned(1))) vec;
+};
+
 int main(int argc, char** argv)
 {
     const snt_bool fucking = __builtin_types_compatible_p(void*, void*);

@@ -47,7 +47,7 @@ extern "C"
 #define ___SNT_PP_DECL_BUILTIN_TYPES_HANDLER(X) \
         ___SNT_PP_DECL_BUILTIN_TYPES_HANDLER_IMPL X
 #define ___SNT_PP_DECL_BUILTIN_TYPES_HANDLER_IMPL(MODEL_NAME, MODEL_TYPE) \
-        MODEL_NAME ___SNT_PP_CAT(MODEL_NAME, _hey) ;
+        ___SNT_PP_DECL_BUILTIN_MODEL_INFO(MODEL_NAME, MODEL_TYPE)
 
 #define ___SNT_PP_DECL_BUILTIN_MODEL_INFO(MODEL_NAME, MODEL_TYPE) \
         ___SNT_PP_DECL_BUILTIN_MODEL_INFO_IMPL(MODEL_NAME, MODEL_TYPE)
@@ -73,7 +73,7 @@ extern "C"
         {                                                                             \
             .field_name = FIELD_NAME,                                                 \
             .field_offset = __builtin_offsetof(FIELD_TYPE, FIELD_NAME),               \
-            ___SNT_PP_IF_ELSE(___SNT_PP_IS_EQ(SNT_POINTER, KEYWORD))                      \
+            ___SNT_PP_IF_ELSE(___SNT_PP_IS_EQ(SNT_POINTER, KEYWORD))                  \
             (                                                                         \
                 .is_pointer = true,                                                   \
             )                                                                         \
